@@ -63,7 +63,12 @@
 
 ## Get Devnet Tokens
 
+1. [Join Sui Discord](https://discord.gg/sui)
+2. Complete verification steps
+3. Enter #devnet-faucet channel
+4. Type `!faucet <WALLET ADDRESS>`
 
+## Get Testnet Tokens
 
 
 
