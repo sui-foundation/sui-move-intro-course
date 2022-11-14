@@ -18,6 +18,16 @@
 
 ## Using a Docker Image with Pre-installed Sui Binaries
 
+1. [Install Docker](https://docs.docker.com/get-docker/)
+
+2. Pull Sui image for Sui Move intro course 
+
+    `placeholder`
+
+3. Start the Docker image:
+
+    `placeholder`
+
 ## Configure VS Code with Move Analyzer Plug-in
 
 1. Install [Move Analyzer plugin](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer) from VS Marketplace
@@ -27,6 +37,34 @@
     `cargo install --git https://github.com/move-language/move move-analyzer --features "address20"`
 
 ## Sui CLI Basic Usage
+
+[Reference Page](https://docs.sui.io/build/cli-client)
+
+### Managing Networks
+
+- Switching network: `sui client switch --env [network alias]`
+- Default network aliases: 
+    - localnet: http://0.0.0.0:9000
+    - devnet: https://fullnode.devnet.sui.io:443
+- List all current network aliases: `sui client envs`
+- Add new network alias: `sui client new-env --alias <ALIAS> --rpc <RPC>`
+
+### Check Active Address and Gas Objects
+
+- Check current addresses in key store: `sui client addresses`
+- Check active-address: `sui client active-address`
+- List all controlled gas objects: `sui client gas`
+
+### Mint a Demo NFT
+
+- Mint a demo NFT on the current network: `sui client create-example-nft`
+
+![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+
+## Get Devnet Tokens
+
+
+
 
 
 
