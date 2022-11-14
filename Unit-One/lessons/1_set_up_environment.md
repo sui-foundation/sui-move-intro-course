@@ -26,5 +26,7 @@
 
     `cargo install --git https://github.com/move-language/move move-analyzer --features "address20"`
 
-### Sui CLI Basics
+## Sui CLI Basic Usage
+
+
 
