@@ -8,13 +8,13 @@
 
 - Module starts with the `module` keyword, which is followed by module name and curly braces - inside them module contents are placed:
 
-```
-module HelloWorld {
+    ```
+    module HelloWorld {
 
-    // module contents
+        // module contents
 
-}
-```
+    }
+    ```
 
 - Published modules are immutable objects in Sui; an immutable object is an object that can never be mutated, transferred or deleted. Because of this immutability, the object is not owned by anyone, and hence it can be used by anyone
 
