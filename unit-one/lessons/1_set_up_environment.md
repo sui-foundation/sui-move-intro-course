@@ -20,11 +20,11 @@
 
 1. [Install Docker](https://docs.docker.com/get-docker/)
 
-2. Pull Sui image for Sui Move intro course 
+2. Pull the premade Docker image for the Sui Move intro course 
 
     `placeholder`
 
-3. Start the Docker image:
+3. Start the Docker container based on the downloaded image:
 
     `placeholder`
 
