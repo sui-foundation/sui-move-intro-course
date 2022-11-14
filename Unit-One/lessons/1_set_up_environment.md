@@ -61,14 +61,14 @@
 
 ![This is an image](https://github.com/hyd628/sui-move-intro-course/blob/main/Unit-One/images/demo-nft.png)
 
-## Get Devnet Tokens
+## Get Devnet Sui Tokens
 
 1. [Join Sui Discord](https://discord.gg/sui)
 2. Complete verification steps
 3. Enter #devnet-faucet channel
 4. Type `!faucet <WALLET ADDRESS>`
 
-## Get Testnet Tokens
+## Get Testnet Sui Tokens
 
 
 
