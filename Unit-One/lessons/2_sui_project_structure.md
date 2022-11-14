@@ -13,8 +13,6 @@ module HelloWorld {
 
     // module contents
 
-    struct helloworld{}
-
 }
 ```
 
