@@ -2,9 +2,9 @@
 
 ## Sui Module and Package
 
-- A Move module is a set of functions and types packed together which the developer publishes under a specific address. 
+- A Move module is a set of functions and types packed together which the developer publishes under a specific address 
 
-- Sui standard library is generally published under the `0x2` address, while user deployed modules are published under a pseodorandom address assigned by the Sui Move VM. 
+- Sui standard library is generally published under the `0x2` address, while user deployed modules are published under a pseodorandom address assigned by the Sui Move VM
 
 - Module starts with the `module` keyword, which is followed by module name and curly braces - inside them module contents are placed:
 
@@ -16,7 +16,7 @@ module HelloWorld {
 }
 ```
 
-- Published modules are immutable objects in Sui; An immutable object is an object that can never be mutated, transferred or deleted. Because of this immutability, the object is not owned by anyone, and hence it can be used by anyone.
+- Published modules are immutable objects in Sui; an immutable object is an object that can never be mutated, transferred or deleted. Because of this immutability, the object is not owned by anyone, and hence it can be used by anyone
 
 - A package is a collection of modules
 
@@ -42,7 +42,7 @@ This creates:
 `Move.toml` consists of three sections:
 
 - `[package]` Defines the name and version number of the package
-- `[dependencies]` Defines other packages that this package depends on, such as the Sui standard library. Other third-party dependencies should be added here as well
+- `[dependencies]` Defines other packages that this package depends on, such as the Sui standard library; other third-party dependencies should be added here as well
 - `[addresses]` Defines aliases for addresses in the package source code
 
 #### Sample `Move.toml` File
