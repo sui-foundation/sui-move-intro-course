@@ -71,5 +71,5 @@ We see that the Sui standard library dependency here is defined using a GitHub r
 - Sui Move module and package naming convention uses snake casing, i.e. this_is_snake_casing.
 
 - A Sui module name uses the Rust path separator `::` to divide the package name and the module name, examples:
-    1. hello_world::hello # `hello` module in `hello_world` package
-    2. capy::capy # `capy` module in `capy` package
+    1. `hello_world::hello`: `hello` module in `hello_world` package
+    2. `capy::capy`: `capy` module in `capy` package
