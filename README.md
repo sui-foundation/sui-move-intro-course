@@ -3,62 +3,57 @@
 Introductory course to the Sui Move language by Mysten Labs Developer Relations
 If you want to join Sui Dev Communities, Join via following links:
 
-[English TG Group](), [Korean Telegram Group](https://t.me/+06FvkeDVwUMwZmM1), [Chinese Telegram Group](https://t.me/+4q-pSDEGH-RjODg9), If you want to join Chinese Dev Wechat Group, you need to join the telegram group and ask for QR code.
-
 Follow [Sui Twitter](https://twitter.com/SuiNetwork) for more updates.
 For any queries, please reach out to MystenLabs Dev Rel Team on Twitter: [@Akasha](https://twitter.com/AkashaCoin) [@BrianSeong99](https://twitter.com/BrianSeong99) [@henrydevrel](https://twitter.com/henrydevrel)
 # Repo developement milestones
 
-## Chapters
+The repo is mainly divided into two differen tracks, if you want to gasp the most commonly used concepts of Sui Move Fast with hands on examples, choose the `Fast Track`. If you want to learn Sui Move in great depth, the `Detailed Track` is also here for you to consume! All the contents explored in fast track will also be available in Detailed Track so you won't miss any important knowledge!
 
-- [ ] Sui Network Explained
+### Fast Tracks - Quickly Get Started with Sui Move!
+
+- [ ] U1 - Environment Setup and Hello World
+- [ ] U2 - Simple NFT Contract (Basics of Working with Sui Object)
+- [ ] U3 - Fungible Tokens
+- [ ] U4 - Shopify on Sui
+
+### Detailed Tracks - Becoming a Sui Move Master!
+
+- [x] Sui Network Explained: [About Sui](https://docs.sui.io/learn/about-sui)
+- [ ] Basics of Sui Move: Move Introduction, Sui Move Grammer
+- [ ] Advanced Sui Move Features
 - [ ] Tools for Sui Dev
-- [ ] Basics of Sui Move
-- [ ] Advanced Features of Sui Move
-- [ ] Sui Move Dapp Examples
-    - [x] List existing Examples
-    - [ ] Explain Examples in details
-- [ ] Sui Dev vs Other Move Devs
+- [x] [Simple Sui Dapp Examples](https://github.com/MystenLabs/sui/tree/main/sui_programmability/examples)
 - [ ] FAQ
 
-## Language
+### Language
 
-- [InProgress] English
+- [ ] [InProgress] English
 - [ ] Chinese
 - [ ] Korean
 
-## Online Lectures
+### Online Lectures
 
 - [ ] Lecture Recordings of all materials
 
-# Sui Network Explained
+# Detailed Track
 
-- [About Sui](https://docs.sui.io/learn/about-sui)
-- [How Sui Works](https://docs.sui.io/learn/how-sui-works)
-- [Sui Tokenomics](https://docs.sui.io/learn/tokenomics)
+## Basics of Sui Move
 
-# Tools for Sui Dev
+- [ ] B01: Hello World
+- [ ] B02: Publish your first Sui Module
+- [ ] B03: Primitive Data Types
+- [ ] B04: Reference
+- [ ] B05: Function Visibilities
+- [ ] B06: Structs and Sui Objects
+- [ ] ....
+
+## Advanced Sui Move Features
+
+- [ ] A01: Fungible Token using Sui Move
+- [ ] A02: ....
+
+## Tools for Sui Dev
 
 - [ ] Sui Client Intro & Examples
-    - [x] [Sui Client Introduction](https://docs.sui.io/build/cli-client)
-    - [ ] Sui Client Examples
-
-# Basics of Sui Move
-
-
-# Advanced Features of Sui Move
-
-
-# Sui Move Dapp Examples
-
-## Basics
-- [ ] [Sui Object Basics](https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/basics/sources/object_basics.move)
-- [ ] [An example of a custom object](https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/basics/sources/object.move)
-- [ ]()
-
-
-# Sui Dev vs Other Move Devs
-
 
 # FAQ
-
