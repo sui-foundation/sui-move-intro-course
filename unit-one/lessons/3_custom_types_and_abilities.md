@@ -4,7 +4,7 @@ In this section, we will start creating our Hello World example contract step by
 
 ## Initializing the Package
 
-(If you skipped the previous section) You can initialize a Hello World Sui package with the following command in the command line after [installing Sui binaries](##TODO):
+(If you skipped the previous section) You can initialize a Hello World Sui package with the following command in the command line after [installing Sui binaries](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/lessons/1_set_up_environment.md#install-sui-binaries-locally):
 
 `sui move new hello_world`
 
@@ -34,10 +34,10 @@ Abilities are keywords in Sui Move that define how types behave at the compiler 
 
 For now, just know that there are four abilities in Sui Move:
 
-    - Copy
-    - Drop
-    - Key
-    - Store
+    - **Copy**: value can be copied (or cloned by value)
+    - **Drop**: value can be dropped by the end of scope
+    - **Key**: value can be used as a key for global storage operations
+    - **Store**: value can be stored inside global storage
 
 Custom types that have the abilities `Key` and `Store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
 

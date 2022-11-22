@@ -59,7 +59,7 @@
 
 - Mint a demo NFT on the current network: `sui client create-example-nft`
 
-![This is an image](https://github.com/hyd628/sui-move-intro-course/blob/main/unit-one/images/demo-nft.png)
+![This is an image](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/demo-nft.png)
 
 ## Get Devnet Sui Tokens
 
