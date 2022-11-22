@@ -46,12 +46,12 @@ Custom types that have the abilities `Key` and `Store` are considered to be **as
 We define the object in our Hello World example as the following:
 
 ```
-    /// An object that contains an arbitrary string
-    struct HelloWorldObject has key, store {
-        id: UID,
-        /// A string contained in the object
-        text: string::String
-    }
+/// An object that contains an arbitrary string
+struct HelloWorldObject has key, store {
+    id: UID,
+    /// A string contained in the object
+    text: string::String
+}
 ```
 
 UID here is a Sui Move system type (sui::object::UID) that defines the globally unique ID of an object. 

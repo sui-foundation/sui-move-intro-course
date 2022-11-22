@@ -8,7 +8,7 @@ Sui Move functions have three types of visibility:
 
 - **private**: the default visibility of a function; it can only be accessed by functions inside the same module
 - **public**: the function is accessible by functions inside the same module, and by functions defined in another module
-- **public(friend)**: the function is accessible by functions inside the same module and by functions defined in modules that are included on [the friends list](https://diem.github.io/move/friends.html){target=blank}
+- **public(friend)**: the function is accessible by functions inside the same module and by functions defined in modules that are included on [the module's friends list](https://diem.github.io/move/friends.html){target=blank}.
 
 By default, Sui Move functions have private visibility. 
 
@@ -20,7 +20,7 @@ In Sui Move, entry functions are simply functions that can be called by a transa
 
 Entry functions typically have the transaction context as the last parameter. This is a special parameter set by the Sui Move VM, and does not need to be specified by the user calling the function. 
 
-The TxContext object contains essentially information about the transaction used to call the entry function, such as the sender's address, 
+The `TxContext` object contains essential information about the transaction used to call the entry function, such as the sender's address
 
 ## Create the Function Code
 
