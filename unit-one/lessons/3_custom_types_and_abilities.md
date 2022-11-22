@@ -30,14 +30,14 @@ A structure in Sui Move is a custom type which contains key-value pairs, where t
 
 Abilities are keywords in Sui Move that define how types behave at the compiler level. 
 
-**Abilities are crucial to defining how object behave in Sui Move at the language level. Each unique combination of abilities in Sui Move is its own design pattern. We will study abitilies and how to use them in Sui Move throughout the course.**
+Abilities are crucial to defining how object behave in Sui Move at the language level. Each unique combination of abilities in Sui Move is its own design pattern. We will study abitilies and how to use them in Sui Move throughout the course.
 
 For now, just know that there are four abilities in Sui Move:
 
-    - **Copy**: value can be copied (or cloned by value)
-    - **Drop**: value can be dropped by the end of scope
-    - **Key**: value can be used as a key for global storage operations
-    - **Store**: value can be stored inside global storage
+- **Copy**: value can be copied (or cloned by value)
+- **Drop**: value can be dropped by the end of scope
+- **Key**: value can be used as a key for global storage operations
+- **Store**: value can be stored inside global storage
 
 Custom types that have the abilities `Key` and `Store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
 
@@ -53,5 +53,7 @@ We define the object in our Hello World example as the following:
         text: string::String
     }
 ```
+
+UID here is a Sui Move system type (sui::object::UID) that defines the globally unique ID of an object. 
 
 

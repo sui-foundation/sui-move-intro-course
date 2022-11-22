@@ -66,7 +66,7 @@ We see that the Sui standard library dependency here is defined using a GitHub r
 
     ```
     [dependencies]
-    Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework", rev = "devnet" } ## TODO
+    Sui = { local = "../sui/crates/sui-framework" } 
     ```
 
 ### Sui Module and Package Naming

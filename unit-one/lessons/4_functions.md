@@ -6,9 +6,9 @@ In this section, we will introduce functions in Sui Move, and write our first Su
 
 Sui Move functions have three types of visibility:
 
-- private: the default visibility of a function; it can only be accessed by functions inside the same module
-- public: the function is accessible by functions inside the same module, and by functions defined in another module
-- public(friend): the function is accessible by functions inside the same module and by functions defined in modules that are included on [the friends list](https://diem.github.io/move/friends.html){target=blank}
+- **private**: the default visibility of a function; it can only be accessed by functions inside the same module
+- **public**: the function is accessible by functions inside the same module, and by functions defined in another module
+- **public(friend)**: the function is accessible by functions inside the same module and by functions defined in modules that are included on [the friends list](https://diem.github.io/move/friends.html){target=blank}
 
 By default, Sui Move functions have private visibility. 
 
