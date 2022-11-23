@@ -1,0 +1,3 @@
+unit-one/sample_project_1/build/
+*.DS_store
+sui.log.*
