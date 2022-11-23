@@ -5,7 +5,7 @@
 /// 
 /// A part of the Sui Move intro course: 
 /// 
-module sample_project_1::hello_world {
+module hello_world_project::hello_world {
 
     use std::string;
     use sui::object::{Self, UID};
