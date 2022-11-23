@@ -57,7 +57,7 @@
 
 ### Mint a Demo NFT
 
-- Mint a demo NFT on the current network: `sui client create-example-nft`
+- Mint a demo NFT on the current network: `sui client create-example-nft`. You should see something similar to the following output:
 
 ![Demo NFT](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/demo-nft.png)
 
