@@ -1,9 +1,8 @@
 // Copyright (c) 2022, Mysten Labs, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-/// A basic Hello World example for Sui Move
-/// 
-/// A part of the Sui Move intro course: 
+/// A basic Hello World example for Sui Move, part of the Sui Move intro course:
+/// https://github.com/sui-foundation/sui-move-intro-course
 /// 
 module hello_world_project::hello_world {
 
