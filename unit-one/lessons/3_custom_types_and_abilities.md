@@ -22,6 +22,23 @@ And create the empty module as following:
         }
     ```
 
+### Import Statements
+
+You can directly import modules in Move by their address, but to make code easier to read, we can organize imports with the keyword `use`. 
+
+```
+    use <Address/Alias>::<ModuleName>;
+```
+
+In our example, we need to import the following modules:
+
+```
+    use std::string;
+    use sui::object::{Self, UID};
+    use sui::transfer;
+    use sui::tx_context::{Self, TxContext};
+```
+
 ## Custom Types
 
 A structure in Sui Move is a custom type which contains key-value pairs, where the key is the name of a property and value is what's stored. Defined using keyword `struct`, a structure can have up to 4 abilities.
@@ -41,19 +58,19 @@ For now, just know that there are four abilities in Sui Move:
 
 Custom types that have the abilities `Key` and `Store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
 
-### Hello World Object Struct Sample Code
+### Hello World Custom Type
 
 We define the object in our Hello World example as the following:
 
 ```
-/// An object that contains an arbitrary string
-struct HelloWorldObject has key, store {
-    id: UID,
-    /// A string contained in the object
-    text: string::String
-}
+    /// An object that contains an arbitrary string
+    struct HelloWorldObject has key, store {
+        id: UID,
+        /// A string contained in the object
+        text: string::String
+    }
 ```
 
-UID here is a Sui Move system type (sui::object::UID) that defines the globally unique ID of an object. 
+UID here is a Sui system type (sui::object::UID) that defines the globally unique ID of an object. Every custom type is required to have an ID field. 
 
 
