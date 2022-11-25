@@ -4,7 +4,7 @@ In this section, we will start creating our Hello World example contract step by
 
 ## Initializing the Package
 
-(If you skipped the previous section) You can initialize a Hello World Sui package with the following command in the command line after [installing Sui binaries](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/lessons/1_set_up_environment.md#install-sui-binaries-locally):
+(If you skipped the previous section) You can initialize a Hello World Sui package with the following command in the command line after [installing Sui binaries](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/lessons/2_set_up_environment.md#install-sui-binaries-locally):
 
 `sui move new hello_world`
 

@@ -22,11 +22,12 @@
 
 2. Pull the premade Docker image for the Sui Move intro course 
 
-    `placeholder`
+    `docker pull hyd628/sui-move-intro-course:latest`
 
-3. Start the Docker container based on the downloaded image:
+3. Start and shell into the Docker container:
 
-    `placeholder`
+    `docker run --entrypoint /bin/sh -itd hyd628/sui-move-intro-course:latest`
+    `docker exec -it <container ID> bash`
 
 ## Configure VS Code with Move Analyzer Plug-in
 
