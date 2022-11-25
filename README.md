@@ -19,11 +19,11 @@ If you want to join Sui Dev Communities, Join via following links:
 
 ## Repo Languages
 
-- [ ] [InProgress] English
+- [x] English
 - [ ] Chinese
 - [ ] Korean
 
-Please [get in touch](henry@mystenlabs.com) if you want to help translate this into other languages. 
+Please [get in touch](mailto:henry@mystenlabs.com) if you want to help translate this into other languages. 
 
 ## Online Lectures
 
