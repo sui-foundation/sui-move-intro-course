@@ -2,7 +2,7 @@
 
 ## The Complete Hello World Sample Project
 
-You can find the complete Hello World project in [this directory](https://github.com/sui-foundation/sui-move-intro-course/tree/main/unit-one/hello_world_project). 
+You can find the complete Hello World project in [this directory](https://github.com/sui-foundation/sui-move-intro-course/tree/main/unit-one/example_projects/hello_world). 
 
 ## Deploying the Contract
 
