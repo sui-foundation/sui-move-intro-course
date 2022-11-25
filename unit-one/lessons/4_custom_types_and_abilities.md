@@ -71,6 +71,6 @@ We define the object in our Hello World example as the following:
     }
 ```
 
-UID here is a Sui system type (sui::object::UID) that defines the globally unique ID of an object. Every custom type is required to have an ID field. 
+UID here is a Sui Framework type (sui::object::UID) that defines the globally unique ID of an object. Every custom type is required to have an ID field. 
 
 
