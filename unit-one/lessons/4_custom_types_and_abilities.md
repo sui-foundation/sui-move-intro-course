@@ -16,9 +16,9 @@ And create the empty module as following:
 
     ```
         module hello_world::hello {
-
+    
             // module contents
-
+    
         }
     ```
 
@@ -56,7 +56,7 @@ For now, just know that there are four abilities in Sui Move:
 - **Key**: value can be used as a key for global storage operations
 - **Store**: value can be stored inside global storage
 
-Custom types that have the abilities `Key` and `Store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
+Custom types(Sui Objects) that have the abilities `Key` and `Store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
 
 ### Hello World Custom Type
 
@@ -72,5 +72,4 @@ We define the object in our Hello World example as the following:
 ```
 
 UID here is a Sui Framework type (sui::object::UID) that defines the globally unique ID of an object. Every custom type is required to have an ID field. 
-
 
