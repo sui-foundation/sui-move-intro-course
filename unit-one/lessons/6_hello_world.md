@@ -11,8 +11,9 @@ the local node. Just set the Sui CLI to the respective network and have enough t
 
 The Sui CLI command for deploying the package is the following:
 
-```
+```bash
 sui client publish --path <absolute local path to the Sui Move package> --gas-budget 30000
+# or just use `sui client publish --path $(pwd) --gas-budget 30000`
 ```
 
 The output should look something like this if the contract was successfully deployd:
@@ -23,7 +24,7 @@ The object ID under the `Created Objects` section is the object ID of the Hello 
 
 Let's export that to a variable. 
 
-```
+```bash
 export PACKAGE_ID=<package object ID from previous output>
 ```
 
@@ -35,7 +36,7 @@ Note that we are able to do this because `mint` is an entry function.
 
 The command for this using Sui CLI is:
 
-```
+```bash
 sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 3000
 ```
 
@@ -53,7 +54,7 @@ Choose the network you are using through the dropdown menu on the upper right.
 
 If you are using a local dev node, select the `Custom RPC URL` option and enter:
 
-```
+```bash
 http://127.0.0.1:9000
 ```
 

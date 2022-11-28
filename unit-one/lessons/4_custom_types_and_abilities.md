@@ -14,29 +14,31 @@ Use an editor of your choice to create a Move smart contract source file called 
 
 And create the empty module as following:
 
-    ```
-        module hello_world::hello {
-    
-            // module contents
-    
-        }
-    ```
+~~~rust
+```
+    module hello_world::hello {
+
+        // module contents
+
+    }
+```
+~~~
 
 ### Import Statements
 
 You can directly import modules in Move by their address, but to make code easier to read, we can organize imports with the keyword `use`. 
 
-```
-    use <Address/Alias>::<ModuleName>;
+```rust
+use <Address/Alias>::<ModuleName>;
 ```
 
 In our example, we need to import the following modules:
 
-```
-    use std::string;
-    use sui::object::{Self, UID};
-    use sui::transfer;
-    use sui::tx_context::{Self, TxContext};
+```rust
+use std::string;
+use sui::object::{Self, UID};
+use sui::transfer;
+use sui::tx_context::{Self, TxContext};
 ```
 
 ## Custom Types
@@ -62,13 +64,13 @@ Custom types(Sui Objects) that have the abilities `Key` and `Store` are consider
 
 We define the object in our Hello World example as the following:
 
-```
-    /// An object that contains an arbitrary string
-    struct HelloWorldObject has key, store {
-        id: UID,
-        /// A string contained in the object
-        text: string::String
-    }
+```rust
+/// An object that contains an arbitrary string
+struct HelloWorldObject has key, store {
+  	id: UID,
+  	/// A string contained in the object
+  	text: string::String
+}
 ```
 
 UID here is a Sui Framework type (sui::object::UID) that defines the globally unique ID of an object. Every custom type is required to have an ID field. 
