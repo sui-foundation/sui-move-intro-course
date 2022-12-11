@@ -16,15 +16,15 @@ The resources or methods we will directly use for our fungible token example are
 - Resource: [TreasuryCap](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/coin.md#resource-treasurycap)
 - Method: [coin::create_currency](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/coin.md#function-create_currency)
 
-### `Coin` resource
+### `Coin` Resource
 
 The `Coin` resource will be explained fully in the following section as it requires understanding generics in Move first. 
 
-### `TreasuryCap` resource
+### `TreasuryCap` Resource
 
 The `TreasuryCap` resource is a type of capability that was introduced in the previous unit; it marks the ability for the holder to mint and burn tokens in the fungible token we are creating. The implementation of `TreasuryCap` in `sui::coin` has the abilities of `store` and `key`. 
 
-### `coin::create_currency` method
+### `coin::create_currency` Method
 
 The `coin::create_currency` method creates a new currency type T as and return the TreasuryCap for T to the caller. 
 
