@@ -31,7 +31,9 @@ The `coin::create_currency` method creates a new currency type T as and return t
 Its method signature is as the following:
 
 ```
-public fun create_currency<T: drop>(witness: T, decimals: u8, symbol: vector<u8>, name: vector<u8>, description: vector<u8>, icon_url: option::Option<url::Url>, ctx: &mut tx_context::TxContext): (coin::TreasuryCap<T>, coin::CoinMetadata<T>)
+public fun create_currency<T: drop>(witness: T, decimals: u8, symbol: vector<u8>, name: vector<u8>, 
+description: vector<u8>, icon_url: option::Option<url::Url>, ctx: &mut tx_context::TxContext): 
+(coin::TreasuryCap<T>, coin::CoinMetadata<T>)
 ```
 
 We will look at this method more closely after introducing the witness pattern. 
