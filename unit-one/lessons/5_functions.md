@@ -28,7 +28,7 @@ The `TxContext` object contains [essential information](https://github.com/Myste
 
 We can define our minting function in the Hello World example as the following:
 
-```
+```rust
     public entry fun mint(ctx: &mut TxContext) {
         let object = HelloWorldObject {
             id: object::new(ctx),
@@ -39,5 +39,4 @@ We can define our minting function in the Hello World example as the following:
 ```
 
 This function simply creates a new instance of the `HelloWoirldObject` custom type, then uses the Sui system transfer function to send it to the transaction caller. 
-
 
