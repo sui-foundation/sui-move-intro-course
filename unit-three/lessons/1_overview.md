@@ -1,4 +1,0 @@
-# Fungible Tokens
-
-## Introduction
-
