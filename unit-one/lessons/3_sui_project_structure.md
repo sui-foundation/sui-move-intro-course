@@ -10,9 +10,7 @@
 
     ```rust
     module hello_world {
-
         // module contents
-
     }
     ```
 
