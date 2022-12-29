@@ -70,10 +70,10 @@ Sui = { local = "../sui/crates/sui-framework" }
 
 ### Sui Module and Package Naming
 
-- Sui Move follows the same module and package [naming conventions as Rust](https://rust-lang.github.io/api-guidelines/naming.html)
-
 - Sui Move module and package naming convention uses snake casing, i.e. this_is_snake_casing.
 
 - A Sui module name uses the Rust path separator `::` to divide the package name and the module name, examples:
     1. `unit_one::hello_world` - `hello_world` module in `unit_one` package
     2. `capy::capy` - `capy` module in `capy` package
+
+- For more information on Move naming conventions, please check [the style section](https://move-language.github.io/move/coding-conventions.html#naming) of the Move book. 
