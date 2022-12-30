@@ -1,3 +1,4 @@
 unit-one/example_projects/hello_world/build/
+unit-two/example_projects/transcript/build/
 *.DS_store
 sui.log.*
