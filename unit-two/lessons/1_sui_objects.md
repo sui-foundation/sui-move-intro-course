@@ -4,7 +4,7 @@
 
 Sui Move is a fully object-centric language. Transactions on Sui are expressed as operations where the inputs and outputs are both objects. 
 
-As we briefly touched on this concept in [Unit 1 Lesson 4](../../unit-one/lessons/4_custom_types_and_abilities.md#custome-types-and-abilities), Sui objects are the basic unit of storage in Sui. It all starts from the `struct` keyword.
+As we briefly touched on this concept in [Unit One, Lesson 4](../../unit-one/lessons/4_custom_types_and_abilities.md#custome-types-and-abilities), Sui objects are the basic unit of storage in Sui. It all starts from the `struct` keyword.
 
 Let's first start with an example of a custom type that represents a transcript recording a student's grades:
 
