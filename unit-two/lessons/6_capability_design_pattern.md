@@ -1,6 +1,6 @@
 # Capability Design Pattern
 
-Capability is a pattern that allows authorizing actions with an object. As Sui Move is all about owning objects/assets. Therefore the concep of authority is also in the form of object. Let's take a look at below example:
+Capability is a pattern that allows authorizing actions with an object. As Sui Move is all about owning objects/assets. Therefore the concept of authority is also in the form of object. Let's take a look at below example:
 
 ```rust
 module sui_intro_unit_two::capability {

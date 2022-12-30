@@ -24,9 +24,15 @@ module sui_intro_unit_two::transcript {
         literature: u8,
     }
 
-    struct Folder {
+    struct WrappableTranscript has store {
+        history: u8,
+        math: u8,
+        literature: u8,
+    }
+
+    struct Folder has key {
         id: UID,
-        transcript: TranscriptObject,
+        transcript: WrappableTranscript,
     }
 
     struct Envelope has key {
