@@ -68,16 +68,16 @@ public entry fun delete_transcript(transcriptObject: TranscriptObject){
 
 ### Object Deletion and Struct Unpacking
 
-The `delete_transcript` method above illustrates how to delete an object on Sui. 
+The `delete_transcript` method from the example above illustrates how to delete an object on Sui. 
 
-You must first unpack the object and retrieve its object ID. Unpacking can only be done inside the module that defines the object due to Move's privileged struct operation rules:
+1. In order to delete an object, you must first unpack the object and retrieve its object ID. Unpacking can only be done inside the module that defines the object due to Move's privileged struct operation rules:
 
 - Struct types can only be created ("packed"), destroyed ("unpacked") inside the module that defines the struct.
 - The fields of a struct are only accessible inside the module that defines the struct.
 
-Following these rules, if you want to modify your struct outside its defining module, you will need to provide public APIs for these operations. 
+Following these rules, if you want to modify your struct outside its defining module, you will need to provide public methods for these operations. 
 
-After unpacking the struct and retrieving its id, the object can be deleted by simply calling the `object::delete` framework method.
+2. After unpacking the struct and retrieving its id, the object can be deleted by simply calling the `object::delete` framework method.
 
 
 
