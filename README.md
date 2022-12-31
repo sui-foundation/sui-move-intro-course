@@ -2,6 +2,13 @@
 
 Introductory course to the Sui Move language maintained by Sui Foundation
 
+## Content
+
+- Unit One: Sui Dev Environment Setup and Hello World
+- Unit Two: Working with Sui Objects
+- Unit Three: Fungible Tokens
+- Unit Four: Unannounced
+
 ## General Developer Resources
 
 - [Sui Developer Documentation](https://docs.sui.io/build)
