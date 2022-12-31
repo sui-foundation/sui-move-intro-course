@@ -4,15 +4,23 @@ Introductory course to the Sui Move language maintained by Sui Foundation
 
 ## Content
 
-- Unit One: Sui Dev Environment Setup and Hello World
+- **Unit One: Sui Dev Environment Setup and Hello World**
     - [Set Up Environment](./unit-one/lessons/2_set_up_environment.md)
     - [Sui Project Structure](./unit-one/lessons/3_sui_project_structure.md)
     - [Custom Types and Abilities](./unit-one/lessons/4_custom_types_and_abilities.md)
     - [Functions](./unit-one/lessons/5_functions.md)
     - [Hello World](./unit-one/lessons/6_hello_world.md)
-- Unit Two: Working with Sui Objects
-- Unit Three: Fungible Tokens
-- Unit Four: To be completed
+- **Unit Two: Working with Sui Objects**
+    - [Introduction](./unit-two/lessons/1_working_wiith_sui_objects.md)
+    - [Ownership](./unit-two/lessons/2_ownership.md)
+    - [Parameter Passing and Object Deletion](./unit-two/lessons/3_parameter_passing_and_object_deletion.md)
+    - [Object Wrapping](./unit-two/lessons/4_object_wrapping.md)
+    - [Object Wrapping by Example](./unit-two/lessons/5_object_wrapping_example.md)
+    - [Capability Design Pattern](./unit-two/lessons/6_capability_design_pattern.md)
+    - [Events](./unit-two/lessons/7_events.md)
+- **Unit Three: Fungible Tokens**
+- **Unit Four: To be completed**
+- **Advanced Topics**
 
 ## General Developer Resources
 
