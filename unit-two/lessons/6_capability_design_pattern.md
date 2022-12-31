@@ -64,7 +64,7 @@ We can see the publish transaction on the explorer as below:
 
 And the `TeacherCap` object sent to the publisher address:
 
-![Teacher Cap]((../images/teachercap.png))
+![Teacher Cap](../images/teachercap.png)
 
 ## Add Additional Teachers
 
