@@ -2,7 +2,7 @@
 
 ## The Complete Hello World Sample Project
 
-You can find the complete Hello World project in [this directory](https://github.com/sui-foundation/sui-move-intro-course/tree/main/unit-one/example_projects/hello_world). 
+You can find the complete Hello World project in [this directory](../example_projects/hello_world). 
 
 ## Deploying the Contract
 
@@ -12,13 +12,16 @@ the local node. Just set the Sui CLI to the respective network and have enough t
 The Sui CLI command for deploying the package is the following:
 
 ```bash
-sui client publish --path <absolute local path to the Sui Move package> --gas-budget 30000
-# or just use `sui client publish --path $(pwd) --gas-budget 30000`
+sui client publish --gas-budget <gas_budget> [absolute file path to the package that needs to be published]
 ```
+
+For the `gas_budget`, we can use a standard value like `30000`.
+
+If the absolute file path to the package is not provided, it will default to `.` or the current directory. 
 
 The output should look something like this if the contract was successfully deployd:
 
-![Publish Output](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/publish.png)
+![Publish Output](../images/publish.png)
 
 The object ID under the `Created Objects` section is the object ID of the Hello World package we just published.
 
@@ -42,7 +45,7 @@ sui client call --function mint --module hello_world --package $PACKAGE_ID --gas
 
 The console output should look like this if the `mint` function was successfully called, and a Hello World object was created and transferred:
 
-![Mint Output](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/mint.png)
+![Mint Output](../images/mint.png)
 
 The object ID under the `Created Objects` section of the output is the ID of the Hello World object.
 
@@ -60,7 +63,7 @@ http://127.0.0.1:9000
 
 Search for the object ID from the output of the previous transaction and you should be able to find the object on the explorer:
 
-![Explorer Output](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/explorer.png)
+![Explorer Output](../images/explorer.png)
 
 You should see the text "Hello World!" under the object's properties. 
 

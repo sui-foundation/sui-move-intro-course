@@ -58,6 +58,8 @@ In our example, we can define the `init` method as the following:
 
 This will create one copy of the `TeacherCap` object and send it to the publisher's address when the module is first published. 
 
+
+
 ## Add Additional Teachers
 
 In order to give additional addresses admin access, we can define a method to create and send additonal `TeacherCap` objects as the following:
