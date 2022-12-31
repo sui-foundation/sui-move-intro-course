@@ -58,7 +58,13 @@ In our example, we can define the `init` method as the following:
 
 This will create one copy of the `TeacherCap` object and send it to the publisher's address when the module is first published. 
 
+We can see the publish transaction on the explorer as below:
 
+![Publish Output](../images/publish.png)
+
+And the `TeacherCap` object sent to the publisher address:
+
+![Teacher Cap]((../images/teachercap.png))
 
 ## Add Additional Teachers
 
