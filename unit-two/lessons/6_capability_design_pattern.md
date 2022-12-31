@@ -58,7 +58,7 @@ In our example, we can define the `init` method as the following:
 
 This will create one copy of the `TeacherCap` object and send it to the publisher's address when the module is first published. 
 
-We can see the publish transaction's effect on the [Sui Explorer](https://explorer.sui.io) as below:
+We can see the publish transaction's effects on the [Sui Explorer](../../unit-one/lessons/6_hello_world.md#viewing-the-object-with-sui-explorer) as below:
 
 ![Publish Output](../images/publish.png)
 

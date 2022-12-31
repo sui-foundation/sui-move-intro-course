@@ -6,9 +6,10 @@
 /// 
 module sui_intro_unit_two::transcript {
 
-    use sui::object::{Self, UID};
+    use sui::object::{Self, ID, UID};
     use sui::tx_context::{Self, TxContext};
     use sui::transfer;
+    use sui::event;
 
     struct WrappableTranscript has key, store {
         id: UID,
@@ -25,6 +26,16 @@ module sui_intro_unit_two::transcript {
 
     struct TeacherCap has key {
         id: UID
+    }
+
+    /// Event marking when a transcript has been requested
+    struct TranscriptRequestEvent has copy, drop {
+        // The Object ID of the transcript wrapper
+        wrapper_id: ID,
+        // The requester of the transcript
+        requester: address,
+        // The intended address of the transcript
+        intended_address: address,
     }
 
     // Error code for when a non-intended address tries to unpack the transcript wrapper
@@ -78,8 +89,13 @@ module sui_intro_unit_two::transcript {
             transcript,
             intended_address
         };
+        event::emit(TranscriptRequestEvent {
+            wrapper_id: object::uid_to_inner(&folderObject.id),
+            requester: tx_context::sender(ctx),
+            intended_address,
+        });
         //We transfer the wrapped transcript object directly to the intended address
-        transfer::transfer(folderObject, intended_address)
+        transfer::transfer(folderObject, intended_address);
     }
 
     public entry fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){
