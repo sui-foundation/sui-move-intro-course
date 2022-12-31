@@ -67,7 +67,15 @@ There are a few new features of Sui Move that we haven't introduced before. Let'
 
 ### Assert
 
+
+
 ### Custom Errors
 
-### '_'
+
+
+*Question: Why do we need to delete the wrapper object here manually? What happens if we don't delete it?*
+
+## Full Example
+
+The full sample code of what we have written so far can be found under [transcript_wrapped.move]().
 

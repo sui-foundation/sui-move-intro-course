@@ -22,20 +22,7 @@ module sui_intro_unit_two::transcript {
         math: u8,
         literature: u8,
     }
-
-    struct WrappableTranscript has key, store {
-        id: UID,
-        history: u8,
-        math: u8,
-        literature: u8,
-    }
-
-    struct Folder has key {
-        id: UID,
-        transcript: WrappableTranscript,
-        intended_address: address
-    }
-
+    
     public entry fun create_transcript_object(history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
         let transcriptObject = TranscriptObject {
             id: object::new(ctx),
@@ -44,16 +31,6 @@ module sui_intro_unit_two::transcript {
             literature,
         };
         transfer::transfer(transcriptObject, tx_context::sender(ctx))
-    }
-
-    public entry fun create_wrappable_transcript_object(history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
-        let wrappableTranscript = WrappableTranscript {
-            id: object::new(ctx),
-            history,
-            math,
-            literature,
-        };
-        transfer::transfer(wrappableTranscript, tx_context::sender(ctx))
     }
 
     // You are allowed to retrieve the score but cannot modify it
@@ -72,24 +49,4 @@ module sui_intro_unit_two::transcript {
         object::delete(id);
     }
 
-    public entry fun request_transcript(transcript: WrappableTranscript, intended_address: address, ctx: &mut TxContext){
-        let folderObject = Folder {
-            id: object::new(ctx),
-            transcript,
-            intended_address
-        };
-        transfer::transfer(folderObject, tx_context::sender(ctx))
-    }
-
-    public entry fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){
-        // Check that the person unpacking the transcript is the intended viewer
-        assert!(folder.intended_address == tx_context::sender(ctx), 0);
-        let Folder {
-            id,
-            transcript,
-            intended_address:_,
-        } = folder;
-        transfer::transfer(transcript, tx_context::sender(ctx));
-        object::delete(id)
-    }
 }
