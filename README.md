@@ -33,7 +33,7 @@ Introductory course to the Sui Move language maintained by the [Sui Foundation](
 
 ## Socials and Communities
 
-If you want to join Sui's online communities, Join via following links:
+If you want to join Sui's online communities, you can join via following links:
 
 - [Sui Network Twitter](https://twitter.com/SuiNetwork) 
 - [Sui Official Discord](https://discord.gg/sui)
