@@ -37,7 +37,7 @@ Following these rules, if you want to modify your struct outside its defining mo
 
 2. After unpacking the struct and retrieving its ID, the object can be deleted by simply calling the `object::delete` framework method on its object ID. 
 
-*'_' Underscore in the above method denotes unused variables or parameters. This will consume the variable or parameter immediately.*
+*💡Note: the, `_`, underscore in the above method denotes unused variables or parameters. This will consume the variable or parameter immediately.*
 
 Here is the work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_1.move_wip)
 
