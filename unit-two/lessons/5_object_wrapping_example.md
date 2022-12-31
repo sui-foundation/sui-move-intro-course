@@ -29,7 +29,7 @@ struct Folder has key {
 }
 ```
 
-## Request Transcript
+## Request Transcript Method
 
 ```rust
 public entry fun request_transcript(transcript: WrappableTranscript, intended_address: address, ctx: &mut TxContext){
@@ -38,13 +38,14 @@ public entry fun request_transcript(transcript: WrappableTranscript, intended_ad
         transcript,
         intended_address
     };
-    transfer::transfer(folderObject, tx_context::sender(ctx))
+    //We transfer the wrapped transcript object directly to the intended address
+    transfer::transfer(folderObject, intended_address)
 }
 ```
 
-This method simply takes in a `WrappableTranscript` object and wraps it in a `Folder` object, and transfers this object to the method caller. 
+This method simply takes in a `WrappableTranscript` object and wraps it in a `Folder` object, and transfers the wrapped transcript to the intended address of the transcript. 
 
-## Unwrap Transcript
+## Unwrap Transcript Method
 
 ```rust
 public entry fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){

@@ -1,120 +1,76 @@
 # Capability Design Pattern
 
-Capability is a pattern that allows authorizing actions with an object. As Sui Move is all about owning objects/assets. Therefore the concept of authority is also in the form of object. Let's take a look at below example:
+Now we have the basics of a transcript publishing system, we want to add some access control to our smart contract. 
+
+Capability is a commonly used pattern in Move that allows fine tuned access control using an object centric model. Let's take a look at how we can define this capability object:
 
 ```rust
-module sui_intro_unit_two::capability {
-  use sui::transfer;
-  use sui::object::{Self, UID};
-  use std::string::{Self, String};
-  use sui::tx_context::{Self, TxContext};
-  
-  // Type that marks Capability to create, update, delete transcripts
+  // Type that marks the capability to create, update, and delete transcripts
   struct TeacherCap has key {
-    id:UID
+    id: UID
   }
-  
-  struct Transcript has key, store {
-    id: UID, 
-    history: u8,
-    math: u8,
-    literature: u8,
-  } 
-}
 ```
 
-We have first declared two types of objects, one is named `TeacherCap` where it is the authority object, transactions with out passing this authority object will not be able to call certain restricted functions. `Transcript` object is an object that contains student's score information, should only be able to modified by teachers, and students can only view them but cannot operate any action to them.
+We define a new struct `TeacherCap` that marks the capability to perform privileged actions on transcripts. If we want the capability to be non-transferrable, we simply do not add the `storage` ability to the struct. 
+
+*💡Note: This is also how the equivalent of soulbound tokens (SBT) can be easily implemented in Move. You simply define a struct that has the `key` ability, but not the `store` ability. 
+
+## Passing and Consuming Capability Objects
+
+Next, we need to modify the methods which should be callable by someone with the `TeacherCap` capability object to take in the capability as an extra parameter and consume it immediately. 
+
+For example, for the `create_wrappable_transcript_object` method, we can modify it as the follows:
 
 ```rust
-fun init(ctx: &mut TxContext) {
-  transfer::transfer(
-    TeacherCap {
-      id: object::new(ctx),
-    },
-    tx_context::sender(ctx)
-  )
-}
+    public entry fun create_wrappable_transcript_object(_: &TeacherCap, history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
+        let wrappableTranscript = WrappableTranscript {
+            id: object::new(ctx),
+            history,
+            math,
+            literature,
+        };
+        transfer::transfer(wrappableTranscript, tx_context::sender(ctx))
+    }
 ```
 
-Then we have the init function, the constructor function in sui move.  It creates one TeacherCap instance and send it to publisher, which in this case, should be teachers themselves.
+We pass in a reference to `TeacherCap` capability object, and consume it immediately with the `_` notation for unused variables and parameters. And note that because we are only passing in a reference to the object, consuming the reference has no effect on the original object. 
+
+*Question: What happens if try to pass in `TeacherCap` by value?*
+
+This means only an address that only a `TeacherCap` object can call this method, effectively implementing access control on this method.
+
+We make similar modifications to all other methods in the contract that perform privileged actions on transcripts. 
+
+## Initializer Function
+
+A module's initializer function is called once upon publishing the module. This is useful for initializing the state of the smart contract, and is used often to send out the initial set of capability objects. 
+
+In our example, we can define the `init` method as the following:
 
 ```rust
-public entry fun create(
-  _: &TeacherCap, 
-  history: u8, 
-  math: u8, 
-  literature: u8, 
-  ctx: &mut TxContext
-) {
-  transfer::transfer(
-    Transcript {
-      id: object::new(ctx),
-      history: history,
-      math: math,
-      literature: literature,
-    },
-    tx_context::sender(ctx)
-  )
-}
+    /// Module initializer is called only once on module publish.
+    fun init(ctx: &mut TxContext) {
+        transfer::transfer(TeacherCap {
+            id: object::new(ctx)
+        }, tx_context::sender(ctx))
+    }
 ```
 
-This is a create function, where it requires a `TeacherCap` object for calling this entry function. It can only be called by owners of `TeacherCap` object.
+This will create one copy of the `TeacherCap` object and send it to the publisher's address when the module is first published. 
+
+## Add Additional Teachers
+
+In order to give additional addresses admin access, we can define a method to create and send additonal `TeacherCap` objects as the following:
 
 ```rust
-public entry fun update(
-  _: &TeacherCap,
-  history: u8,
-  math: u8,
-  literature: u8,
-  transcript: &mut Transcript
-) {
-  transcript.math = math;
-  transcript.history = history;
-  transcript.literature = literature;
-}
-
-public entry fun delete(
-  _: &TeacherCap, transcript: Transcript
-) {
-  let Transcript { id, history: _, math: _, literature: _ } = transcript;
-  object::delete(id);
-}
+    public entry fun add_additional_teacher(_: &TeacherCap, new_teacher_address: address, ctx: &mut TxContext){
+        transfer::transfer(
+            TeacherCap {
+                id: object::new(ctx)
+            },
+        new_teacher_address
+        )
+    }
 ```
 
-Same goes to update and delete functions, they cannot be called if the transaction sender doesn't have `TeacherCap` object. But now, how can we manage the capabilities among teachers?
-
-We could create a new capability type named `SuperTeacherCap`.
-
-```rust
-struct SuperTeacherCap has key{
-  id: UID,
-}
-
-fun init(ctx: &mut TxContext) {
-  transfer::transfer(
-    SuperTeacherCap {
-      id: object::new(ctx),
-    },
-    tx_context::sender(ctx)
-  )
-}
-```
-
-In the above code, we have created a new capability named `SuperTeacherCap`, which will have access to add teachers to modity transcripts. 
-
-```rust
-public entry fun new_teacher(){
-	_: &SuperTeacherCap,
-	to: address
-} {
-	transfer::transfer(
-    TeacherCap {
-      id: object::new(ctx),
-      name: string::utf8(name)
-    },
-    to
-  )
-}
-```
-
-The entire code can be found in [*HERE*](../example_projects/transcript/sources/capability.move)
+**Here is the third work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_3.move_wip)**
