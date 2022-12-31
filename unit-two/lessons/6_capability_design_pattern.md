@@ -68,9 +68,9 @@ The second object created from the above transaction is an instance of the `Teac
 
 *Question: What was the first object created?*
 
-## Add Additional Teachers
+## Add Additional Teachers or Admins
 
-In order to give additional addresses admin access, we can define a method to create and send additonal `TeacherCap` objects as the following:
+In order to give additional addresses admin access, we can simply define a method to create and send additonal `TeacherCap` objects as the following:
 
 ```rust
     public entry fun add_additional_teacher(_: &TeacherCap, new_teacher_address: address, ctx: &mut TxContext){
@@ -82,5 +82,7 @@ In order to give additional addresses admin access, we can define a method to cr
         )
     }
 ```
+
+This method re-uses the `TeacherCap` to control access, but if needed, you can also define a new capability struct indicating sudo access. 
 
 **Here is the third work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_3.move_wip)**

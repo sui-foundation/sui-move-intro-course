@@ -51,30 +51,10 @@ On the Sui explorer, we can see the event emitted displayed as the following, sh
 
 ![Custom Event](../images/customevent.png)
 
+Here is the complete version of our transcript project and contract: [transcript sample project](../example_projects/transcript/sources/event.move)
 
+**Here is the complete version of the transcript sample project: [transcript.move](../example_projects/transcript/sources/transcript.move)**
 
-```rust
-module sui_intro_unit_two::events {
-	use sui::event;
-  struct Transcript has key {
-    id: UID,
-    history: u8,
-    math: u8,
-    literature: u8,
-  }
-  
-  // ....create transacript functions, init functions, etc, you can find them in Capability Design Pattern section.
-  
-  public entry fun print_transcript(transcript: &Transcript) {
-		event::emit(transcript);
-  }
-}
-```
+Please try out creating, requesting and unpacking transcripts using the Sui CLI client and the Sui explorer to check the result. 
 
-Just need to pass in any objects, variables, then it shall be printed and waiting to be observed using Sui API. For tutorials on how to get event using API, check [*HERE*](https://docs.sui.io/devnet/build/event_api).
-
-
-
-
-
-The updated version of capability design codes with events can be found in [*HERE*](../example_projects/transcript/sources/event.move)
+That's the end of Unit 2, great job!
