@@ -51,10 +51,8 @@ On the Sui explorer, we can see the event emitted displayed as the following, sh
 
 ![Custom Event](../images/customevent.png)
 
-Here is the complete version of our transcript project and contract: [transcript sample project](../example_projects/transcript/sources/event.move)
-
 **Here is the complete version of the transcript sample project: [transcript.move](../example_projects/transcript/sources/transcript.move)**
 
-Please try out creating, requesting and unpacking transcripts using the Sui CLI client and the Sui explorer to check the result. 
+Try out creating, requesting and unpacking transcripts using the Sui CLI client and the Sui explorer to check the result. 
 
 That's the end of Unit 2, great job!
