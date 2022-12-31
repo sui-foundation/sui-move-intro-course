@@ -1,7 +1,5 @@
 # Intro to Generics
 
-## Introduction
-
 Generics are abstract stand-ins for concrete types or other properties. They work similarly to [generics in Rust](https://doc.rust-lang.org/stable/book/ch10-00-generics.html), and can be used to allow greater flexibility and avoid logic duplication while writing Sui Move code.
 
 Generics are a very key concept in Sui Move, and it's important to understand and have an intuition for how they work, so it's important to take your time with this section and understand every part fully. 

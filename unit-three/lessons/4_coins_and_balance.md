@@ -19,7 +19,7 @@ struct Balance<phantom T> has store {
 }
 ```
 
-### The `phantom` Generic Type
+### The `phantom` Keyword
 
 We see that `Coin` takes in a generic type `T`, which is passed to `balance` which also takes in a generic type, but the `sui::balance::Balance` type does not use `T` in any of its field, and thus this generic type `T` is a `phantom` generic type, in that `T` is not used in a field of the struct that requires it, and is denoted by the keyword `phantom`.
 
