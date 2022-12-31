@@ -24,7 +24,7 @@ public entry fun delete_transcript(transcriptObject: TranscriptObject){
 }
 ```
 
-### Object Deletion and Struct Unpacking
+## Object Deletion and Struct Unpacking
 
 The `delete_transcript` method from the example above illustrates how to delete an object on Sui. 
 
