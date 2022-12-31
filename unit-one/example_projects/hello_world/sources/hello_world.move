@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Mysten Labs, Inc.
+// Copyright (c) 2022, Sui Foundation
 // SPDX-License-Identifier: Apache-2.0
 
 /// A basic Hello World example for Sui Move, part of the Sui Move intro course:

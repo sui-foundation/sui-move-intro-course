@@ -61,21 +61,31 @@ public entry fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){
     }
 ```
 
-This method unwraps the `WrappableTranscript` object from the `Folder` wrapper object, and sends it to the method caller. 
-
-There are a few new features of Sui Move that we haven't introduced before. Let's look at them one by one. 
-
-### Assert
-
-
-
-### Custom Errors
-
-
+This method unwraps the `WrappableTranscript` object from the `Folder` wrapper object if the method caller is the intended viewer of the transcript, and sends it to the method caller. 
 
 *Question: Why do we need to delete the wrapper object here manually? What happens if we don't delete it?*
 
-## Full Example
+### Assert
 
-The full sample code of what we have written so far can be found under [transcript_wrapped.move]().
+We used the `assert!` syntax to verify that the address sending the transaction to unpack the transcript is the same as the `intended_address` field of the `Folder` wrapper object. 
+
+the `assert!` macro takes in two parameters of the format:
+
+```
+assert!(<bool expression>, <code>)
+```
+
+where the boolean expression must evaluate to true, otherwise it will abort with error code `<code>`.
+
+### Custom Errors
+
+We are using a default 0 for our error code above, but we can also define a custom error constant in the following way:
+
+```rust
+    const ENotIntendedAddress: u64 = 1;
+```
+
+This error code then can be consumed at the application level and handled appropriatelty. 
+
+**Here is the second work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_2.move_wip)**
 
