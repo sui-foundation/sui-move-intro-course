@@ -4,7 +4,7 @@ Introductory course to the Sui Move language maintained by the [Sui Foundation](
 
 ## Content
 
-- **Unit One: Sui Dev Environment Setup and Hello World**
+- **Unit One: Environment Setup and Hello World**
     - [Set Up Environment](./unit-one/lessons/2_set_up_environment.md)
     - [Sui Project Structure](./unit-one/lessons/3_sui_project_structure.md)
     - [Custom Types and Abilities](./unit-one/lessons/4_custom_types_and_abilities.md)
