@@ -47,7 +47,7 @@ Let's modify our `request_transcript` method to emit this event:
     }
 ```
 
-On the Sui explorer, we can see the event emitted displayed as the following, showing the three data fields that we defined in the custom event:
+On the Sui explorer, we can see the event emitted displayed as the following, showing the three data fields that we defined in the `TranscriptRequestEvent` event:
 
 ![Custom Event](../images/customevent.png)
 
