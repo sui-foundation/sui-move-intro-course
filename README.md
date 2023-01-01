@@ -55,7 +55,7 @@ Please [get in touch](mailto:henry@sui.io) if you want to help translate this in
 
 1. Can I use the content of this repo to produce other educational content related to Sui or Sui Move programming language? 
 
-    Yes. That is the original intention of this repo, to allow content creators or educational platforms to use and expand on the material within this repo to create different forms of media or content about Sui or Sui Move language. 
+    Yes. That is the original intention of this repo, to allow content creators and educational platforms to use and expand on the material within this repo to create different forms of media or technical content about Sui or the Sui Move language. 
 
     This repo is licensed under the Creative Common License; [CC-BY-SA-4.0 license](https://github.com/sui-foundation/sui-move-intro-course/blob/main/LICENSE), to be specific. This allows anyone to remix, transform, build or share the content in this repo for whatever purposes, but any content based on this repo also needs to be licensed under the same Creative Common License, and give an attribution to the source. 
 
