@@ -68,7 +68,7 @@ We see that the Sui standard library dependency here is defined using a GitHub r
 Sui = { local = "../sui/crates/sui-framework" } 
 ```
 
-### Sui Module and Package Naming
+## Sui Module and Package Naming
 
 - Sui Move module and package naming convention uses snake casing, i.e. this_is_snake_casing.
 

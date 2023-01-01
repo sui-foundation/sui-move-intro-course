@@ -1,15 +1,15 @@
 # Sui Move Intro Course
 
-Introductory course to the Sui Move language maintained by the [Sui Foundation](https://suifoundation.org/)
+Introductory course to the Sui Move language maintained by [the Sui Foundation](https://suifoundation.org/)
 
 ## Content
 
 - **Unit One: Environment Setup and Hello World**
-    - [Set Up Environment](./unit-one/lessons/2_set_up_environment.md)
-    - [Sui Project Structure](./unit-one/lessons/3_sui_project_structure.md)
-    - [Custom Types and Abilities](./unit-one/lessons/4_custom_types_and_abilities.md)
-    - [Functions](./unit-one/lessons/5_functions.md)
-    - [Hello World](./unit-one/lessons/6_hello_world.md)
+    - [Set Up Environment](./unit-one/lessons/1_set_up_environment.md)
+    - [Sui Project Structure](./unit-one/lessons/2_sui_project_structure.md)
+    - [Custom Types and Abilities](./unit-one/lessons/3_custom_types_and_abilities.md)
+    - [Functions](./unit-one/lessons/4_functions.md)
+    - [Hello World](./unit-one/lessons/5_hello_world.md)
 - **Unit Two: Working with Sui Objects**
     - [Introduction](./unit-two/lessons/1_working_wiith_sui_objects.md)
     - [Ownership](./unit-two/lessons/2_ownership.md)
@@ -55,7 +55,7 @@ Please [get in touch](mailto:henry@sui.io) if you want to help translate this in
 
 1. Can I use the content of this repo to produce other educational content related to Sui or Sui Move programming language? 
 
-    Yes. That is the original intention of this repo, to allow content creators or educational platforms to use either some or all of the technical content within to create different forms of media about Sui or Sui Move language. 
+    Yes. That is the original intention of this repo, to allow content creators or educational platforms to use and expand on the material within this repo to create different forms of media or content about Sui or Sui Move language. 
 
     This repo is licensed under the Creative Common License; [CC-BY-SA-4.0 license](https://github.com/sui-foundation/sui-move-intro-course/blob/main/LICENSE), to be specific. This allows anyone to remix, transform, build or share the content in this repo for whatever purposes, but any content based on this repo also needs to be licensed under the same Creative Common License, and give an attribution to the source. 
 

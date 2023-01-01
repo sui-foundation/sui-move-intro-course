@@ -4,7 +4,7 @@ In this section, we will start creating our Hello World example contract step by
 
 ## Initializing the Package
 
-(If you skipped the previous section) You can initialize a Hello World Sui package with the following command in the command line after [installing Sui binaries](./2_set_up_environment.md#install-sui-binaries-locally):
+(If you skipped the previous section) You can initialize a Hello World Sui package with the following command in the command line after [installing Sui binaries](./1_set_up_environment.md#install-sui-binaries-locally):
 
 `sui move new hello_world`
 
@@ -54,7 +54,7 @@ For now, just know that there are four abilities in Sui Move:
 - **Key**: value can be used as a key for global storage operations
 - **Store**: value can be stored inside global storage
 
-Custom types that have the abilities `Key` and `Store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
+Custom types that have the abilities `key` and `store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
 
 ### Hello World Custom Type
 
@@ -69,5 +69,5 @@ struct HelloWorldObject has key, store {
 }
 ```
 
-UID here is a Sui Framework type (sui::object::UID) that defines the globally unique ID of an object. Every custom type is required to have an ID field. 
+UID here is a Sui Framework type (sui::object::UID) that defines the globally unique ID of an object. Any custom type with the `key` ability is required to have an ID field. 
 
