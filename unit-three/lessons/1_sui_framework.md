@@ -19,7 +19,7 @@ The resources or methods we will directly use in our fungible token example are:
 - Resource: [CoinMetadata](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/coin.md#resource-coinmetadata)
 - Method: [coin::create_currency](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/coin.md#function-create_currency)
 
-We will revisit each of these in more depth after introducing some new Move concepts in the next few sections. 
+We will revisit each of these in more depth after introducing some new concepts in the next few sections. 
 
 
 
