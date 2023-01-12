@@ -25,7 +25,7 @@ struct Balance<phantom T> has store {
 
 Recall our discussion on [`phantom`](./3_witness_design_pattern.md#the-phantom-keyword), The type `T` is used in `Coin` only as an argument to another phantom type for `Balance`, and in `Balance`, it's not used in any of its fields, thus `T` is a `phantom` type parameter. 
 
-`Coin<T>` can be thought of as a container of the inner `Balance<T>` type, which takes in a phantom type `T`. It serves an asset representation of a certain amount of the fungible token type `T` that can be transferred between accounts. 
+`Coin<T>` serves a transferrable asset representation of a certain amount of the fungible token type `T` that can be transferred between addresses or consumed by smart contract function calls. 
 
 ## The `create_currency` Method
 
@@ -72,7 +72,18 @@ The method creates and returns two objects, one is the `TreasuryCap` resource an
 
 ### `TreasuryCap`
 
-The `TreasuryCap` resource is guaranteed to be a singleton object by the One Time Witness pattern and wraps a singtleton field `total_supply` of type `Balance::Supply`:
+The `TreasuryCap` is an asset and is guaranteed to be a singleton object by the One Time Witness pattern:
+
+```rust
+    /// Capability allowing the bearer to mint and burn
+    /// coins of type `T`. Transferable
+    struct TreasuryCap<phantom T> has key, store {
+            id: UID,
+            total_supply: Supply<T>
+        }
+```
+
+It wraps a singtleton field `total_supply` of type `Balance::Supply`:
 
 ```rust
 /// A Supply of T. Used for minting and burning.
@@ -82,7 +93,7 @@ The `TreasuryCap` resource is guaranteed to be a singleton object by the One Tim
     }
 ```
 
-`Supple<T>` tracks the total amount of this custom fungible token of type `T` that is currently in circulation. You can see why this field must be a singleton, as having multiple `Supply` instances for a single token type makes no sense. 
+`Supple<T>` tracks the total amount of the given custom fungible token of type `T` that is currently in circulation. You can see why this field must be a singleton, as having multiple `Supply` instances for a single token type makes no sense. 
 
 ### `CoinMetadata`
 
