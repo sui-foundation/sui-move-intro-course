@@ -47,7 +47,7 @@ The `witness` resource type must have the `drop` keyword, so that this resource 
     }
 ```
 
-*The example above is modified from the book [Sui Move by Example](https://examples.sui.io/patterns/witness.html) by [Damir Shamanaev](https://github.com/damirka).*
+*The example above is modified from the excellent book [Sui Move by Example](https://examples.sui.io/patterns/witness.html) by [Damir Shamanaev](https://github.com/damirka).*
 
 ### The `phantom` Keyword
 
