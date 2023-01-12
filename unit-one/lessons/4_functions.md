@@ -10,6 +10,20 @@ Sui Move functions have three types of visibility:
 - **public**: the function is accessible by functions inside the same module, and by functions defined in another module
 - **public(friend)**: the function is accessible by functions inside the same module and by functions defined in modules that are included on [the module's friends list](https://diem.github.io/move/friends.html).
 
+## Return Value
+
+The return type of a function is specified in the function signature after the function parameters, separated by a colon. 
+
+A function's last line (of execution) without a semicolon is the return value. 
+
+Example:
+
+```rust
+    public fun addition (a: u8, b: u8): u8 {
+        a + b    
+    }
+```
+
 ## Entry Functions
 
 In Sui Move, entry functions are simply functions that can be called by a transactions. They must satisfy the following three requirements:
