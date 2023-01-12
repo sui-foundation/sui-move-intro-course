@@ -19,6 +19,12 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
     - [Capability Design Pattern](./unit-two/lessons/6_capability_design_pattern.md)
     - [Events](./unit-two/lessons/7_events.md)
 - **Unit Three: Fungible Tokens**
+    - [Sui Framework](./unit-three/lessons/1_sui_framework.md)
+    - [Intro to Generics](./unit-three/lessons/2_intro_to_generics.md)
+    - [Witness Design Pattern](./unit-three/lessons/3_witness_design_pattern.md)
+    - [The `Coin` Resource and `create_currency` Method](./unit-three/lessons/4_coin_resource_and_create_currency_method.md)
+    - [Managed Coin Example](./unit-three/lessons/5_managed_coin.md)
+    - [Unit Testing](./unit-three/lessons/6_unit_testing.md)    
 - **Unit Four: To be completed**
 - **Advanced Topics**
 
