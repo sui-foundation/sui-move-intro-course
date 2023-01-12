@@ -34,7 +34,7 @@ The `Coin` resource is a type with the abilities `store` and `key`, and it takes
 
 ### `coin::create_currency` Method
 
-The `coin::create_currency` method creates a new currency type T and return the TreasuryCap for T to the caller. 
+The `coin::create_currency` method creates a new currency type T and return the `TreasuryCap<T>` to the caller. 
 
 Its method signature is as the following:
 
@@ -44,7 +44,7 @@ Its method signature is as the following:
     (coin::TreasuryCap<T>, coin::CoinMetadata<T>)
 ```
 
-We will look at this method more closely after introducing the witness pattern. 
+We will revisit each of these after introducing some new concepts. 
 
 
 
