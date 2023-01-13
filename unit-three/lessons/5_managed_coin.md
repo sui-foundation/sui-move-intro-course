@@ -51,13 +51,13 @@ To mint some `MNG` tokens, we can use the following CLI command:
 
 ![Minting](../images/minting.png)
 
-Export the object ID's of the newly minted `COIN<MANGED>` object to a bash variable:
+Export the object ID's of the newly minted `COIN<MANAGED>` object to a bash variable:
 
 ```bash
 export COIN_ID=<coin object ID from previous output>
 ```
 
-Verify that the `Supply` field under the `TreasuryCap<Managed>` object should be increased by the amount minted. 
+Verify that the `Supply` field under the `TreasuryCap<MANAGED>` object should be increased by the amount minted. 
 
 ### Burning Tokens
 
@@ -69,6 +69,6 @@ To burn an existing `COIN<MANAGED>` object, we use the following CLI command:
 
 ![Burning](../images/burning.png)
 
-Verify that the `Supply` field under the `TreasuryCap<Managed>` object should be back to `0`. 
+Verify that the `Supply` field under the `TreasuryCap<MANAGED>` object should be back to `0`. 
 
 *Exercise: What other commonly used functions do fungible tokens need? You should know enough about programming in Move now to try to implement some of these functions.*
