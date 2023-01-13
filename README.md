@@ -25,7 +25,7 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
     - [The `Coin` Resource and `create_currency` Method](./unit-three/lessons/4_coin_resource_and_create_currency_method.md)
     - [Managed Coin Example](./unit-three/lessons/5_managed_coin.md)
     - [Unit Testing](./unit-three/lessons/6_unit_testing.md)    
-- **Unit Four: To be completed**
+- **Unit Four: NFT Marketplace**
 - **Advanced Topics**
 
 ## General Developer Resources
