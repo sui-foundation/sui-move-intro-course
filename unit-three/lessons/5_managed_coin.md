@@ -4,9 +4,9 @@ Now we have peeked under the hood of the `sui::coin` module, we can look at a si
 
 ## Smart Contract
 
-You can find the complete [Managed Coin contract](../example_projects/fungible_tokens/sources/managed.move) under the example project folder.
+You can find the complete [Managed Coin example contract](../example_projects/fungible_tokens/sources/managed.move) under the example project folder.
 
-Given what we have covered so far, this contract should be very easy to understand. It follows the [One Time Witness](./3_witness_design_pattern.md#one-time-witness) pattern, where the `witness` resource is named `MANAGED`, and automatically created by the module `init` function. 
+Given what we have covered so far, this contract should be fairly easy to understand. It follows the [One Time Witness](./3_witness_design_pattern.md#one-time-witness) pattern exactly, where the `witness` resource is named `MANAGED`, and automatically created by the module `init` function. 
 
 The `init` function then calls `coin::create_currency` to get the `TreasuryCap` and `CoinMetadata` resources. The parameters passed into this function are the fields of the `CoinMetadata` object, so include the token name, symbol, icon URL, etc. 
 
@@ -28,13 +28,11 @@ You should see console output similar to:
 
 ![Publish Output](../images/publish.png)
 
-The two immutable objects created are respectively the package itself, `CoinMetadata` of Managed Coin. And the owned object is the `TreasuryCap` object of Managed Coin. 
-
-![Metadata Object](../images/metadata.png)
+The two immutable objects created are respectively the package itself and the `CoinMetadata` object of `Managed Coin`. And the owned object passed to the transaction sender is the `TreasuryCap` object of `Managed Coin`. 
 
 ![Treasury Object](../images/treasury.png)
 
-Export the object ID's of the package object and the `TreasuryCap` object:
+Export the object ID's of the package object and the `TreasuryCap` object to environmental variables:
 
 ```bash
 export PACKAGE_ID=<package object ID from previous output>
@@ -49,9 +47,9 @@ To mint some `MNG` tokens, we can use the following CLI command:
     sui client call --function mint --module managed --package $PACKAGE_ID --args $TREASURYCAP_ID \"<amount to mint>\" <recipient address> --gas-budget 3000
 ```
 
-*💡Note: as of Sui binary version 0.21.0, `u64` inputs must be escaped as strings, thus the above CLI command format. This might change in future versions.*
+*💡Note: as of Sui binary version 0.21.0, `u64` inputs must be escaped as strings, thus the above CLI command format. This might change in a future version.*
 
-![Treasury Object](../images/minting.png)
+![Minting](../images/minting.png)
 
 Export the object ID's of the newly minted `COIN<MANGED>` object to a bash variable:
 
@@ -59,12 +57,18 @@ Export the object ID's of the newly minted `COIN<MANGED>` object to a bash varia
 export COIN_ID=<coin object ID from previous output>
 ```
 
+Verify that the `Supply` field under the `TreasuryCap<Managed>` object should be increased by the amount minted. 
+
 ### Burning Tokens
 
 To burn an existing `COIN<MANAGED>` object, we use the following CLI command:
 
 ```bash
-    sui client call --function burn --module managed --package $PACKAGE_ID --args $TREASURYCAP $COIN_ID --gas-budget 3000
+    sui client call --function burn --module managed --package $PACKAGE_ID --args $TREASURYCAP_ID $COIN_ID --gas-budget 3000
 ```
+
+![Burning](../images/burning.png)
+
+Verify that the `Supply` field under the `TreasuryCap<Managed>` object should be back to `0`. 
 
 *Exercise: What other commonly used functions do fungible tokens need? You should know enough about programming in Move now to try to implement some of these functions.*
