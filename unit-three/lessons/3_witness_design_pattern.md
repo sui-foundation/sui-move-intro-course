@@ -13,7 +13,7 @@ The `witness` resource type must have the `drop` keyword, so that this resource 
 ```rust
     /// Module that defines a generic type `Guardian<T>` which can only be
     /// instantiated with a witness.
-    module examples::peace {
+    module witness::peace {
         use sui::object::{Self, UID};
         use sui::transfer;
         use sui::tx_context::{Self, TxContext};
