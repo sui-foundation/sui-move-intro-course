@@ -1,14 +1,12 @@
-# Unit Test
+# Unit Testing
 
-Sui supports the [Move Testing Framework](https://github.com/move-language/move/blob/main/language/documentation/book/src/unit-testing.md). Here we will give an example of how to right unit test codes and run your test code.
+Sui supports the [Move Testing Framework](https://github.com/move-language/move/blob/main/language/documentation/book/src/unit-testing.md). Here we will create some unit tests for `managed coin` to show how to write unit tests and run them.
 
-To run test, just need to type in the following command in CLI:
+## Testing Environment
 
-```bash
-sui move test
-```
+Sui Move test codes are just like any other Sui Move codes, but they have special annotations and functions to distinguish them from actual production envrionment and the testing environment.
 
-Sui Move test codes are just like any other sui move codes, but they have special annotations and functions to distinguish them from actual production envrionment and the testing environment. 
+Your first start with `#[test]` annotation on top of testing function. Then inside the function, you will be mainly using `test_scenario` package to simulate runtime envrionment and transaction sequence.
 
 ```rust
 #[test]
@@ -17,7 +15,30 @@ fun test_function() {
 }
 ```
 
-Your first start with `#[test]` annotation on top of testing function. Then inside the function, you will be mainly using `test_scenario` package to simulate runtime envrionment and transaction sequence.
+## Initializing the State
+
+
+
+```rust
+    public fun test_init(ctx: &mut TxContext) {
+        init(MANAGED {}, ctx)
+    }
+```
+
+## Minting 
+
+## Burning 
+
+## Running Unit Tests
+
+To run test, just need to type in the following command in CLI:
+
+```bash
+sui move test
+```
+
+
+
 
 Let's dive in using our previous `Transcript` examples. So now as a `SuperTeacher` yourself, you want to give teacher address `@0x1234` access to modify transcripts. Then you want to verify the works that is done by the teachers. The original code is in [here](../example_projects/transcript/sources/unittest.move)
 

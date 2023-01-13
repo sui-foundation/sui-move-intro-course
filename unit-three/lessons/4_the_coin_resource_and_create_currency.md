@@ -105,4 +105,4 @@ This is a resource that stores the metadata of the fungible token that has been 
 - `description`: the description of this custom fungible token
 - `icon_url`: the url to the icon file of this custom fungible token
 
-The information contained in `CoinMetadata` can be thought as as a basic fungible token standard of Sui, and can be used by wallets and explorers to display fungible tokens created using the `sui::coin` module. 
+The information contained in `CoinMetadata` can be thought as as a basic and lightweight fungible token standard of Sui, and can be used by wallets and explorers to display fungible tokens created using the `sui::coin` module. 

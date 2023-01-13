@@ -44,12 +44,6 @@ module fungible_tokens::managed {
     public entry fun burn(treasury_cap: &mut TreasuryCap<MANAGED>, coin: Coin<MANAGED>) {
         coin::burn(treasury_cap, coin);
     }
-
-    #[test_only]
-    /// Wrapper of module initializer for testing
-    public fun test_init(ctx: &mut TxContext) {
-        init(MANAGED {}, ctx)
-    }
 }
 
 ```
@@ -63,6 +57,8 @@ The `CoinMetadata` is then frozen via the `transfer::freeze_object` method, so t
 Then the `TreasuryCap` [Capability](../../unit-two/lessons/6_capability_design_pattern.md) object is used as a way to control access to the `mint` and `burn` methods that create or destroy `Coin<Managed>` objects respectively. 
 
 ## Publishing and CLI Testing
+
+### Publish the Module
 
 Under the [fungible_tokens](../example_projects/fungible_tokens/) project folder, run:
 
@@ -80,3 +76,37 @@ The two immutable objects created are respectively the package itself, `CoinMeta
 
 ![Treasury Object](../images/treasury.png)
 
+Export the object ID's of the package object and the `TreasuryCap` object:
+
+```bash
+export PACKAGE_ID=<package object ID from previous output>
+export TREASURYCAP_ID=<treasury cap object ID from previous output>
+```
+
+### Minting Tokens
+
+To mint some `managed` tokens, we can use the following CLI command:
+
+```bash
+    sui client call --function mint --module managed --package $PACKAGE_ID --args $TREASURYCAP_ID \"<amount to mint>\" <recipient address> --gas-budget 3000
+```
+
+*💡Note: as of Sui binary version 0.21.0, `u64` inputs must be escaped as strings, thus the above CLI command format. This might change in future versions.*
+
+![Treasury Object](../images/minting.png)
+
+Export the object ID's of the newly minted `COIN<MANGED>` object to a bash variable:
+
+```bash
+export COIN_ID=<coin object ID from previous output>
+```
+
+### Burning Tokens
+
+To burn an existing `COIN<MANGED>` object, we use the following CLI command:
+
+```bash
+    sui client call --function burn --module managed --package $PACKAGE_ID --args $TREASURYCAP $COIN_ID --gas-budget 3000
+```
+
+*Exercise: What other commonly used functions do fungible tokens need? You should know enough about programming in Move now to try to implement some of these functions.*
