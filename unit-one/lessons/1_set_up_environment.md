@@ -31,6 +31,8 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
     `docker run --entrypoint /bin/sh -itd hyd628/sui-move-intro-course:latest`
     `docker exec -it <container ID> bash`
 
+*💡Note: the Docker image above might not be compatible with your computer or not up to date, in which case, you can start with a base [Ubuntu](https://hub.docker.com/_/ubuntu) or [Rust](https://hub.docker.com/_/rust) Docker image appropriate for your computer and install or update the Sui binaries as described above.*
+
 ## Configure VS Code with Move Analyzer Plug-in
 
 1. Install [Move Analyzer plugin](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer) from VS Marketplace
