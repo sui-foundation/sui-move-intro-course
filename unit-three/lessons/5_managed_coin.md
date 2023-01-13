@@ -62,5 +62,21 @@ The `CoinMetadata` is then frozen via the `transfer::freeze_object` method, so t
 
 Then the `TreasuryCap` [Capability](../../unit-two/lessons/6_capability_design_pattern.md) object is used as a way to control access to the `mint` and `burn` methods that create or destroy `Coin<Managed>` objects respectively. 
 
-## Publishing and CLI Commands
+## Publishing and CLI Testing
+
+Under the [fungible_tokens](../example_projects/fungible_tokens/) project folder, run:
+
+```bash
+    sui client publish --gas-budget 30000
+```
+
+You should see console output similar to:
+
+![Publish Output](../images/publish.png)
+
+The two immutable objects created are respectively the package itself, `CoinMetadata` of Managed Coin. And the owned object is the `TreasuryCap` object of Managed Coin. 
+
+![Metadata Object](../images/metadata.png)
+
+![Treasury Object](../images/treasury.png)
 
