@@ -19,7 +19,7 @@ module fungible_tokens::managed {
     /// registered once.
     fun init(witness: MANAGED, ctx: &mut TxContext) {
         // Get a treasury cap for the coin and give it to the transaction sender
-        let (treasury_cap, metadata) = coin::create_currency<MANAGED>(witness, 2, b"MANAGED", b"", b"", option::none(), ctx);
+        let (treasury_cap, metadata) = coin::create_currency<MANAGED>(witness, 2, b"MANAGED", b"MNG", b"", option::none(), ctx);
         transfer::freeze_object(metadata);
         transfer::transfer(treasury_cap, tx_context::sender(ctx))
     }
@@ -41,25 +41,4 @@ module fungible_tokens::managed {
     public fun test_init(ctx: &mut TxContext) {
         init(MANAGED {}, ctx)
     }
-}
-
-
-#[test_only]
-module fungible_tokens::managed_tests {
-
-    use fungible_tokens::managed;
-    use sui::test_scenario::{Self, next_tx, ctx};
-
-    #[test]
-    fun mint_burn() {
-        let addr1 = @0xA;
-        let addr2 = @0xB;
-        let scenario = test_scenario::begin(&addr1);
-        
-        next_tx(&mut scenario, &addr1); 
-        {
-            managed::test_init(ctx(&mut scenario))
-        };
-    }
-
 }

@@ -8,3 +8,4 @@ Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-fram
 [addresses]
 fungible_tokens =  "0x0"
 sui =  "0000000000000000000000000000000000000002"
+std =  "0000000000000000000000000000000000000001"
