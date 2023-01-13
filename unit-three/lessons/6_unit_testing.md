@@ -37,7 +37,7 @@ Inside the testing environment, we will be mainly leveraging the [`test_scenario
 
 *💡Note that the `Scenario` object is not droppable, so it must be explicitly cleaned up at the end of its scope using `test_scenario::end`.*
 
-## Initializing the Module State
+### Initializing the Module State
 
 To test our `Managed Coin` module, we need to first initialize the module state. Given that our module has an `init` function, we need to first create a `test_only` init function inside the `managed` module:
 
@@ -58,7 +58,7 @@ This is essentially a mock `init` function that can only be used for testing. Th
     };
 ```
 
-## Minting 
+### Minting 
 
 We use the [`next_tx` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/test_scenario.move#L103) to advance to the next transaction in our scenario where we want to mint a `Coin<MANAGED>` object.
 
@@ -77,7 +77,7 @@ next_tx(&mut scenario, addr1);
         };
 ```
 
-## Burning 
+### Burning 
 
 To testing burning a token, it's almost exactly the same as testing minting, except we also need to retrieve a `Coin<MANAGED>` object from the person it was minted to. 
 
