@@ -91,7 +91,7 @@ To run the unit tests, we simply need to type in the following command in CLI in
   sui move test
 ```
 
-You should see console output indicating which unit tests passed or failed.
+You should see console output indicating which unit tests have passed or failed.
 
 ![Unit Test](../images/unittest.png)
 
