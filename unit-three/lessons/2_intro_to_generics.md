@@ -32,22 +32,24 @@ module Storage {
 
 #### Ability Constraints
 
-We can add conditions to check that the type passed into the generic must have certain abilities. The syntax looks like the following:
+We can add conditions to enforce that the type passed into the generic must have certain abilities. The syntax looks like the following:
 
 ```rust
 module Storage {
     // T must be copyable and droppable 
-    struct Box<T: copy + drop> has copy {
+    struct Box<T: store + drop> has key, store {
         value: T
     }
 }
 ```
 
-💡It's very important to note here that the inner type `T` in the above example must have the ability (or abilities) or the outer container type. In this example, `T` must be copyable, as `Box` is copyable. However, `T` can also have abilities that the container doesn't have, such as `drop` in this example.
+💡It's important to note here that the inner type `T` in the above example must meet certain ability constraints due to the outer container type. In this example, `T` must have `store`, as `Box` has `store` and `key`. However, `T` can also have abilities that the container doesn't have, such as `drop` in this example.
 
-The intuition is that if the container is allowed to contain a type that does not follow the same rules that it does, the container would violate its own ability. How can a box be copyable if its content isn't also copyable?
+The intuition is that if the container is allowed to contain a type that does not follow the same rules that it does, the container would violate its own ability. How can a box be storeable if its content isn't also storeable?
 
 We will see in the next section that there is a way to get around this rule in certain cases using a special keyword, called `phantom`. 
+
+*💡See the [generics project](../example_projects/generics/) under `example_projects` for some examples of generic types.*
 
 ### Using Generics in Functions
 
@@ -95,7 +97,3 @@ sui client call --package $PACKAGE --module $MODULE --function "create_box" --ar
 For more advanced syntax involving the use of generics in Sui Move, such as multiple generic types, please refer to the excellent [section on generics in the Move Book](https://move-book.com/advanced-topics/understanding-generics.html). 
 
 But for our current lesson on fungible tokens, you already know enough about how generics work to proceed. 
-
-
-
-
