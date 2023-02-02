@@ -28,6 +28,12 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
 - **Unit Four: Marketplace**
 - **Advanced Topics**
 
+## TODOs
+
+- [ ] Finish Unit Four
+- [ ] Create a multi-platform Docker image
+- [ ] Create exercises for each unit
+
 ## General Developer Resources
 
 - [Sui Developer Documentation](https://docs.sui.io/build)

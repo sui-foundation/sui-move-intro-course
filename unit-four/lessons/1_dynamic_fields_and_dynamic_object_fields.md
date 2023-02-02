@@ -1,6 +1,8 @@
 ## Dynamic Fields & Dynamic Object Fields
 
-These might be new terminology for a lot of people so lets first get to what are `fields` and `object fields` first.
+Before we get into how a generic marketplace can be implemented in Sui, we need to revisit object to object ownerships and introduce a new concept of dynamic fields. Dynamic fields are heterogeneous (versus homogeneous for [Vectors](https://move-book.com/advanced-topics/managing-collections-with-vectors.html)), can be added or removed at runtime, and can have arbitrary names. 
+
+There are two types of dynamic fields: 
 
 - **Fields** can store any value that has `store`, however an object stored in this kind of field will be considered wrapped and will not be accessible via its ID by external tools (explorers, wallets, etc) accessing storage.
 - **Object field** values *must* be objects (have the `key` ability, and `id: UID` as the first field), but will still be accessible at their ID to external tools.
