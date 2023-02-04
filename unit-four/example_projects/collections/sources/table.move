@@ -28,7 +28,7 @@ module collection::table {
         table::add(&mut table.table_values, k, v);
     }
 
-    /// Removes the key-value pair in the Generictable `table: &mut Table<K, V>` and returns the value.   
+    /// Removes the key-value pair in the GenericTable `table: &mut Table<K, V>` and returns the value.   
     public fun remove<K: copy + drop + store, V: store>(table: &mut GenericTable<K, V>, k: K): V {
         table::remove(&mut table.table_values, k)
     }
@@ -48,7 +48,7 @@ module collection::table {
         table::contains<K, V>(&table.table_values, k)
     }
 
-    /// Returns the size of the table, the number of key-value pairs
+    /// Returns the size of the GenericTable, the number of key-value pairs
     public fun length<K: copy + drop + store, V: store>(table: &GenericTable<K, V>): u64 {
         table::length(&table.table_values)
     }
