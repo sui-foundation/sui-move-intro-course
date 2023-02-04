@@ -1,8 +1,8 @@
-# Dynamic Fields & Dynamic Object Fields
+# Dynamic Fields
 
 To peek under how collections like `Table` are actually implemented in Sui Move, we need to introduce the concept of dynamic fields in Sui Move. Dynamic fields are heterogeneous fields that can be added or removed at runtime, and can have arbitrary user assigned names. 
 
-There are two types of dynamic fields: 
+There are two sub-types of dynamic fields: 
 
   - **Dynamic Fields** can store any value that has the `store` ability, however an object stored in this kind of field will be considered wrapped and will not be accessible directly via its ID by external tools (explorers, wallets, etc) accessing storage.
   - **Dynamic Object Fields** values *must* be Sui objects (have the `key` and `store` abilities, and `id: UID` as the first field), but will still be directly accessible via their object ID after being attached.
