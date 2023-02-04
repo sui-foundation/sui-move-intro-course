@@ -25,7 +25,7 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
     - [The `Coin` Resource and `create_currency` Method](./unit-three/lessons/4_the_coin_resource_and_create_currency.md)
     - [Managed Coin Example](./unit-three/lessons/5_managed_coin.md)
     - [Unit Testing](./unit-three/lessons/6_unit_testing.md)    
-- **Unit Four: Collections and Marketplace**
+- **Unit Four: Marketplace**
     - [Homogeneous Collections](./unit-four/lessons/1_homogeneous_collections.md)
     - [Dynamic Fields](./unit-four/lessons/2_dynamic_fields.md)
     - [Heterogeneous Collections](./unit-four/lessons/3_heterogeneous_collections.md)
