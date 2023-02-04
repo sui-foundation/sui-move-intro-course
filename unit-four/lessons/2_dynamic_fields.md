@@ -138,8 +138,8 @@ When should you use a dynamic field versus a dynamic object field? Generally spe
 
 For a full explanation of the underlying reason, please check [this forum post](https://forums.sui.io/t/dynamicfield-vs-dynamicobjectfield-why-do-we-have-both/2095) by @sblackshear.  
 
-## Revisitng `Table`
+## Revisiting `Table`
 
 Now we understand how dynamic fields work, we can think of the `Table` collection as a thin wrapper around dynamic field operations. 
 
-You can look through the [source code](https://github.com/MystenLabs/sui/blob/eb866def280bb050838d803f8f72e67e05bf1616/crates/sui-framework/sources/table.move) of the `Table` type in Sui, and see how each of the previously introduced operations map to dynamic field operations and with some additional logic to keep track of the size of the `Table`. 
+You can look through the [source code](https://github.com/MystenLabs/sui/blob/eb866def280bb050838d803f8f72e67e05bf1616/crates/sui-framework/sources/table.move) of the `Table` type in Sui as an exercise, and see how each of the previously introduced operations map to dynamic field operations and with some additional logic to keep track of the size of the `Table`. 
