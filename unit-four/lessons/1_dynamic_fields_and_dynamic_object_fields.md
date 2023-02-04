@@ -1,6 +1,8 @@
 ## Dynamic Fields & Dynamic Object Fields
 
-Before we get into how a generic marketplace can be implemented in Sui, we need to revisit object to object ownerships and introduce a new concept of dynamic fields. Dynamic fields are heterogeneous (versus homogeneous for [Vectors](https://move-book.com/advanced-topics/managing-collections-with-vectors.html)), can be added or removed at runtime, and can have arbitrary names. 
+Before we get into how a generic marketplace can be implemented in Sui, we need to revisit object to object ownerships and introduce the concept of dynamic fields. 
+
+Dynamic fields are heterogeneous (versus homogeneous for [Vectors](https://move-book.com/advanced-topics/managing-collections-with-vectors.html)), can be added or removed at runtime, and can have arbitrary names. 
 
 There are two types of dynamic fields: 
 

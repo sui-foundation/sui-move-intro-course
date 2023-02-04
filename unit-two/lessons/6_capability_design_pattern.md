@@ -35,7 +35,7 @@ For example, for the `create_wrappable_transcript_object` method, we can modify 
 
 We pass in a reference to `TeacherCap` capability object, and consume it immediately with the `_` notation for unused variables and parameters. And note that because we are only passing in a reference to the object, consuming the reference has no effect on the original object. 
 
-*Question: What happens if try to pass in `TeacherCap` by value?*
+*Quiz: What happens if try to pass in `TeacherCap` by value?*
 
 This means only an address that only a `TeacherCap` object can call this method, effectively implementing access control on this method.
 
@@ -66,7 +66,7 @@ The second object created from the above transaction is an instance of the `Teac
 
 ![Teacher Cap](../images/teachercap.png)
 
-*Question: What was the first object created?*
+*Quiz: What was the first object created?*
 
 ## Add Additional Teachers or Admins
 
