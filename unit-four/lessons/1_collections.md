@@ -59,6 +59,8 @@ A table is a map-like collection that dynamically stores key-value pairs. But un
 
 The `key` type of a `Table` must have the ability constraint of `copy + drop + store`, and the `value` type must have the ability constraint of `store`.
 
+*Quiz: Would two table objects containing the exact same key-value pairs be equal to each other when checked with the `===` operator? Try it out.*
+
 See the below example for working with `Table` collections:
 
 ```rust
@@ -116,10 +118,4 @@ module collection::table {
 
 }
 ```
-
-*Quiz: Would two table objects containing the exact same key-value pairs be equal to each other when checked with the `===` operator? Try it out.*
-
-
-
-
 
