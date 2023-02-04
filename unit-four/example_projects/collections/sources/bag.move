@@ -3,49 +3,48 @@
 
 module collection::bag {
 
-    use sui::table::{Table, Self};
+    use sui::bag::{Bag, Self};
     use sui::tx_context::{TxContext};
 
     // Defining a table with generic types for the key and value 
-    struct GenericTable<phantom K: copy + drop + store, phantom V: store> {
-        table_values: Table<K, V>
+    struct GenericBag {
+       items: Bag
     }
 
-    // Create a new, empty GenericTable with key type K, and value type V
-    public fun create<K: copy + drop + store, V: store>(ctx: &mut TxContext): GenericTable<K, V> {
-        GenericTable<K, V> {
-            table_values: table::new<K, V>(ctx)
+    // Create a new, empty GenericBag
+    public fun create(ctx: &mut TxContext): GenericBag {
+        GenericBag{
+            items: bag::new(ctx)
         }
     }
 
-    // Adds a key-value pair to GenericTable
-    public fun add<K: copy + drop + store, V: store>(table: &mut GenericTable<K, V>, k: K, v: V) {
-        table::add(&mut table.table_values, k, v);
+    // Adds a key-value pair to GenericBag
+    public fun add<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K, v: V) {
+       bag::add(&mut bag.items, k, v);
     }
 
-    /// Removes the key-value pair in the GenericTable `table: &mut Table<K, V>` and returns the value.   
-    public fun remove<K: copy + drop + store, V: store>(table: &mut GenericTable<K, V>, k: K): V {
-        table::remove(&mut table.table_values, k)
+    /// Removes the key-value pair from the GenericBag with the provided key and returns the value.   
+    public fun remove<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K): V {
+        bag::remove(&mut bag.items, k)
     }
 
-    // Borrows an immutable reference to the value associated with the key in GenericTable
-    public fun borrow<K: copy + drop + store, V: store>(table: &GenericTable<K, V>, k: K): &V {
-        table::borrow(&table.table_values, k)
+    // Borrows an immutable reference to the value associated with the key in GenericBag
+    public fun borrow<K: copy + drop + store, V: store>(bag: &GenericBag, k: K): &V {
+        bag::borrow(&bag.items, k)
     }
 
-    /// Borrows a mutable reference to the value associated with the key in GenericTable
-    public fun borrow_mut<K: copy + drop + store, V: store>(table: &mut GenericTable<K, V>, k: K): &mut V {
-        table::borrow_mut(&mut table.table_values, k)
+    /// Borrows a mutable reference to the value associated with the key in GenericBag
+    public fun borrow_mut<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K): &mut V {
+        bag::borrow_mut(&mut bag.items, k)
     }
 
-    /// Check if a value associated with the key exists in the GenericTable
-    public fun contains<K: copy + drop + store, V: store>(table: &GenericTable<K, V>, k: K): bool {
-        table::contains<K, V>(&table.table_values, k)
+    /// Check if a value associated with the key exists in the GenericBag
+    public fun contains<K: copy + drop + store>(bag: &GenericBag, k: K): bool {
+        bag::contains<K>(&bag.items, k)
     }
 
-    /// Returns the size of the GenericTable, the number of key-value pairs
-    public fun length<K: copy + drop + store, V: store>(table: &GenericTable<K, V>): u64 {
-        table::length(&table.table_values)
+    /// Returns the size of the GenericBag, the number of key-value pairs
+    public fun length(bag: &GenericBag): u64 {
+        bag::length(&bag.items)
     }
-
 }
