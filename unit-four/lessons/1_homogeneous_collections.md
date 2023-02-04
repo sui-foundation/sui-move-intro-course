@@ -1,4 +1,4 @@
-# Collections 
+# Homogeneous Collections 
 
 Before we delve into the main topic of building a marketplace on Sui, let's learn about collections in Move first. 
 
@@ -51,13 +51,15 @@ module collection::vector {
 
 ```
 
-It's important to note that while a vector defined with a generic type can accept objects of _an arbitrary type_, all objects in the collection still must be _the same type_, that is, the collection is homogeneous. 
+It's important to note that while a vector defined with a generic type can accept objects of _an arbitrary type_, all objects in the collection still must be _the same type_, that is, the collection is _homogeneous_. 
 
 ## Table
 
 A table is a map-like collection that dynamically stores key-value pairs. But unlike a traditional map collection, it's keys and values are not stored within the `Table` value, but instead are stored using Sui's object system. The `Table` struct acts only as a handle into the object system to retrieve those keys and values. 
 
-The `key` type of a `Table` must have the ability constraint of `copy + drop + store`, and the `value` type must have the ability constraint of `store`.
+The `key` type of a `Table` must have the ability constraint of `copy + drop + store`, and the `value` type must have the ability constraint of `store`. 
+
+`Table` is also a type of _homogeneous_ collection where the key and value fields can be specified or generic types, but all values and all keys in a `Table` collection must be of the _same_ types. 
 
 *Quiz: Would two table objects containing the exact same key-value pairs be equal to each other when checked with the `===` operator? Try it out.*
 
@@ -118,4 +120,3 @@ module collection::table {
 
 }
 ```
-
