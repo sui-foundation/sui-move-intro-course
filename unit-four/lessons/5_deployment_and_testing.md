@@ -68,16 +68,52 @@ First, we mint a `widget` item to be listed:
     sui client call --function mint --module widget --package  $PACKAGE_ID --gas-budget 1000
 ```
 
+Save the object item of the minted `widget` to an environmental variable:
+
+```bash
+    export ITEM_ID=<object ID of the widget item from console>
+```
+
 Then we list this item to our marketplace:
 
 ```bash
-sui client call --function list --module marketplace --package $PACKAGE_ID --args $MARKET_ID <Widget item ID> 1 --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
+    sui client call --function list --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID 1 --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
 ```
 
 We need to submit two type arguments here, first is the type of the item to be listed and second is the fungible coin type for the payment. The above example uses a listing price of `1`. 
 
-After submitting this transaction, you can check the newly created listing on [the Sui explorer](https://explorer.sui.io/):
+After submitting this transaction, you can check the newly created listing on the [Sui explorer](https://explorer.sui.io/):
 
 ![Listing](../images/listing.png)
 
-## 
+## Purchase
+
+Split out a `SUI` coin object of amount `1` to use as the payment object. You can use the `sui client gas` CLI command to see a list of available `SUI` coins under your account and pick one to be split.
+
+```bash
+    sui client split-coin --coin-id <object ID of the coin to be split> --amounts 1 --gas-budget 1000
+```
+
+Export the object ID of the newly split `SUI` coin with balance `1`:
+
+```bash
+    export PAYMENT_ID=<object ID of the split 1 balance SUI coin>
+```
+
+Now, let's buy back the item that we just listed:
+
+```bash
+    sui client call --function buy_and_take --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID $PAYMENT_ID --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
+```
+
+You should see a long list of transaction effects in the console after submit this transaction. We can verify that the `widget` is owned by our address, and the `payments` `Table` now has an entry with the key of our address and value of a `SUI` coin object with balance of `1`.
+
+### Take Profits
+
+Finally, we can claim our earnings by calling the `take_profits_and_keep` method:
+
+```bash
+    sui client call --function take_profits_and_keep --module marketplace --package $PACKAGE_ID --args $MARKET_ID --type-args 0x2::sui::SUI --gas-budget 1000
+```
+
+This will reap the balance from the `payments` `Table` object and return its size to 0. Verify this on the explorer. 
