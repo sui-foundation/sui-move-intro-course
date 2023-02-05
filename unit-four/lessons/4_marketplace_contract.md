@@ -1,7 +1,6 @@
-# Marketplace Contract Design
+# Marketplace Contract
 
-Now we have a solid understanding of how various types of collections and dynamic fields work, we can start
-designing an on-chain marketplace that can support the following feartures:
+Now we have a solid understanding of how various types of collections and dynamic fields work, we can start writing the contract for an on-chain marketplace that can support the following feartures:
 
 - Listing of arbitrary item types and numbers
 - Accepts payment in a custom or native fungible token type
