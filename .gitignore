@@ -4,5 +4,6 @@ unit-three/example_projects/witness/build/
 unit-three/example_projects/fungible_tokens/build/
 unit-three/example_projects/generics/build/
 unit-four/example_projects/collections/build/
+unit-four/example_projects/marketplace/build/
 *.DS_store
 sui.log.*
