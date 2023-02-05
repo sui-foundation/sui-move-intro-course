@@ -3,7 +3,7 @@
 ///
 /// Modified from https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/nfts/sources/marketplace.move
 
-module marketplace::marketplacebag {
+module marketplace::marketplace {
     use sui::dynamic_object_field as ofield;
     use sui::tx_context::{Self, TxContext};
     use sui::object::{Self, ID, UID};
