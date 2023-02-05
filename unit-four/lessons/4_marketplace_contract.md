@@ -185,7 +185,7 @@ Lastly, we define methods for sellers to retrieve their balance from the marketp
     }
 ```
 
-_Quiz: why do we not need to use [capability](../../unit-two/lessons/6_capability_design_pattern.md) based access control under this marketplace design? Can we add capability design pattern here? What property would that give to the marketplace? 
+_Quiz: why do we not need to use [Capability](../../unit-two/lessons/6_capability_design_pattern.md) based access control under this marketplace design? Can we implement capability design pattern here? What property would that give to the marketplace?_
 
 ## Full Contract
 
