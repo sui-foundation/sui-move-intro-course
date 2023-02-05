@@ -189,4 +189,4 @@ _Quiz: why do we not need to use [capability](../../unit-two/lessons/6_capabilit
 
 ## Full Contract
 
-You can check the full smart contract for our implementation of a generic marketplace under the [`example_projects/marketplace`](../example_projects/marketplace/sources/marketplace.move) folder.
+You can find the full smart contract for our implementation of a generic marketplace under the [`example_projects/marketplace`](../example_projects/marketplace/sources/marketplace.move) folder.
