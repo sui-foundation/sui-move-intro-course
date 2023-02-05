@@ -100,6 +100,8 @@ Export the object ID of the newly split `SUI` coin with balance `1`:
     export PAYMENT_ID=<object ID of the split 1 balance SUI coin>
 ```
 
+_Quiz: As an exercise, modify the marketplace contract to accept any payment that has enough balance to pay for the asking price, instead of requiring the exact amount._
+
 Now, let's buy back the item that we just listed:
 
 ```bash

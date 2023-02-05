@@ -35,9 +35,10 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
 
 ## TODOs
 
-- [ ] Finish Unit Four
+- [ ] Write BCS lesson for advanced topics
 - [ ] Create a multi-platform Docker image
 - [ ] Create exercises for each unit
+- [ ] Unit Five on NFT display standard and SDK/frontend implementation
 
 ## General Developer Resources
 
