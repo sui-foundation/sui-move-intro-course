@@ -29,6 +29,8 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
     - [Homogeneous Collections](./unit-four/lessons/1_homogeneous_collections.md)
     - [Dynamic Fields](./unit-four/lessons/2_dynamic_fields.md)
     - [Heterogeneous Collections](./unit-four/lessons/3_heterogeneous_collections.md)
+    - [Marketplace Contract Design](./unit-four/lessons/4_marketplace_contract_design.md)
+    - [Deployment and Testing](./unit-four/lessons/5_deployment_and_testing.md)
 - **Advanced Topics**
 
 ## TODOs
