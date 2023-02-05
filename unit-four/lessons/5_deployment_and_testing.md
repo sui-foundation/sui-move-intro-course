@@ -106,7 +106,7 @@ Now, let's buy back the item that we just listed:
     sui client call --function buy_and_take --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID $PAYMENT_ID --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
 ```
 
-You should see a long list of transaction effects in the console after submit this transaction. We can verify that the `widget` is owned by our address, and the `payments` `Table` now has an entry with the key of our address and value of a `SUI` coin object with balance of `1`.
+You should see a long list of transaction effects in the console after submit this transaction. We can verify that the `widget` is owned by our address, and the `payments` `Table` now has an entry with the key of our address and should be of size `1`.
 
 ### Take Profits
 
@@ -116,4 +116,4 @@ Finally, we can claim our earnings by calling the `take_profits_and_keep` method
     sui client call --function take_profits_and_keep --module marketplace --package $PACKAGE_ID --args $MARKET_ID --type-args 0x2::sui::SUI --gas-budget 1000
 ```
 
-This will reap the balance from the `payments` `Table` object and return its size to 0. Verify this on the explorer. 
+This will reap the balance from the `payments` `Table` object and return its size to `0`. Verify this on the explorer. 
