@@ -57,18 +57,18 @@ Dynamic fields and dynamic object fields can be read or accessed as the followin
 
 ```rust
     // Borrows a reference to a DOFChild
-    public fun borrow_dofchild(child: & DOFChild): & DOFChild {
+    public fun borrow_dofchild(child: &DOFChild): &DOFChild {
         child
     }
 
     // Borrows a reference to a DFChild via its parent object
-    public fun borrow_dfchild_via_parent(parent: & Parent, child_name: vector<u8>): & DFChild {
-        field::borrow<vector<u8>, DFChild>(& parent.id, child_name)
+    public fun borrow_dfchild_via_parent(parent: &Parent, child_name: vector<u8>): &DFChild {
+        field::borrow<vector<u8>, DFChild>(&parent.id, child_name)
     }
 
     // Borrows a reference to a DOFChild via its parent object
-    public fun borrow_dofchild_via_parent(parent: & Parent, child_name: vector<u8>): & DOFChild {
-        ofield::borrow<vector<u8>, DOFChild>(& parent.id, child_name)
+    public fun borrow_dofchild_via_parent(parent: &Parent, child_name: vector<u8>): &DOFChild {
+        ofield::borrow<vector<u8>, DOFChild>(&parent.id, child_name)
     }
 ```
 
