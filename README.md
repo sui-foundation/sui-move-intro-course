@@ -67,7 +67,7 @@ Please [get in touch](mailto:henry@sui.io) if you want to help translate this in
 ## Videos and other Formats
 
 - [ ] Encode Club Video Series (English)
-- [ ] BuidlerDAO Video Series (Chinese)
+- [ ] [BuidlerDAO Video Series](https://www.bilibili.com/video/BV1RY411v7YU/) (Chinese)
 
 ## FAQ
 
