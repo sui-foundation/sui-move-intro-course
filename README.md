@@ -32,6 +32,7 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
     - [Marketplace Contract](./unit-four/lessons/4_marketplace_contract.md)
     - [Deployment and Testing](./unit-four/lessons/5_deployment_and_testing.md)
 - **Advanced Topics**
+    - [BCS Encoding](./advanced-topics/BCS_encoding/lessons/BCS_encoding.md)
 
 ## TODOs
 
