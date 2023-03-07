@@ -1,6 +1,6 @@
 # BCS Encoding
 
-Binary Canonical Serialization, or BCS, is a serialization format developed in the context of the Diem blockchain, and is now extensively used in most of the blockchains based on Move (Sui, Starcoin, Aptos, 0L). BCS is not only used in the Move VM, but also used in transaction and event coding. 
+Binary Canonical Serialization, or BCS, is a serialization format developed in the context of the Diem blockchain, and is now extensively used in most of the blockchains based on Move (Sui, Starcoin, Aptos, 0L). BCS is not only used in the Move VM, but also used in transaction and event coding, such as serializing transactions before signing, or parsing event data. 
 
 Knowing how BCS works is crucial if you want to understand how Move works at a deeper level and become a Move expert. Let's dive in.
 
@@ -9,8 +9,7 @@ Knowing how BCS works is crucial if you want to understand how Move works at a d
 There are some high level properties of BCS encoding that are good to keep in mind as we go through the rest of the lesson:
 
 - BCS is a data-serialization format where the resulting output bytes do not contain any type information; because of this, the side receiving the encoded bytes will need to know how to deserialize the data
-- Primitive types like unsigned ints are encoded in Little Endian format
-- There are no structs in BCS (since there is no types); the struct simplies defines the order in which fields are serialized
+- There are no structs in BCS (since there is no types); the struct simply defines the order in which fields are serialized
 - Wrapper types are ignored, so `OuterType` and `UnnestedType` will have the same BCS representation:
 
     ```rust
@@ -24,7 +23,7 @@ There are some high level properties of BCS encoding that are good to keep in mi
         address: address
     }
     ```
-- The fields in types containing the generic type fields can be parsed up to the first generic type field. So it's a good practice to put the generic type field(s) last if it's a type that will be ser/de'd.
+- Types containing the generic type fields can be parsed up to the first generic type field. So it's a good practice to put the generic type field(s) last if it's a custom type that will be ser/de'd.
     ```rust
     struct BCSObject<T> has drop, copy {
         id: ID,
@@ -34,8 +33,9 @@ There are some high level properties of BCS encoding that are good to keep in mi
     }
     ```
     In this example, we can deserialize everything up to the `meta` field. 
+- Primitive types like unsigned ints are encoded in Little Endian format
 
-Full BCS specification can be found in [the BCS repository](https://github.com/zefchain/bcs).
+The full BCS specification can be found in [the BCS repository](https://github.com/zefchain/bcs).
 
 ## Using the `@mysten/bcs` JavaScript Library
 
