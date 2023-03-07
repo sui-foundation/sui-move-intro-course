@@ -189,7 +189,7 @@ We want the BCS writer's output to be in hexadecimal format this time, which can
 Affix the serialization result hexstring with `0x` prefix and export to an environmental variable:
 
 ```bash
-export OBJECT_HEXSTRING = 0000000000000000000000000000000000000005000000000000000000000000000000000000000a03616161
+export OBJECT_HEXSTRING = 0x0000000000000000000000000000000000000005000000000000000000000000000000000000000a03616161
 ```
 
 Now we can either run the associated Move unit tests to check for correctness:
