@@ -169,7 +169,7 @@ _Quiz: What would happen if `BSCObject` had a `UID` type instead of an `ID` type
 
 ## Complete Ser/De Example
 
-Find the full JavaScript and Sui Move sample codes in the [`example_projects` folder](../example_projects/).
+Find the full JavaScript and Sui Move sample codes in the [`example_projects`](../example_projects/) folder.
 
 First, we serialize a test object using the JavaScript program:
 
