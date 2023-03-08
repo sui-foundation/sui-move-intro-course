@@ -34,6 +34,7 @@ There are some high level properties of BCS encoding that are good to keep in mi
     ```
     In this example, we can deserialize everything up to the `meta` field. 
 - Primitive types like unsigned ints are encoded in Little Endian format
+- Vector is serialized as a [ULEB128](https://en.wikipedia.org/wiki/LEB128) length (with max length up to `u32`) followed by the content of the vector.
 
 The full BCS specification can be found in [the BCS repository](https://github.com/zefchain/bcs).
 
