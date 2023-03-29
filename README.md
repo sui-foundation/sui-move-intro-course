@@ -36,7 +36,7 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
 
 ## TODOs
 
-- [ ] Write BCS lesson for advanced topics
+- [x] Write BCS lesson for advanced topics
 - [ ] Create a multi-platform Docker image
 - [ ] Create exercises for each unit
 - [ ] Unit Five on NFT display standard and SDK/frontend implementation
@@ -68,7 +68,7 @@ Please [get in touch](mailto:henry@sui.io) if you want to help translate this in
 ## Videos and other Formats
 
 - [ ] Encode Club Video Series (English)
-- [ ] [BuidlerDAO Video Series](https://www.bilibili.com/video/BV1RY411v7YU/) (Chinese)
+- [x] [BuidlerDAO Video Series](https://www.bilibili.com/video/BV1RY411v7YU?p=1) (Chinese)
 
 ## FAQ
 
