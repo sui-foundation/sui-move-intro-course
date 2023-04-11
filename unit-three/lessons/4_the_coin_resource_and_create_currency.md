@@ -15,7 +15,7 @@ struct Coin<phantom T> has key, store {
 
 The `Coin` resource type is a struct that has a generic type `T` and two fields, `id` and `balance`. `id` is of the type `sui::object::UID`, which we have already seen before. 
 
-`balance` is of the type [`sui::balance::Balance`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/docs/balance.md#0x2_balance_Balance), and is [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/balance.move#L25) as:
+`balance` is of the type [`sui::balance::Balance`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/balance.md#0x2_balance_Balance), and is [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/balance.move#L25) as:
 
 ```rust 
 struct Balance<phantom T> has store {
