@@ -23,7 +23,7 @@ module hello_world::hello_world {
             id: object::new(ctx),
             text: string::utf8(b"Hello World!")
         };
-        transfer::transfer(object, tx_context::sender(ctx));
+        transfer::public_transfer(object, tx_context::sender(ctx));
     }
 
 }

@@ -4,7 +4,7 @@ Now, we know how generics and witness pattern work, let's revisit the `Coin` res
 
 ## The `Coin` Resource
 
-Now we understand how generics work, we can revisit the `Coin` resource from `sui::coin`.  It's [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/coin.move#L29) as the following:
+Now we understand how generics work, we can revisit the `Coin` resource from `sui::coin`.  It's [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L29) as the following:
 
 ```rust
 struct Coin<phantom T> has key, store {
@@ -15,7 +15,7 @@ struct Coin<phantom T> has key, store {
 
 The `Coin` resource type is a struct that has a generic type `T` and two fields, `id` and `balance`. `id` is of the type `sui::object::UID`, which we have already seen before. 
 
-`balance` is of the type [`sui::balance::Balance`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/balance.md#0x2_balance_Balance), and is [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/balance.move#L25) as:
+`balance` is of the type [`sui::balance::Balance`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/balance.md#0x2_balance_Balance), and is [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/balance.move#L25) as:
 
 ```rust 
 struct Balance<phantom T> has store {
@@ -29,7 +29,7 @@ Recall our discussion on [`phantom`](./3_witness_design_pattern.md#the-phantom-k
 
 ## The `create_currency` Method
 
-Let's look at what `coin::create_currency` actually does in its [source code](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/coin.move#L251):
+Let's look at what `coin::create_currency` actually does in its [source code](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L251):
 
 ```rust
     public fun create_currency<T: drop>(
@@ -66,7 +66,7 @@ Let's look at what `coin::create_currency` actually does in its [source code](ht
     }
 ```
 
-The assert checks that the `witness` resource passed in is a One Time Witness using the [`sui::types::is_one_time_witness`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/types.move) method from the Sui Framework. 
+The assert checks that the `witness` resource passed in is a One Time Witness using the [`sui::types::is_one_time_witness`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/types.move) method from the Sui Framework. 
 
 The method creates and returns two objects, one is the `TreasuryCap` resource and the other is a `CoinMetadata` resource. 
 

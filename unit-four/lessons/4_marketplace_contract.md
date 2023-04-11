@@ -98,11 +98,11 @@ For delisting, we define the following methods:
         ctx: &mut TxContext
     ) {
         let item = delist<T, COIN>(marketplace, item_id, ctx);
-        transfer::transfer(item, tx_context::sender(ctx));
+        transfer::public_transfer(item, tx_context::sender(ctx));
     }
 ```
 
-Note how the delisted `Listing` object is unpacked and deleted, and the listed item object is retrieved through [`ofield::remove`](https://github.com/MystenLabs/sui/blob/e4c459ff522dc2077d3520f99b514e266935047a/crates/sui-framework/sources/dynamic_object_field.move#L67). Remember that Sui assets cannot be destroyed outside of their defining module, so we must transfer the item to the delister. 
+Note how the delisted `Listing` object is unpacked and deleted, and the listed item object is retrieved through [`ofield::remove`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/dynamic_object_field.move#L71). Remember that Sui assets cannot be destroyed outside of their defining module, so we must transfer the item to the delister. 
 
 ## Purchasing and Payments
 

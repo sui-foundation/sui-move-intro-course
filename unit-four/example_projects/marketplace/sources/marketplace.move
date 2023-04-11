@@ -90,7 +90,7 @@ module marketplace::marketplace {
         ctx: &mut TxContext
     ) {
         let item = delist<T, COIN>(marketplace, item_id, ctx);
-        transfer::transfer(item, tx_context::sender(ctx));
+        transfer::public_transfer(item, tx_context::sender(ctx));
     }
 
     /// Internal function to purchase an item using a known Listing. Payment is done in Coin<C>.
@@ -132,7 +132,7 @@ module marketplace::marketplace {
         paid: Coin<COIN>,
         ctx: &mut TxContext
     ) {
-        transfer::transfer(
+        transfer::public_transfer(
             buy<T, COIN>(marketplace, item_id, paid),
             tx_context::sender(ctx)
         )
@@ -151,7 +151,7 @@ module marketplace::marketplace {
         marketplace: &mut Marketplace<COIN>,
         ctx: &mut TxContext
     ) {
-        transfer::transfer(
+        transfer::public_transfer(
             take_profits(marketplace, ctx),
             tx_context::sender(ctx)
         )

@@ -9,3 +9,4 @@ advanced-topics/BCS_encoding/example_projects/bcs_move/build/
 advanced-topics/BCS_encoding/example_projects/bcs_js/node_modules/
 *.DS_store
 sui.log.*
+.idea
