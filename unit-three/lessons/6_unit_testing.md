@@ -23,7 +23,7 @@ Each function inside this module can be seen as one unit test consisiting of a s
 
 ## Test Scenario
 
-Inside the testing environment, we will be mainly leveraging the [`test_scenario` package](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/test_scenario.move) to simulate a runtime envrionment. The main object we need to understand and interact with here is the `Scenario` object. A `Scenario` simulates a multi-transaction sequence, and it can be initialized with the sender address as following:
+Inside the testing environment, we will be mainly leveraging the [`test_scenario` package](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/test_scenario.move) to simulate a runtime envrionment. The main object we need to understand and interact with here is the `Scenario` object. A `Scenario` simulates a multi-transaction sequence, and it can be initialized with the sender address as following:
 
 ```rust
   // Initialize a mock sender address
@@ -60,7 +60,7 @@ This is essentially a mock `init` function that can only be used for testing. Th
 
 ### Minting 
 
-We use the [`next_tx` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/test_scenario.move#L103) to advance to the next transaction in our scenario where we want to mint a `Coin<MANAGED>` object.
+We use the [`next_tx` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/test_scenario.move#L103) to advance to the next transaction in our scenario where we want to mint a `Coin<MANAGED>` object.
 
 To do this, we need to first extract the `TreasuryCap<MANAGED>` object. We use a special testing function called `take_from_sender` to retrieve this from our scenario. Note that we need to pass into `take_from_sender` the type parameter of the object we are trying to retrieve. 
 
