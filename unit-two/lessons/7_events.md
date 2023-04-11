@@ -26,7 +26,7 @@ Developers can also define custom events on Sui. We can define a custom event ma
 
 The type representing an event has the abilities `copy` and `drop`. Event objects aren't representing assets, and we are only interested in the data contained within, so they can be duplicated, and dropped at the end of scopes.
 
-To emit an event in Sui, you just need to use the [`sui::event::emit` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/docs/event.md#function-emit).
+To emit an event in Sui, you just need to use the [`sui::event::emit` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/event.md#function-emit).
 
 Let's modify our `request_transcript` method to emit this event:
 
