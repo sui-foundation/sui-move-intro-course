@@ -46,8 +46,14 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
 - [Sui Developer Documentation](https://docs.sui.io/build)
 - [Sui GitHub](https://github.com/MystenLabs/sui)
 - [Sui Framework Documentaton](https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/docs)
-- [Sui Typescript SDK](https://github.com/MystenLabs/sui/tree/main/sdk/typescript)
-- [Sui Rust SDK](https://github.com/MystenLabs/sui/tree/main/crates/sui-sdk)
+- [Sui Typescript SDK (official)](https://github.com/MystenLabs/sui/tree/main/sdk/typescript)
+- [Sui Typescript SDK (community)](https://github.com/scallop-io/sui-kit)
+- [Sui Rust SDK (official)](https://github.com/MystenLabs/sui/tree/main/crates/sui-sdk)
+- [Sui Golang SDK (community)](https://github.com/coming-chat/go-sui-sdk)
+- [Sui Python SDK (community)](https://github.com/FrankC01/pysui)
+- [Sui Java SDK (community)](https://github.com/GrapeBaBa/sui4j)
+- [Sui Kotlin SDK (community)](https://github.com/cosmostation/suikotlin)
+- [Sui C# SDK (community)](https://github.com/d-moos/SuiNet)
 - [Sui Explorer](https://explorer.sui.io/)
 
 ## Socials and Communities
