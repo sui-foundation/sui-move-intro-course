@@ -52,5 +52,5 @@ We can define our minting function in the Hello World example as the following:
     }
 ```
 
-This function simply creates a new instance of the `HelloWoirldObject` custom type, then uses the Sui system transfer function to send it to the transaction caller. 
+This function simply creates a new instance of the `HelloWorldObject` custom type, then uses the Sui system transfer function to send it to the transaction caller. 
 
