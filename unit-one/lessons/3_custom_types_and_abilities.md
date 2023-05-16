@@ -1,4 +1,4 @@
-# Custome Types and Abilities
+# Custom Types and Abilities
 
 In this section, we will start creating our Hello World example contract step by step and explain fundamental concepts in Sui Move as they come up, such as custom types and abilities. 
 
