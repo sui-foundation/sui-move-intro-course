@@ -68,6 +68,7 @@ If you want to join Sui's online communities, you can join via following links:
 
 - [x] English
 - [x] [Chinese](https://github.com/RandyPen/sui-move-intro-course-zh)
+- [x] [Thai](https://github.com/Contribution-DAO/sui-move-intro-course-thai)
 
 Please [get in touch](mailto:henry@sui.io) if you want to help translate this into other languages. 
 
