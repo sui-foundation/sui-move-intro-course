@@ -4,13 +4,13 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 
 ## Install Sui Binaries Locally
 
-[Reference Page](https://docs.sui.io/build/install#install-sui-binaries)
-
-1. [Install prerequisites](https://docs.sui.io/build/install#prerequisites) (dependent on OS) 
+1. [Install prerequisites depending on your operating system](https://docs.sui.io/build/install#prerequisites)
 
 2. Install Sui binaries
     
     `cargo install --locked --git https://github.com/MystenLabs/sui.git --branch devnet sui`
+
+    Change the branch target here to `testnet` or `mainnet` if you are targeting one of those. 
 
 3. Check binaries are installed successfully:
 
