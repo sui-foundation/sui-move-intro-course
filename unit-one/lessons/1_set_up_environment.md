@@ -75,6 +75,9 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 
 ## Get Testnet Sui Tokens
 
-
+1. [Join Sui Discord](https://discord.gg/sui)
+2. Complete verification steps
+3. Enter `#testnet-faucet` channel
+4. Type `!faucet <WALLET ADDRESS>`
 
 
