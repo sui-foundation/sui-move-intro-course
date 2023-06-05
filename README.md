@@ -37,7 +37,7 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
 ## TODOs
 
 - [x] Write BCS lesson for advanced topics
-- [ ] Create a multi-platform Docker image
+- [x] Create a multi-platform Docker image
 - [ ] Create exercises for each unit
 - [ ] Add content on Display.move
 - [ ] Add content on clock and example on token unlocking
