@@ -152,3 +152,19 @@ Modify the `withdraw_all` function to add a time constraint.
 
 The [complete code can be found here](../example_projects/lockup/sources/lockup.move), implementing the lock-up feature with Clock module.
 
+### Deploy and CLI call
+
+After the contract is published, you need to execute `start_timing` to start timing. Then you can call the `withdraw_all` function after the specified duration.
+
+When calling the `start_timing` function, the third argument `0x6` indicates the shared Clock module. This Clock module is created in the genesis block, starts counting, and cannot be changed.
+
+![start_timing](../images/start_timing.png)
+
+Other input parameters with `&Clock` are called in the same way.
+
+### Exercises
+
+You can try adding the following features for practice.
+- replace `share object` with `object_wrapping`
+- acquire time via `epoch timestamps`
+- Unlock in batches, such as unlocking in one year, two years, and three years
