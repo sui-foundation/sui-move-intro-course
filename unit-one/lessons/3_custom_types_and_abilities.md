@@ -15,7 +15,7 @@ Use an editor of your choice to create a Move smart contract source file called 
 And create the empty module as following:
 
 ```rust
-module hello_world::hello {
+module hello_world::hello_world {
     // module contents
 }
 ```
