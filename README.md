@@ -61,7 +61,7 @@ Introductory course to the Sui Move language maintained by [the Sui Foundation](
 - [Sui Kotlin SDK (community)](https://github.com/cosmostation/suikotlin)
 - [Sui C# SDK (community)](https://github.com/d-moos/SuiNet)
 - [Sui Dart SDK(community)](https://github.com/mofalabs/sui)
-- [Sui Explorer](https://explorer.sui.io/)
+- [Sui Explorer](https://suiexplorer.com/)
 
 ## Socials and Communities
 
