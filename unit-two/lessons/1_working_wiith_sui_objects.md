@@ -29,11 +29,11 @@ struct TranscriptObject has key {
 
 ## Create a Sui Object
 
-Creating a Sui object requires a unique ID, we use the `sui::object::new` function to create a new ID passing in the current `TxContext`. 
+Creating a Sui object requires a unique ID. We use the `sui::object::new` function to create a new ID passing in the current `TxContext`. 
 
-In Sui, every object must have an owner, which can be either an address, another object, or "shared". In our examples, we decided to make our new `transcriptObject` owned by the transaction sender, it is done using the `transfer` function of Sui framework and using `tx_context::sender` function to get the current entry call's sender's address.  
+In Sui, every object must have an owner, which can be either an address, another object, or "shared". In our examples, we decided to make our new `transcriptObject` owned by the transaction sender. It is done using the `transfer` function of the Sui framework and using `tx_context::sender` function to get the current entry call's sender's address.  
 
-We will discuss object owernship more in-depth in the next section. 
+We will discuss object ownership more in-depth in the next section. 
 
 ```rust
 use sui::object::{Self};
