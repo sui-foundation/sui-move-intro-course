@@ -93,7 +93,7 @@ It wraps a singtleton field `total_supply` of type `Balance::Supply`:
     }
 ```
 
-`Supple<T>` tracks the total amount of the given custom fungible token of type `T` that is currently in circulation. You can see why this field must be a singleton, as having multiple `Supply` instances for a single token type makes no sense. 
+`Supply<T>` tracks the total amount of the given custom fungible token of type `T` that is currently in circulation. You can see why this field must be a singleton, as having multiple `Supply` instances for a single token type makes no sense. 
 
 ### `CoinMetadata`
 
