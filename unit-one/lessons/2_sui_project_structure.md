@@ -4,9 +4,9 @@
 
 - A Sui module is a set of functions and types packed together which the developer publishes under a specific address 
 
-- The Sui standard library is published under the `0x2` address, while user deployed modules are published under a pseodorandom address assigned by the Sui Move VM
+- The Sui standard library is published under the `0x2` address, while user-deployed modules are published under a pseudorandom address assigned by the Sui Move VM
 
-- Module starts with the `module` keyword, which is followed by module name and curly braces - inside them module contents are placed:
+- Module starts with the `module` keyword, which is followed by the module name and curly braces - inside them, module contents are placed:
 
     ```rust
     module hello_world {
@@ -14,7 +14,7 @@
     }
     ```
 
-- Published modules are immutable objects in Sui; an immutable object is an object that can never be mutated, transferred or deleted. Because of this immutability, the object is not owned by anyone, and hence it can be used by anyone
+- Published modules are immutable objects in Sui; an immutable object is an object that can never be mutated, transferred, or deleted. Because of this immutability, the object is not owned by anyone, and hence it can be used by anyone
 
 - A Move package is just a collection of modules with a manifest file called Move.toml
 
@@ -31,7 +31,7 @@ For our example in this unit, we will start a Hello World project:
 This creates: 
 - the project root folder `hello_world`
 - the `Move.toml` manifest file
-- the `sources` subfolder which will contain Sui Move smart contract source files
+- the `sources` subfolder, which will contain Sui Move smart contract source files
 
 ### `Move.toml` Manifest Structure
 
