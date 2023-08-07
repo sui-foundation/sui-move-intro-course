@@ -1,12 +1,11 @@
 # Unit Testing
 
-Sui supports the [Move Testing Framework](https://github.com/move-language/move/blob/main/language/documentation/book/src/unit-testing.md). Here we will create some unit tests for `Managed Coin` to show how to write unit tests and run them.
+Sui supports the [Move Testing Framework](https://github.com/move-language/move/blob/main/language/documentation/book/src/unit-testing.md). Here, we will create some unit tests for `Managed Coin` to show how to write unit tests and run them.
 
 ## Testing Environment
 
-Sui Move test codes are just like any other Sui Move codes, but they have special annotations and functions to distinguish them from actual production envrionment and the testing environment.
-
-Your first start with `#[test]` or `#[test_only]` annotation on top of testing function or module to mark them as testing environment. 
+Sui Move test code is just like any other Sui Move code, but it has special annotations and functions to distinguish it from the actual production code.
+Test functions or modules start with the `#[test]` or `#[test_only]` annotation. 
 
 ```rust
 #[test_only]
@@ -19,16 +18,16 @@ module fungible_tokens::managed_tests {
 
 We will put the unit tests for `Managed Coin` into a separate testing module called `managed_tests`. 
 
-Each function inside this module can be seen as one unit test consisiting of a single or multiple transactions. We are only going to write one unit test called `mint_burn` here. 
+Each function inside this module can be seen as one unit test consisting of one or more transactions. We'll write one unit test called `mint_burn`. 
 
 ## Test Scenario
 
-Inside the testing environment, we will be mainly leveraging the [`test_scenario` package](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/test_scenario.move) to simulate a runtime envrionment. The main object we need to understand and interact with here is the `Scenario` object. A `Scenario` simulates a multi-transaction sequence, and it can be initialized with the sender address as following:
+Inside the testing environment, we will be mainly leveraging the [`test_scenario` package](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/test_scenario.move) to simulate a runtime environment. The main object we need to understand and interact with here is the `Scenario` object. A `Scenario` simulates a multi-transaction sequence, and it can be initialized with the sender address as follows:
 
 ```rust
   // Initialize a mock sender address
   let addr1 = @0xA;
-  // Begins a multi transaction scenario with addr1 as the sender
+  // Begins a multi-transaction scenario with addr1 as the sender
   let scenario = test_scenario::begin(addr1);
   ...
   // Cleans up the scenario object
@@ -39,7 +38,7 @@ Inside the testing environment, we will be mainly leveraging the [`test_scenario
 
 ### Initializing the Module State
 
-To test our `Managed Coin` module, we need to first initialize the module state. Given that our module has an `init` function, we need to first create a `test_only` init function inside the `managed` module:
+To test our `Managed Coin` module, we need first to initialize the module state. Given that our module has an `init` function, we need to first create a `test_only` init function inside the `managed` module:
 
 ```rust
 #[test_only]
@@ -62,7 +61,7 @@ This is essentially a mock `init` function that can only be used for testing. Th
 
 We use the [`next_tx` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/test_scenario.move#L103) to advance to the next transaction in our scenario where we want to mint a `Coin<MANAGED>` object.
 
-To do this, we need to first extract the `TreasuryCap<MANAGED>` object. We use a special testing function called `take_from_sender` to retrieve this from our scenario. Note that we need to pass into `take_from_sender` the type parameter of the object we are trying to retrieve. 
+To do this, we need first to extract the `TreasuryCap<MANAGED>` object. We use a special testing function called `take_from_sender` to retrieve this from our scenario. Note that we need to pass into `take_from_sender` the type parameter of the object we are trying to retrieve. 
 
 Then we simply call the `managed::mint` using all the necessary parameters. 
 

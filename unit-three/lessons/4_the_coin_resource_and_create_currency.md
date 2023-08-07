@@ -1,10 +1,10 @@
 # The `Coin` Resource and `create_currency` Method
 
-Now, we know how generics and witness pattern work, let's revisit the `Coin` resource and the `create_currency` method.
+Now we know how generics and witness pattern work, let's revisit the `Coin` resource and the `create_currency` method.
 
 ## The `Coin` Resource
 
-Now we understand how generics work, we can revisit the `Coin` resource from `sui::coin`.  It's [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L29) as the following:
+Now we understand how generics work. We can revisit the `Coin` resource from `sui::coin`.  It's [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L29) as the following:
 
 ```rust
 struct Coin<phantom T> has key, store {
@@ -25,7 +25,7 @@ struct Balance<phantom T> has store {
 
 Recall our discussion on [`phantom`](./3_witness_design_pattern.md#the-phantom-keyword), The type `T` is used in `Coin` only as an argument to another phantom type for `Balance`, and in `Balance`, it's not used in any of its fields, thus `T` is a `phantom` type parameter. 
 
-`Coin<T>` serves a transferrable asset representation of a certain amount of the fungible token type `T` that can be transferred between addresses or consumed by smart contract function calls. 
+`Coin<T>` serves as a transferrable asset representation of a certain amount of the fungible token type `T` that can be transferred between addresses or consumed by smart contract function calls. 
 
 ## The `create_currency` Method
 
@@ -83,7 +83,7 @@ The `TreasuryCap` is an asset and is guaranteed to be a singleton object by the 
         }
 ```
 
-It wraps a singtleton field `total_supply` of type `Balance::Supply`:
+It wraps a singleton field `total_supply` of type `Balance::Supply`:
 
 ```rust
 /// A Supply of T. Used for minting and burning.
@@ -103,6 +103,6 @@ This is a resource that stores the metadata of the fungible token that has been 
 - `name`: the name of this custom fungible token
 - `symbol`: the token symbol of this custom fungible token
 - `description`: the description of this custom fungible token
-- `icon_url`: the url to the icon file of this custom fungible token
+- `icon_url`: the URL to the icon file of this custom fungible token
 
-The information contained in `CoinMetadata` can be thought as as a basic and lightweight fungible token standard of Sui, and can be used by wallets and explorers to display fungible tokens created using the `sui::coin` module. 
+The information contained in `CoinMetadata` can be thought of as a basic and lightweight fungible token standard of Sui, and can be used by wallets and explorers to display fungible tokens created using the `sui::coin` module. 

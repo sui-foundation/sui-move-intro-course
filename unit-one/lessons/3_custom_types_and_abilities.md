@@ -12,7 +12,7 @@ In this section, we will start creating our Hello World example contract step by
 
 Use an editor of your choice to create a Move smart contract source file called `hello.move` under the `sources` subfolder. 
 
-And create the empty module as following:
+And create the empty module as follows:
 
 ```rust
 module hello_world::hello_world {
@@ -39,18 +39,18 @@ use sui::tx_context::{Self, TxContext};
 
 ## Custom Types
 
-A structure in Sui Move is a custom type which contains key-value pairs, where the key is the name of a property and value is what's stored. Defined using keyword `struct`, a structure can have up to 4 abilities.
+A structure in Sui Move is a custom type that contains key-value pairs, where the key is the name of a property, and the value is what's stored. Defined using the keyword `struct`, a structure can have up to 4 abilities.
 
 ### Abilities
 
 Abilities are keywords in Sui Move that define how types behave at the compiler level. 
 
-Abilities are crucial to defining how object behave in Sui Move at the language level. Each unique combination of abilities in Sui Move is its own design pattern. We will study abitilies and how to use them in Sui Move throughout the course.
+Abilities are crucial to defining how objects behave in Sui Move at the language level. Each unique combination of abilities in Sui Move is its own design pattern. We will study abilities and how to use them in Sui Move throughout the course.
 
 For now, just know that there are four abilities in Sui Move:
 
 - **Copy**: value can be copied (or cloned by value)
-- **Drop**: value can be dropped by the end of scope
+- **Drop**: value can be dropped by the end of the scope
 - **Key**: value can be used as a key for global storage operations
 - **Store**: value can be stored inside global storage
 
