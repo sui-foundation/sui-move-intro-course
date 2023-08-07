@@ -1,6 +1,6 @@
 # Types of Ownership of Sui Objects
 
-Each object in Sui has an owner field that indicates how this object is being owned. In Sui Move, there are total of four types of ownership.
+Each object in Sui has an owner field that indicates how this object is being owned. In Sui Move, there are a total of four types of ownership.
 
 - Owned
     - Owned by an address
@@ -15,13 +15,13 @@ The first two types of ownership fall under the `Owned Objects` category. Owned 
 
 ### Owned by an Address
 
-Let's continue using our `transcript` example here. This type of ownership is pretty straightforward as the object is owned by an address which the object is transfered to upon object creation, such as in above example at this line:
+Let's continue using our `transcript` example here. This type of ownership is pretty straightforward as the object is owned by an address to which the object is transferred upon object creation, such as in the above example at this line:
 
 ```rust
     transfer::transfer(transcriptObject, tx_context::sender(ctx)) // where tx_context::sender(ctx) is the recipient
 ```
 
-where the `transcriptObject` is transfered to the address of the transaction sender upon creation.
+where the `transcriptObject` is transferred to the address of the transaction sender upon creation.
 
 ### Owned by An Object
 
