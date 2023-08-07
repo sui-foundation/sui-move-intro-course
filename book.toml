@@ -1,0 +1,6 @@
+[book]
+authors = ["uvd"]
+language = "en"
+multilingual = false
+src = "."
+title = "Sui Move Intro Course"
