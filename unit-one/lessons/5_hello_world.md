@@ -6,7 +6,7 @@ You can find the complete Hello World project in [this directory](../example_pro
 
 ## Deploying the Contract
 
-We will use the Sui CLI to deploy the package to the Sui network. You can deploy it to either the Sui devnet, testnet or 
+We will use the Sui CLI to deploy the package to the Sui network. You can deploy it to either the Sui devnet, testnet, or 
 the local node. Just set the Sui CLI to the respective network and have enough tokens to pay for gas. 
 
 The Sui CLI command for deploying the package is the following:
@@ -19,7 +19,7 @@ For the `gas_budget`, we can use a standard value like `30000`.
 
 If the absolute file path to the package is not provided, it will default to `.` or the current directory. 
 
-The output should look something like this if the contract was successfully deployd:
+The output should look something like this if the contract was successfully deployed:
 
 ![Publish Output](../images/publish.png)
 
@@ -33,7 +33,7 @@ export PACKAGE_ID=<package object ID from previous output>
 
 ## Calling a Method through a Transaction
 
-Next we want to mint a Hello World object by calling the `mint` function in the smart contract we just deployed.
+Next, we want to mint a Hello World object by calling the `mint` function in the smart contract we just deployed.
 
 Note that we are able to do this because `mint` is an entry function. 
 
@@ -43,7 +43,7 @@ The command for this using Sui CLI is:
 sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 3000
 ```
 
-The console output should look like this if the `mint` function was successfully called, and a Hello World object was created and transferred:
+The console output should look like this if the `mint` function was successfully called and a Hello World object was created and transferred:
 
 ![Mint Output](../images/mint.png)
 
