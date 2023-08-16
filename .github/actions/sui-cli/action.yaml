@@ -1,0 +1,13 @@
+inputs:
+  GIT_CREDENTIALS:
+    description: "Optional credentials to pass to git"
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+    - run: cargo install --locked --git https://github.com/MystenLabs/sui.git --branch devnet sui
+      shell: bash
