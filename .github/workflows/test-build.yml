@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: uvd/sui-move-intro-course/.github/actions/sui-cli@feature/check.sh
+      - uses: sui-foundation/sui-move-intro-course/.github/actions/sui-cli@feature/check.sh
       - run: sui -V
       - run: ./.github/scripts/check.sh -e
         shell: bash
