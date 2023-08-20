@@ -53,7 +53,7 @@ The `witness` resource type must have the `drop` keyword, so that this resource 
 
 In the above example, we want the `Guardian` type to have the `key` and `store` abilities, so that it's an asset and is transferrable and persists in global storage. 
 
-We also want to pass in the `witness` resource, `PEACE`, into `Guardian`, but `PEACE` only has the `drop` ability. Recall our previous discussion on [ability constraints](./2_intro_to_generics.md#ability-constraints) and inner types, the rule implies that `PEACE` should also have `key` and `storage` given that the outer type `Guardian` does. But in this case, we do not want to add unnecessary abilities to our `witness` type, because doing so could cause undesirable behaviors and vulnerabilities. 
+We also want to pass in the `witness` resource, `PEACE`, into `Guardian`, but `PEACE` only has the `drop` ability. Recall our previous discussion on [ability constraints](./2_intro_to_generics.md#ability-constraints) and inner types, the rule implies that `PEACE` should also have `key` and `store` given that the outer type `Guardian` does. But in this case, we do not want to add unnecessary abilities to our `witness` type, because doing so could cause undesirable behaviors and vulnerabilities. 
 
 We can use the keyword `phantom` to get around this situation. When a type parameter is either not used inside the struct definition or it is only used as an argument to another `phantom` type parameter, we can use the `phantom` keyword to ask the Move type system to relax the ability constraint rules on inner types. We see that `Guardian` doesn't use the type `T` in any of its fields, so we can safely declare `T` to be a `phantom` type. 
 
