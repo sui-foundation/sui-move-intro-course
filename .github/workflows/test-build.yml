@@ -1,0 +1,20 @@
+name: Test deployment
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Review gh actions docs if you want to further define triggers, paths, etc
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+
+jobs:
+  build_and_test:
+    name: Rust project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: sui-foundation/sui-move-intro-course/.github/actions/sui-cli@feature/check.sh
+      - run: sui -V
+      - run: ./.github/scripts/check.sh -e
+        shell: bash
+
