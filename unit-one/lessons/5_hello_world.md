@@ -15,7 +15,7 @@ The Sui CLI command for deploying the package is the following:
 sui client publish --gas-budget <gas_budget> [absolute file path to the package that needs to be published]
 ```
 
-For the `gas_budget`, we can use a standard value like `30000`.
+For the `gas_budget`, we can use a standard value like `20000000`.
 
 If the absolute file path to the package is not provided, it will default to `.` or the current directory. 
 
