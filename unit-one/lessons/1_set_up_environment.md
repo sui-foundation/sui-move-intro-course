@@ -34,7 +34,7 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 
 *💡Note: If the above Docker image is not compatible with your CPU architecture, you can start with a base [Rust](https://hub.docker.com/_/rust) Docker image appropriate for your CPU architecture, and install the Sui binaries and prerequisites as described above.*
 
-## Configure VS Code with Move Analyzer Plug-in
+## (Optional) Configure VS Code with Move Analyzer Plug-in
 
 1. Install [Move Analyzer plugin](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer) from VS Marketplace
 
