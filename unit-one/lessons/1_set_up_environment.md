@@ -28,9 +28,9 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 
 3. Start and shell into the Docker container:
 
-    `docker run -itd mysten/sui-tools:devnet --name mysuicontainer`
+    `docker run --name suidevcontainer -itd mysten/sui-tools:devnet`
 
-    `docker exec -it mysuicontainer bash`
+    `docker exec -it suidevcontainer bash`
 
 *💡Note: If the above Docker image is not compatible with your CPU architecture, you can start with a base [Rust](https://hub.docker.com/_/rust) Docker image appropriate for your CPU architecture, and install the Sui binaries and prerequisites as described above.*
 
