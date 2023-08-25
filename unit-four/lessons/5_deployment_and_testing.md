@@ -31,7 +31,7 @@ This is basically the Hello World project from Unit One, but made even simpler.
 First we publish both the package with:
 
 ```bash
-    sui client publish --gas-budget 3000
+    sui client publish --gas-budget 10000000
 ```
 
 You should see both `marketplace` and `widget` modules published on the explorer: 
@@ -49,7 +49,7 @@ Export the package object ID into an environmental variable:
 Next, we need to initialize the marketplace contract by calling the `create` entry function. We want to pass it a type argument to specify which type of fungible token this marketplace will accept. It's easiest to just use the `Sui` native token here. We can use the following CLI command: 
 
 ```bash
-    sui client call --function create --module marketplace --package $PACKAGE_ID --type-args 0x2::sui::SUI --gas-budget 1000
+    sui client call --function create --module marketplace --package $PACKAGE_ID --type-args 0x2::sui::SUI --gas-budget 10000000
 ```
 
 Note the syntax for passing in the type argument for `SUI` token. 
@@ -65,7 +65,7 @@ Export the `Marketplace` shared object's ID into an environmental variable:
 First, we mint a `widget` item to be listed:
 
 ```bash
-    sui client call --function mint --module widget --package  $PACKAGE_ID --gas-budget 1000
+    sui client call --function mint --module widget --package  $PACKAGE_ID --gas-budget 10000000
 ```
 
 Save the object item of the minted `widget` to an environmental variable:
@@ -77,7 +77,7 @@ Save the object item of the minted `widget` to an environmental variable:
 Then we list this item to our marketplace:
 
 ```bash
-    sui client call --function list --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID 1 --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
+    sui client call --function list --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID 1 --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 10000000
 ```
 
 We need to submit two type arguments here, first is the type of the item to be listed and second is the fungible coin type for the payment. The above example uses a listing price of `1`. 
@@ -91,7 +91,7 @@ After submitting this transaction, you can check the newly created listing on th
 Split out a `SUI` coin object of amount `1` to use as the payment object. You can use the `sui client gas` CLI command to see a list of available `SUI` coins under your account and pick one to be split.
 
 ```bash
-    sui client split-coin --coin-id <object ID of the coin to be split> --amounts 1 --gas-budget 1000
+    sui client split-coin --coin-id <object ID of the coin to be split> --amounts 1 --gas-budget 10000000
 ```
 
 Export the object ID of the newly split `SUI` coin with balance `1`:
@@ -105,7 +105,7 @@ _Quiz: As an exercise, modify the marketplace contract to accept any payment tha
 Now, let's buy back the item that we just listed:
 
 ```bash
-    sui client call --function buy_and_take --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID $PAYMENT_ID --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
+    sui client call --function buy_and_take --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID $PAYMENT_ID --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 10000000
 ```
 
 You should see a long list of transaction effects in the console after submit this transaction. We can verify that the `widget` is owned by our address, and the `payments` `Table` now has an entry with the key of our address and should be of size `1`.
@@ -115,7 +115,7 @@ You should see a long list of transaction effects in the console after submit th
 Finally, we can claim our earnings by calling the `take_profits_and_keep` method:
 
 ```bash
-    sui client call --function take_profits_and_keep --module marketplace --package $PACKAGE_ID --args $MARKET_ID --type-args 0x2::sui::SUI --gas-budget 1000
+    sui client call --function take_profits_and_keep --module marketplace --package $PACKAGE_ID --args $MARKET_ID --type-args 0x2::sui::SUI --gas-budget 10000000
 ```
 
 This will reap the balance from the `payments` `Table` object and return its size to `0`. Verify this on the explorer. 

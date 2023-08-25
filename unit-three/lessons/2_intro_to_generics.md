@@ -13,7 +13,7 @@ Let's look at a basic example of how to use generics to create a container `Box`
 First, without generics, we can define a `Box` that holds a `u64` type as the following:
 
 ```rust
-module Storage {
+module  generics::storage {
     struct Box {
         value: u64
     }
@@ -23,7 +23,7 @@ module Storage {
 However, this type will only be able to hold a value of type `u64`, to make our `Box` able to hold any generic type, we will need to use generics. The code would be modified as following:
 
 ```rust
-module Storage {
+module  generics::storage {
     struct Box<T> {
         value: T
     }
@@ -35,7 +35,7 @@ module Storage {
 We can add conditions to enforce that the type passed into the generic must have certain abilities. The syntax looks like the following:
 
 ```rust
-module Storage {
+module  generics::storage {
     // T must be copyable and droppable 
     struct Box<T: store + drop> has key, store {
         value: T
@@ -76,10 +76,10 @@ This will only accept inputs of the type `u64` for the `create_box` method, whil
 To call a function with a signature that contains generics, we must specify the type in square brackets, as in the following syntax:
 
 ```rust
-// value will be of type Storage::Box<bool>
-    let bool_box = Storage::create_box<bool>(true);
-// value will be of the type Storage::Box<u64>
-    let u64_box = Storage::create_box<u64>(1000000);
+// value will be of type storage::Box<bool>
+    let bool_box = storage::create_box<bool>(true);
+// value will be of the type storage::Box<u64>
+    let u64_box = storage::create_box<u64>(1000000);
 ```
 
 #### Calling Functions with Generics using Sui CLI
@@ -89,7 +89,7 @@ To call a function with generics in its signature from the Sui CLI, you must def
 The following is an example that calls the `create_box` function to create a box that contains a coin of the type `0x2::sui::SUI`:
 
 ```bash
-sui client call --package $PACKAGE --module $MODULE --function "create_box" --args $OBJECT_ID --type-args 0x2::sui::SUI --gas-budget 10000
+sui client call --package $PACKAGE --module $MODULE --function "create_box" --args $OBJECT_ID --type-args 0x2::sui::SUI --gas-budget 10000000
 ```
 
 ## Advanced Generics Syntax

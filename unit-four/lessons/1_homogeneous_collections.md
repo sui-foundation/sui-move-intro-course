@@ -2,7 +2,7 @@
 
 Before we delve into the main topic of building a marketplace on Sui, let's learn about collections in Move first. 
 
-## Vectors
+## vectors
 
 `Vector` in Move is similar to those in other languages such as C++. It's a way to dynamically allocate memory at runtime and manage a group of a single type, which can be a specific type or a [generic type](../../unit-three/lessons/2_intro_to_generics.md). 
 
