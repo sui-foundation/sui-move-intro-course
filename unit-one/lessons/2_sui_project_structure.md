@@ -54,11 +54,11 @@ name = "hello_world"
 version = "0.0.1"
 
 [dependencies]
-Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "devnet" }
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
+
 
 [addresses]
 hello_world =  "0x0"
-sui =  "0x2"
 ```
 
 We see that the Sui standard library dependency here is defined using a GitHub repo, but it can also point to a local binary using its relative or absolute file path, for example:

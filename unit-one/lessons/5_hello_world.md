@@ -40,7 +40,7 @@ Note that we are able to do this because `mint` is an entry function.
 The command for this using Sui CLI is:
 
 ```bash
-sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 3000
+sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 10000000
 ```
 
 The console output should look like this if the `mint` function was successfully called and a Hello World object was created and transferred:
