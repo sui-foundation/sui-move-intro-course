@@ -9,7 +9,7 @@
 - Module starts with the `module` keyword, which is followed by the module name and curly braces - inside them, module contents are placed:
 
     ```rust
-    module hello_world {
+    module hello_world::hello_world {
         // module contents
     }
     ```

@@ -49,10 +49,10 @@ Abilities are crucial to defining how objects behave in Sui Move at the language
 
 For now, just know that there are four abilities in Sui Move:
 
-- **Copy**: value can be copied (or cloned by value)
-- **Drop**: value can be dropped by the end of the scope
-- **Key**: value can be used as a key for global storage operations
-- **Store**: value can be stored inside global storage
+- **copy**: value can be copied (or cloned by value)
+- **drop**: value can be dropped by the end of the scope
+- **key**: value can be used as a key for global storage operations
+- **store**: value can be stored inside global storage
 
 Custom types that have the abilities `key` and `store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
 
