@@ -46,6 +46,10 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 
 [Reference Page](https://docs.sui.io/build/cli-client)
 
+### Initialization
+- Enter `Y` for `do you want to connect to a Sui Full node server?` and press `Enter` to default to Sui Devnet full node
+- Enter `0` for key scheme selection to choose [`ed25519`](https://ed25519.cr.yp.to/)
+
 ### Managing Networks
 
 - Switching network: `sui client switch --env [network alias]`
@@ -54,18 +58,13 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
     - devnet: https://fullnode.devnet.sui.io:443
 - List all current network aliases: `sui client envs`
 - Add new network alias: `sui client new-env --alias <ALIAS> --rpc <RPC>`
+    - Try adding a testnet alias with: `sui client new-env --alias testnet --rpc https://fullnode.testnet.sui.io:443`
 
 ### Check Active Address and Gas Objects
 
 - Check current addresses in key store: `sui client addresses`
 - Check active-address: `sui client active-address`
 - List all controlled gas objects: `sui client gas`
-
-### Mint a Demo NFT
-
-- Mint a demo NFT on the current network: `sui client create-example-nft`. You should see something similar to the following output:
-
-![Demo NFT](../images/demo-nft.png)
 
 ## Get Devnet Sui Tokens
 
@@ -80,5 +79,3 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 2. Complete verification steps
 3. Enter `#testnet-faucet` channel
 4. Type `!faucet <WALLET ADDRESS>`
-
-
