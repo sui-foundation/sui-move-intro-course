@@ -51,7 +51,7 @@ The object ID under the `Created Objects` section of the output is the ID of the
 
 ## Viewing the Object with Sui Explorer
 
-Let's use the [Sui Explorer](https://explorer.sui.io/) to view the Hello World object we just created and transferred.
+Let's use the [Sui Explorer](https://suiexplorer.com/) to view the Hello World object we just created and transferred.
 
 Choose the network you are using through the dropdown menu on the upper right. 
 

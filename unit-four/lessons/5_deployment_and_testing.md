@@ -82,7 +82,7 @@ Then we list this item to our marketplace:
 
 We need to submit two type arguments here, first is the type of the item to be listed and second is the fungible coin type for the payment. The above example uses a listing price of `1`. 
 
-After submitting this transaction, you can check the newly created listing on the [Sui explorer](https://explorer.sui.io/):
+After submitting this transaction, you can check the newly created listing on the [Sui explorer](https://suiexplorer.com/):
 
 ![Listing](../images/listing.png)
 
