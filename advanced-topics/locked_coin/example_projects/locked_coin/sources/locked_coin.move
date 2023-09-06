@@ -35,11 +35,14 @@ module locked_coin::locked_coin {
     public fun withdraw_vested(self: &mut Registry, clock: &Clock, ctx: &mut TxContext){
         let locker: &mut Locker = sui::dynamic_field::borrow_mut(&mut self.id, sender(ctx));
         let total_duration = locker.final_date - locker.start_date;
-        let passed_duration = clock::timestamp_ms(clock) - locker.start_date;
-        let percentage_unlocked = passed_duration / total_duration;
-        let total_vested_amount = locker.original_balance * percentage_unlocked;
-        let withdrawn_amount = locker.original_balance-balance::value(&locker.balance);
-        let available_vested_amount = total_vested_amount - withdrawn_amount;
+        let elapsed_duration = clock::timestamp_ms(clock) - locker.start_date;
+        let total_vested_amount = if (elapsed_duration > total_duration) {
+            locker.original_balance
+        } else {
+            locker.original_balance * elapsed_duration / total_duration
+        };
+        // let total_vested_amount = locker.original_balance * percentage_unlocked;
+        let available_vested_amount = total_vested_amount - (locker.original_balance-balance::value(&locker.balance));
         transfer::public_transfer(coin::take(&mut locker.balance, available_vested_amount, ctx), sender(ctx))
     }
 
