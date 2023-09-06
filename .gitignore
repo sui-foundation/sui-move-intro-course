@@ -7,6 +7,7 @@ unit-four/example_projects/collections/build/
 unit-four/example_projects/marketplace/build/
 advanced-topics/BCS_encoding/example_projects/bcs_move/build/
 advanced-topics/BCS_encoding/example_projects/bcs_js/node_modules/
+advanced-topics/locked_coin/example_projects/locked_coin/build/
 *.DS_store
 sui.log.*
 .idea
