@@ -78,13 +78,13 @@ next_tx(&mut scenario, addr1);
 
 ### Burning 
 
-To testing burning a token, it's almost exactly the same as testing minting, except we also need to retrieve a `Coin<MANAGED>` object from the person it was minted to. 
+To test burning a token, the procedure is very similar to testing minting. The only difference is that we must also retrieve a `Coin<MANAGED>` object from the person it was minted to.
 
 ## Running Unit Tests
 
 The full [`managed_tests`](../example_projects/fungible_tokens/sources/managed_tests.move) module source code can be found under `example_projects` folder.
 
-To run the unit tests, we simply need to type in the following command in CLI in the project directory:
+To execute the unit tests, navigate to the project directory in CLI and enter the following command:
 
 ```bash
   sui move test
