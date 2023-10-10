@@ -2,13 +2,13 @@
 
 Next, we need to understand the witness pattern to peek under the hood of how a fungible token is implemented in Sui Move. 
 
-Witness is a design pattern used to prove that the a resource or type in question, `A`, can be initiated only once after the ephemeral `witness` resource has been consumed. The `witness` resource must be immediately consumed or dropped after use, ensuring that it cannot be reused to create multiple instances of `A`.
+Witness is a design pattern used to prove that the resource or type in question, `A`, can be initiated only once after the ephemeral `witness` resource has been consumed. The `witness` resource must be immediately consumed or dropped after use, ensuring that it cannot be reused to create multiple instances of `A`.
 
 ## Witness Pattern Example
 
-In the below example, the `witness` resource is `PEACE`, while the type `A` that we want to control instantiation of is `Guardian`. 
+In the below example, the `witness` resource is `PEACE`, while the type `A` that we want to control the instantiation of is `Guardian`. 
 
-The `witness` resource type must have the `drop` keyword, so that this resource can be dropped after being passed into a function. We see that the instance of `PEACE` resource is passed into the `create_guardian` method and dropped (note the underscore before `witness`), ensuring that only one instance of `Guardian` can be created.
+The `witness` resource type must have the `drop` keyword so that this resource can be dropped after being passed into a function. We see that the instance of `PEACE` resource is passed into the `create_guardian` method and dropped (note the underscore before `witness`), ensuring that only one instance of `Guardian` can be created.
 
 ```rust
     /// Module that defines a generic type `Guardian<T>` which can only be
@@ -55,13 +55,13 @@ In the above example, we want the `Guardian` type to have the `key` and `store` 
 
 We also want to pass in the `witness` resource, `PEACE`, into `Guardian`, but `PEACE` only has the `drop` ability. Recall our previous discussion on [ability constraints](./2_intro_to_generics.md#ability-constraints) and inner types, the rule implies that `PEACE` should also have `key` and `storage` given that the outer type `Guardian` does. But in this case, we do not want to add unnecessary abilities to our `witness` type, because doing so could cause undesirable behaviors and vulnerabilities. 
 
-We can use the keyword `phantom` to get around this situation. When a type parameter is either not used inside the struct definition or it is only used as an argument to another `phantom` type parameter, we can use the `phantom` keyword to ask the Move type system to relax the ability constraint rules on inner types. We see that `Guardian` doesn't use the type `T` in any of its fields, so we can safely declare `T` to be a `phantom` type. 
+We can use the keyword `phantom` to get around this situation. When a type parameter is either not used inside the struct definition or is only used as an argument to another `phantom` type parameter, we can use the `phantom` keyword to ask the Move type system to relax the ability constraint rules on inner types. We see that `Guardian` doesn't use the type `T` in any of its fields, so we can safely declare `T` to be a `phantom` type. 
 
 For a more in-depth explanation of the `phantom` keyword, please check the [relevant section](https://github.com/move-language/move/blob/main/language/documentation/book/src/generics.md#phantom-type-parameters) of the Move language documentation.
 
 ## One Time Witness
 
-One Time Witness (OTW) is a sub-pattern of the Witness pattern, where we utilize the module `init` function to ensure that there is only one instance of the `witness` resource created (so type `A` is guaranteed to be a singleton). 
+One Time Witness (OTW) is a sub-pattern of the Witness pattern, where we utilize the module `init` function to ensure that only one instance of the `witness` resource is created (so type `A` is guaranteed to be a singleton). 
 
 In Sui Move a type is considered an OTW if its definition has the following properties:
 
