@@ -20,7 +20,7 @@ module  generics::storage {
 }
 ```
 
-However, this type will only be able to hold a value of type `u64`, to make our `Box` able to hold any generic type, we will need to use generics. The code would be modified as following:
+However, this type will only be able to hold a value of type `u64`. To make our `Box` able to hold any generic type, we will need to use generics. The code would be modified as follows:
 
 ```rust
 module  generics::storage {
@@ -73,7 +73,7 @@ This will only accept inputs of the type `u64` for the `create_box` method, whil
 
 #### Calling Functions with Generics
 
-To call a function with a signature that contains generics, we must specify the type in square brackets, as in the following syntax:
+To call a function with a signature that contains generics, we must specify the type in angle brackets, as in the following syntax:
 
 ```rust
 // value will be of type storage::Box<bool>
