@@ -2,7 +2,7 @@
 
 Homogeneous collections like `Vector` and `Table` can work for marketplaces (or other types of applications) where we need to hold a collection of objects of the same type, but what if we need to hold objects of different types, or if we do not know at compile time what types the objects we need to hold are going to be?
 
-For this type of marketplaces, we need to use a _heterogenerous_ collection to hold the items to be sold. Already having done the heavy lifting of understanding dynamic fields, heterogenerous collection in Sui should be very easy to understand.We will look at the `Bag` collection type more closely here. 
+For this type of marketplaces, we need to use a _heterogeneous_ collection to hold the items to be sold. Already having done the heavy lifting of understanding dynamic fields, heterogeneous collection in Sui should be very easy to understand. We will look at the `Bag` collection type more closely here. 
 
 ## The `Bag` Type
 
@@ -10,7 +10,7 @@ A `Bag` is a heterogeneous map-like collection. The collection is similar to `Ta
 
 ### Common `Bag` Operations
 
-A sample code of common `Bag` operations are included below: 
+Sample code of common `Bag` operations is included below: 
 
 ```rust
 module collection::bag {
@@ -62,4 +62,4 @@ module collection::bag {
 }
 ```
 
-As you can see the functions signatures for interacting with a `Bag` collection are quite similar to ones interacting with a `Table` collection, with the main difference being not needing to declare any types while creating a new `Bag`, and the the key-value pair types being added to it do not need to be of the same types.
+The function signatures for interacting with Bag collections are very similar to the function signatures for interacting with Table collections. The main difference is that you don't need to declare any types when creating a new Bag, and the key-value pairs that you add to a Bag can be of different types.
