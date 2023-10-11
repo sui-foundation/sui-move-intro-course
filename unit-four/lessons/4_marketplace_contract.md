@@ -1,6 +1,6 @@
 # Marketplace Contract
 
-Now we have a solid understanding of how various types of collections and dynamic fields work, we can start writing the contract for an on-chain marketplace that can support the following feartures:
+Now that we have a solid understanding of how various types of collections and dynamic fields work, we can start writing the contract for an on-chain marketplace that can support the following features:
 
 - Listing of arbitrary item types and numbers
 - Accepts payment in a custom or native fungible token type
@@ -32,7 +32,7 @@ _Quiz: How would you modify this struct to accept multiple fungible token types?
 Next, we define a `Listing` type:
 
 ```rust
-    /// A single listing which contains the listed item and its
+    /// A single listing that contains the listed item and its
     /// price in [`Coin<COIN>`].
     struct Listing has key, store {
         id: UID,
@@ -40,9 +40,9 @@ Next, we define a `Listing` type:
         owner: address,
     }
 ```
-This struct simply holds the information we need related to an item listing. We will directly attached the actual item to be trade to the `Listing` object as a dynamic object field, thus we don't need to explicitly define any item field or collection here. 
+This struct holds the information we need related to an item listing. We will attach the actual item to be traded to the `Listing` object as a dynamic object field, eliminating the need to define any item field or collection. 
 
-Note that `Listing` has the `key` ability, this is because we want to be able to use its object id as the key when we place it inside of a collection. 
+Note that `Listing` has the `key` ability, so we are now able to use its object id as the key when we place it inside of a collection. 
 
 ## Listing and Delisting
 
@@ -106,7 +106,7 @@ Note how the delisted `Listing` object is unpacked and deleted, and the listed i
 
 ## Purchasing and Payments
 
-Buying an item is similar to delisting, but with additional logic for handling payments. 
+Buying an item is similar to delisting but with additional logic for handling payments. 
 
 ```rust
     /// Internal function to purchase an item using a known Listing. Payment is done in Coin<C>.
@@ -185,7 +185,7 @@ Lastly, we define methods for sellers to retrieve their balance from the marketp
     }
 ```
 
-_Quiz: why do we not need to use [Capability](../../unit-two/lessons/6_capability_design_pattern.md) based access control under this marketplace design? Can we implement capability design pattern here? What property would that give to the marketplace?_
+_Quiz: why do we not need to use [Capability](../../unit-two/lessons/6_capability_design_pattern.md) based access control under this marketplace design? Can we implement the capability design pattern here? What property would that give to the marketplace?_
 
 ## Full Contract
 
