@@ -26,7 +26,7 @@ module collection::vector {
         values: vector<T>
     }
 
-    // Creates a GenericVector that hold a generic type T
+    // Creates a GenericVector that holds a generic type T
     public fun create<T>(): GenericVector<T> {
         GenericVector<T> {
             values: vector::empty<T>()
