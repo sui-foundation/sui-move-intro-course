@@ -2,7 +2,7 @@
 
 ## Parameter Passing (by `value`, `ref` and `mut ref`)
 
-If you are familiar with rustlang, then you are probably familiar the Rust ownership system. One advantage of movelang compare to Solidity is that, you can get a sense of what a function call might do to your asset that you used for the function interaction. Here are some examples:
+If you are familiar with rustlang, then you are probably familiar with the Rust ownership system. One advantage of movelang compared to Solidity is that you can get a sense of what a function call might do to the asset that you used for the function interaction. Here are some examples:
 
 ```rust
 use sui::object::{Self};
@@ -17,7 +17,7 @@ public entry fun update_score(transcriptObject: &mut TranscriptObject, score: u8
     transcriptObject.literature = score
 }
 
-// You are allowed to do anything with the score, including view, edit, delete the entire transcript itself.
+// You are allowed to do anything with the score, including view, edit, or delete the entire transcript itself.
 public entry fun delete_transcript(transcriptObject: TranscriptObject){
     let TranscriptObject {id, history: _, math: _, literature: _ } = transcriptObject;
     object::delete(id);
