@@ -17,7 +17,7 @@ struct Folder has key {
 }
 ```
 
-In the above examople, `Folder` wraps `WrappableTranscript`, and `Folder` is addressable through its id as it has the `key` ability. 
+In the above example, `Folder` wraps `WrappableTranscript`, and `Folder` is addressable through its id as it has the `key` ability. 
 
 ## Object Wrapping Properties
 
