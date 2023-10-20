@@ -2,7 +2,7 @@
 
 Now we have the basics of a transcript publishing system, we want to add some access control to our smart contract. 
 
-Capability is a commonly used pattern in Move that allows fine tuned access control using an object centric model. Let's take a look at how we can define this capability object:
+Capability is a commonly used pattern in Move that allows fine-tuned access control using an object-centric model. Let's take a look at how we can define this capability object:
 
 ```rust
   // Type that marks the capability to create, update, and delete transcripts
@@ -33,11 +33,11 @@ For example, for the `create_wrappable_transcript_object` method, we can modify 
     }
 ```
 
-We pass in a reference to `TeacherCap` capability object, and consume it immediately with the `_` notation for unused variables and parameters. And note that because we are only passing in a reference to the object, consuming the reference has no effect on the original object. 
+We pass in a reference to `TeacherCap` capability object and consume it immediately with the `_` notation for unused variables and parameters. Note that because we are only passing in a reference to the object, consuming the reference has no effect on the original object. 
 
 *Quiz: What happens if try to pass in `TeacherCap` by value?*
 
-This means only an address that only a `TeacherCap` object can call this method, effectively implementing access control on this method.
+This means only an address that has a `TeacherCap` object can call this method, effectively implementing access control on this method.
 
 We make similar modifications to all other methods in the contract that perform privileged actions on transcripts. 
 
@@ -70,7 +70,7 @@ The second object created from the above transaction is an instance of the `Teac
 
 ## Add Additional Teachers or Admins
 
-In order to give additional addresses admin access, we can simply define a method to create and send additonal `TeacherCap` objects as the following:
+In order to give additional addresses admin access, we can simply define a method to create and send additional `TeacherCap` objects as the following:
 
 ```rust
     public entry fun add_additional_teacher(_: &TeacherCap, new_teacher_address: address, ctx: &mut TxContext){
