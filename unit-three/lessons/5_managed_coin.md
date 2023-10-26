@@ -1,6 +1,6 @@
 # Managed Coin Example
 
-Now we have peeked under the hood of the `sui::coin` module, we can look at a simple, but complete example of creating a type of custom fungible token where there is a trusted manager that has the capability to mint and burn, similar to many ERC-20 implementations. 
+Now we have peeked under the hood of the `sui::coin` module, we can look at a simple but complete example of creating a type of custom fungible token where there is a trusted manager that has the capability to mint and burn, similar to many ERC-20 implementations. 
 
 ## Smart Contract
 
@@ -32,7 +32,7 @@ The two immutable objects created are respectively the package itself and the `C
 
 ![Treasury Object](../images/treasury.png)
 
-Export the object ID's of the package object and the `TreasuryCap` object to environmental variables:
+Export the object IDs of the package object and the `TreasuryCap` object to environmental variables:
 
 ```bash
 export PACKAGE_ID=<package object ID from previous output>
@@ -51,7 +51,7 @@ To mint some `MNG` tokens, we can use the following CLI command:
 
 ![Minting](../images/minting.png)
 
-Export the object ID's of the newly minted `COIN<MANAGED>` object to a bash variable:
+Export the object ID of the newly minted `COIN<MANAGED>` object to a bash variable:
 
 ```bash
 export COIN_ID=<coin object ID from previous output>
