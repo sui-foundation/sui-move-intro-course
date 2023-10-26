@@ -1,12 +1,12 @@
 # Object Wrapping Example
 
-We will implement an example of object wrapping to our transcript example, so that `WrappableTranscript` is wrapped by a `Folder` object, and so that `Folder` object can only be unpacked by, and thus the transcript inside only accessible by an intended address/viewer. 
+We will implement an example of object wrapping to our transcript example, so that `WrappableTranscript` is wrapped by a `Folder` object, and so that the `Folder` object can only be unpacked by, and thus the transcript inside only accessible by an intended address/viewer. 
 
 ## Modify `WrappableTranscript` and `Folder`
 
-First, we need to make some adjustment to our two custom types `WrappableTranscript` and `Folder` from the previous section
+First, we need to make some adjustments to our two custom types `WrappableTranscript` and `Folder` from the previous section
 
-1. We to add the `key` ability to our type definitions for `WrappableTranscript`, so that they become assets and are transferrable. 
+1. We need to add the `key` ability to our type definitions for `WrappableTranscript`, so that they become assets and are transferrable. 
 
 Remember that custom types with the abilities `key` and `store` are considered to be assets in Sui Move. 
 
@@ -86,7 +86,7 @@ We are using a default 0 for our error code above, but we can also define a cust
     const ENotIntendedAddress: u64 = 1;
 ```
 
-This error code then can be consumed at the application level and handled appropriatelty. 
+This error code then can be consumed at the application level and handled appropriately. 
 
 **Here is the second work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_2.move_wip)**
 
