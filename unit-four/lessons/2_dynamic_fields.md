@@ -1,6 +1,6 @@
 # Dynamic Fields
 
-To peek under how collections like `Table` are actually implemented in Sui Move, we need to introduce the concept of dynamic fields in Sui Move. Dynamic fields are heterogeneous fields that can be added or removed at runtime, and can have arbitrary user assigned names. 
+To peek under how collections like `Table` are actually implemented in Sui Move, we need to introduce the concept of dynamic fields in Sui Move. Dynamic fields are heterogeneous fields that can be added or removed at runtime, and can have arbitrary user-assigned names. 
 
 There are two sub-types of dynamic fields: 
 
@@ -31,7 +31,7 @@ To illustrate how to work with dynamic fields, we define the following structs:
     }
 ```
 
-Here's the API to use for adding **dynamic fields** or **dynamic object field** to an object:
+Here's the API to use for adding **dynamic fields** or **dynamic object fields** to an object:
 
 ```rust
   module collection::dynamic_fields {
@@ -120,7 +120,7 @@ We can remove a dynamic field from its parent object as follows:
         object::delete(id);
     }
 
-    // Removes a DOFChild from the parent object and transfer it to the caller
+    // Removes a DOFChild from the parent object and transfers it to the caller
     public entry fun reclaim_dofchild(parent: &mut Parent, child_name: vector<u8>, ctx: &mut TxContext) {
         let child = ofield::remove<vector<u8>, DOFChild>(
             &mut parent.id,
@@ -130,11 +130,11 @@ We can remove a dynamic field from its parent object as follows:
     }
 ```
 
-Note that in the case of a dynamic object field, we can delete or transfer it after removing its attachment to another object, as a dynamic object field is a Sui object. But we cannot do the same with for a dynamic field, as it does not have the `key` ability and is not a Sui object. 
+Note that in the case of a dynamic object field, we can delete or transfer it after removing its attachment to another object, as a dynamic object field is a Sui object. But we cannot do the same with a dynamic field, as it does not have the `key` ability and is not a Sui object. 
 
 ## Dynamic Field vs. Dynamic Object Field
 
-When should you use a dynamic field versus a dynamic object field? Generally speaking, we want to use dynamic object fields when the child type in question has the `key` ability, and use dynamic fields otherwise. 
+When should you use a dynamic field versus a dynamic object field? Generally speaking, we want to use dynamic object fields when the child type in question has the `key` ability and use dynamic fields otherwise. 
 
 For a full explanation of the underlying reason, please check [this forum post](https://forums.sui.io/t/dynamicfield-vs-dynamicobjectfield-why-do-we-have-both/2095) by @sblackshear.  
 
