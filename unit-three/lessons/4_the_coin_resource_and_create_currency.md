@@ -1,6 +1,6 @@
 # The `Coin` Resource and `create_currency` Method
 
-Now we know how generics and witness pattern work, let's revisit the `Coin` resource and the `create_currency` method.
+Now we know how generics and witness patterns work, let's revisit the `Coin` resource and the `create_currency` method.
 
 ## The `Coin` Resource
 
@@ -93,7 +93,7 @@ It wraps a singleton field `total_supply` of type `Balance::Supply`:
     }
 ```
 
-`Supply<T>` tracks the total amount of the given custom fungible token of type `T` that is currently in circulation. You can see why this field must be a singleton, as having multiple `Supply` instances for a single token type makes no sense. 
+`Supply<T>` tracks the total amount of the given custom fungible token of type `T` currently circulating. You can see why this field must be a singleton, as having multiple `Supply` instances for a single token type makes no sense. 
 
 ### `CoinMetadata`
 
