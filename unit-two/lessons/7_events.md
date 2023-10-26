@@ -4,7 +4,7 @@ Events are important for Sui Move smart contracts, as it is the main way for ind
 
 Events on Sui are also represented as objects. There are several types of system level events in Sui, including Move event, Publish event, Transfer object event, and so on. For the full list of system event types, please refer to the [Sui Events API page here](https://docs.sui.io/build/event_api).
 
-The event details of a transaction can be viewed on the [Sui Explorer](https://explorer.sui.io/) under the `Events` tab:
+The event details of a transaction can be viewed on the [Sui Explorer](https://suiexplorer.com/) under the `Events` tab:
 
 ![Event Tab](../images/eventstab.png)
 
