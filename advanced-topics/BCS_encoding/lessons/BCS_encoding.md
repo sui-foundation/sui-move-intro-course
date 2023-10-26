@@ -6,10 +6,10 @@ Knowing how BCS works is crucial if you want to understand how Move works at a d
 
 ## BCS Specification and Properties
 
-There are some high level properties of BCS encoding that are good to keep in mind as we go through the rest of the lesson:
+There are some high-level properties of BCS encoding that are good to keep in mind as we go through the rest of the lesson:
 
 - BCS is a data-serialization format where the resulting output bytes do not contain any type information; because of this, the side receiving the encoded bytes will need to know how to deserialize the data
-- There are no structs in BCS (since there is no types); the struct simply defines the order in which fields are serialized
+- There are no structs in BCS (since there are no types); the struct simply defines the order in which fields are serialized
 - Wrapper types are ignored, so `OuterType` and `UnnestedType` will have the same BCS representation:
 
     ```rust
@@ -82,7 +82,7 @@ There are built-in ENUMs that can be used for Sui Move types like `BCS.U16`, `BC
 Let's take a close look at the serialized and deserialized fields:
 
 ```bash
-# ints are little endian hexadecimals
+# ints are little-endian hexadecimals
 0a00
 10
 # the first element of a vector indicates the total length,
