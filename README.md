@@ -1,6 +1,6 @@
-# Sui Move Intro Course
+# Move Intro Course
 
-Introductory course to the Sui Move language maintained by [the Sui Foundation](https://suifoundation.org/).
+Introductory course to the Move language maintained by [the Sui Foundation](https://suifoundation.org/).
 
 ## Content
 
