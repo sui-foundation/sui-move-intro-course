@@ -26,7 +26,7 @@ module bcs_move::bcs_object {
         // Pack a BCSObject struct with the results of serialization
         BCSObject { id: object::id_from_address(id), owner, meta: Metadata {name: std::ascii::string(meta)}  } }
 
-    public entry fun emit_object(bcs_bytes: vector<u8>) {
+    public fun emit_object(bcs_bytes: vector<u8>) {
         event::emit(object_from_bytes(bcs_bytes));
     }
 

@@ -50,7 +50,7 @@ Next, we write the logic for listing and delisting items. First, listing an item
 
 ```rust
    /// List an item at the Marketplace.
-    public entry fun list<T: key + store, COIN>(
+    public fun list<T: key + store, COIN>(
         marketplace: &mut Marketplace<COIN>,
         item: T,
         ask: u64,
@@ -92,7 +92,7 @@ For delisting, we define the following methods:
     }
 
     /// Call [`delist`] and transfer item to the sender.
-    public entry fun delist_and_take<T: key + store, COIN>(
+    public fun delist_and_take<T: key + store, COIN>(
         marketplace: &mut Marketplace<COIN>,
         item_id: ID,
         ctx: &mut TxContext
@@ -142,7 +142,7 @@ Buying an item is similar to delisting but with additional logic for handling pa
     }
 
     /// Call [`buy`] and transfer item to the sender.
-    public entry fun buy_and_take<T: key + store, COIN>(
+    public fun buy_and_take<T: key + store, COIN>(
         marketplace: &mut Marketplace<COIN>,
         item_id: ID,
         paid: Coin<COIN>,
@@ -174,7 +174,7 @@ Lastly, we define methods for sellers to retrieve their balance from the marketp
     }
 
     /// Call [`take_profits`] and transfer Coin object to the sender.
-    public entry fun take_profits_and_keep<COIN>(
+    public fun take_profits_and_keep<COIN>(
         marketplace: &mut Marketplace<COIN>,
         ctx: &mut TxContext
     ) {

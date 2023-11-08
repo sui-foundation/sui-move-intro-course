@@ -31,7 +31,7 @@ module collection::dynamic_fields {
     }
 
     // Adds a DOFChild to the parent object under the provided name
-    public entry fun add_dofchild(parent: &mut Parent, child: DOFChild, name: vector<u8>) {
+    public fun add_dofchild(parent: &mut Parent, child: DOFChild, name: vector<u8>) {
         ofield::add(&mut parent.id, name, child);
     }
 
@@ -51,7 +51,7 @@ module collection::dynamic_fields {
     }
 
     // Mutate a DOFChild directly
-    public entry fun mutate_dofchild(child: &mut DOFChild) {
+    public fun mutate_dofchild(child: &mut DOFChild) {
         child.count = child.count + 1;
     }
 
@@ -61,13 +61,13 @@ module collection::dynamic_fields {
     }
 
     // Mutate a DFChild's counter via its parent object
-    public entry fun mutate_dfchild_via_parent(parent: &mut Parent, child_name: vector<u8>) {
+    public fun mutate_dfchild_via_parent(parent: &mut Parent, child_name: vector<u8>) {
         let child = field::borrow_mut<vector<u8>, DFChild>(&mut parent.id, child_name);
         child.count = child.count + 1;
     }
 
     // Mutate a DOFChild's counter via its parent object
-    public entry fun mutate_dofchild_via_parent(parent: &mut Parent, child_name: vector<u8>) {
+    public fun mutate_dofchild_via_parent(parent: &mut Parent, child_name: vector<u8>) {
         mutate_dofchild(ofield::borrow_mut<vector<u8>, DOFChild>(
             &mut parent.id,
             child_name,
@@ -85,13 +85,13 @@ module collection::dynamic_fields {
     }
 
     // Deletes a DOFChild given its name and parent object's mutable reference
-    public entry fun delete_dofchild(parent: &mut Parent, child_name: vector<u8>) {
+    public fun delete_dofchild(parent: &mut Parent, child_name: vector<u8>) {
         let DOFChild { id, count: _ } = remove_dofchild(parent, child_name);
         object::delete(id);
     }
 
     // Removes a DOFChild from the parent object and transfer it to the caller
-    public entry fun reclaim_dofchild(parent: &mut Parent, child_name: vector<u8>, ctx: &mut TxContext) {
+    public fun reclaim_dofchild(parent: &mut Parent, child_name: vector<u8>, ctx: &mut TxContext) {
         let child = remove_dofchild(parent, child_name);
         transfer::transfer(child, tx_context::sender(ctx));
     }

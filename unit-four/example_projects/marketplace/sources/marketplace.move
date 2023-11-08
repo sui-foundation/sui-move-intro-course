@@ -35,7 +35,7 @@ module marketplace::marketplace {
     }
 
     /// Create a new shared Marketplace.
-    public entry fun create<COIN>(ctx: &mut TxContext) {
+    public fun create<COIN>(ctx: &mut TxContext) {
         let id = object::new(ctx);
         let items = bag::new(ctx);
         let payments = table::new<address, Coin<COIN>>(ctx);
@@ -47,7 +47,7 @@ module marketplace::marketplace {
     }
 
     /// List an item at the Marketplace.
-    public entry fun list<T: key + store, COIN>(
+    public fun list<T: key + store, COIN>(
         marketplace: &mut Marketplace<COIN>,
         item: T,
         ask: u64,
@@ -84,7 +84,7 @@ module marketplace::marketplace {
     }
 
     /// Call [`delist`] and transfer item to the sender.
-    public entry fun delist_and_take<T: key + store, COIN>(
+    public fun delist_and_take<T: key + store, COIN>(
         marketplace: &mut Marketplace<COIN>,
         item_id: ID,
         ctx: &mut TxContext
@@ -126,7 +126,7 @@ module marketplace::marketplace {
     }
 
     /// Call [`buy`] and transfer item to the sender.
-    public entry fun buy_and_take<T: key + store, COIN>(
+    public fun buy_and_take<T: key + store, COIN>(
         marketplace: &mut Marketplace<COIN>,
         item_id: ID,
         paid: Coin<COIN>,
@@ -147,7 +147,7 @@ module marketplace::marketplace {
     }
 
     /// Call [`take_profits`] and transfer Coin object to the sender.
-    public entry fun take_profits_and_keep<COIN>(
+    public fun take_profits_and_keep<COIN>(
         marketplace: &mut Marketplace<COIN>,
         ctx: &mut TxContext
     ) {

@@ -13,7 +13,7 @@ module marketplace::widget {
         id: UID,
     }
 
-    public entry fun mint(ctx: &mut TxContext) {
+    public fun mint(ctx: &mut TxContext) {
         let object = Widget {
             id: object::new(ctx)
         };
