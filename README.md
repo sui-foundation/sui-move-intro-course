@@ -9,7 +9,7 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
     - [Sui Project Structure](./unit-one/lessons/2_sui_project_structure.md)
     - [Custom Types and Abilities](./unit-one/lessons/3_custom_types_and_abilities.md)
     - [Functions](./unit-one/lessons/4_functions.md)
-    - [Hello World](./unit-one/lessons/5_hello_world.md)
+    - [Contract Deployment and Hello World](./unit-one/lessons/5_contract_deployment_and_hello_world.md)
 - **Unit Two: Working with Sui Objects**
     - [Introduction](./unit-two/lessons/1_working_wiith_sui_objects.md)
     - [Ownership](./unit-two/lessons/2_ownership.md)
