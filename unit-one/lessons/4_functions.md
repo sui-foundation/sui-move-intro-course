@@ -24,6 +24,7 @@ Example:
     }
 ```
 
+<!--
 ## Entry Functions
 
 In Sui Move, entry functions are simply functions that can be called by transactions. They must satisfy the following three requirements:
@@ -32,9 +33,11 @@ In Sui Move, entry functions are simply functions that can be called by transact
 - have no return value
 - (optional) have a mutable reference to an instance of the `TxContext` type in the last parameter
 
-### Transaction Context
+-->
 
-Entry functions typically have an instance of `TxContext` as the last parameter. This is a special parameter set by the Sui Move VM and does not need to be specified by the user calling the function. 
+## Transaction Context
+
+Functions called directly through a transaction typically have an instance of `TxContext` as the last parameter. This is a special parameter set by the Sui Move VM and does not need to be specified by the user calling the function. 
 
 The `TxContext` object contains [essential information](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/tx_context.move) about the transaction used to call the entry function, such as the sender's address, the signer's address, the tx's epoch, etc. 
 
@@ -43,14 +46,14 @@ The `TxContext` object contains [essential information](https://github.com/Myste
 We can define our minting function in the Hello World example as the following:
 
 ```rust
-    public entry fun mint(ctx: &mut TxContext) {
+    public fun mint(ctx: &mut TxContext) {
         let object = HelloWorldObject {
             id: object::new(ctx),
             text: string::utf8(b"Hello World!")
         };
-        transfer::transfer(object, tx_context::sender(ctx));
+        transfer::public_transfer(object, tx_context::sender(ctx));
     }
 ```
 
-This function simply creates a new instance of the `HelloWorldObject` custom type, then uses the Sui system transfer function to send it to the transaction caller. 
+This function simply creates a new instance of the `HelloWorldObject` custom type, then uses the Sui system [`public_transfer`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/transfer.md#function-public_transfer) function to send it to the transaction caller. 
 

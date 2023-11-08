@@ -23,7 +23,7 @@ The output should look something like this if the contract was successfully depl
 
 ![Publish Output](../images/publish.png)
 
-The object ID under the `Created Objects` section is the object ID of the Hello World package we just published.
+The object ID under the `Published Objects` section is the object ID of the Hello World package we just published.
 
 Let's export that to a variable. 
 

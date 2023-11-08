@@ -70,5 +70,5 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 
 1. [Join Sui Discord](https://discord.gg/sui)
 2. Complete verification steps
-3. Enter `#devnet-faucet` channel for devnet tokens, or `#testnet-faucet` channel for testnet tokens
+3. Enter [`#devnet-faucet`](https://discord.com/channels/916379725201563759/971488439931392130) channel for devnet tokens, or [`#testnet-faucet`](https://discord.com/channels/916379725201563759/1037811694564560966) channel for testnet tokens
 4. Type `!faucet <WALLET ADDRESS>`
