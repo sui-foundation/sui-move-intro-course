@@ -6,11 +6,12 @@ We introduced abilities in this unit, which are critical to how assets are defin
 
 Mark the following ability combinations as either legal or illegal:
 
-- Store + Key
 - Copy + Drop
+- Copy + Key
+- Copy + Store
+- Drop + Key
 - Drop + Store
-- Store + Copy
-- Key + Copy
+- Store + Key
 
 For each of the illegal combinations, briefly describe the conflicting behavior that would occur it the combination was allowed. 
 
