@@ -66,16 +66,9 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 - Check active-address: `sui client active-address`
 - List all controlled gas objects: `sui client gas`
 
-## Get Devnet Sui Tokens
+## Get Devnet or Testnet Sui Tokens
 
 1. [Join Sui Discord](https://discord.gg/sui)
 2. Complete verification steps
-3. Enter `#devnet-faucet` channel
-4. Type `!faucet <WALLET ADDRESS>`
-
-## Get Testnet Sui Tokens
-
-1. [Join Sui Discord](https://discord.gg/sui)
-2. Complete verification steps
-3. Enter `#testnet-faucet` channel
+3. Enter `#devnet-faucet` channel for devnet tokens, or `#testnet-faucet` channel for testnet tokens
 4. Type `!faucet <WALLET ADDRESS>`
