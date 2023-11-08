@@ -3,6 +3,7 @@ unit-two/example_projects/transcript/build/
 unit-three/example_projects/witness/build/
 unit-three/example_projects/fungible_tokens/build/
 unit-three/example_projects/generics/build/
+unit-three/example_projects/locked_coin/build/
 unit-four/example_projects/collections/build/
 unit-four/example_projects/marketplace/build/
 advanced-topics/BCS_encoding/example_projects/bcs_move/build/
