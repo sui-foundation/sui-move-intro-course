@@ -31,7 +31,7 @@ To emit an event in Sui, you just need to use the [`sui::event::emit` method](ht
 Let's modify our `request_transcript` method to emit this event:
 
 ```rust
-    public entry fun request_transcript(transcript: WrappableTranscript, intended_address: address, ctx: &mut TxContext){
+    public fun request_transcript(transcript: WrappableTranscript, intended_address: address, ctx: &mut TxContext){
         let folderObject = Folder {
             id: object::new(ctx),
             transcript,

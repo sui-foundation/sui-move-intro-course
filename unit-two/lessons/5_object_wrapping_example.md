@@ -32,7 +32,7 @@ struct Folder has key {
 ## Request Transcript Method
 
 ```rust
-public entry fun request_transcript(transcript: WrappableTranscript, intended_address: address, ctx: &mut TxContext){
+public fun request_transcript(transcript: WrappableTranscript, intended_address: address, ctx: &mut TxContext){
     let folderObject = Folder {
         id: object::new(ctx),
         transcript,
@@ -48,7 +48,7 @@ This method simply takes in a `WrappableTranscript` object and wraps it in a `Fo
 ## Unwrap Transcript Method
 
 ```rust
-public entry fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){
+public fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){
     // Check that the person unpacking the transcript is the intended viewer
     assert!(folder.intended_address == tx_context::sender(ctx), 0);
     let Folder {

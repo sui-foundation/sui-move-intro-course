@@ -48,7 +48,7 @@ module sui_intro_unit_two::transcript {
         }, tx_context::sender(ctx))
     }
     
-    public entry fun add_additional_teacher(_: &TeacherCap, new_teacher_address: address, ctx: &mut TxContext){
+    public fun add_additional_teacher(_: &TeacherCap, new_teacher_address: address, ctx: &mut TxContext){
         transfer::transfer(
             TeacherCap {
                 id: object::new(ctx)
@@ -57,7 +57,7 @@ module sui_intro_unit_two::transcript {
         )
     }
 
-    public entry fun create_wrappable_transcript_object(_: &TeacherCap, history: u8, math: u8, literature: u8, ctx: &mut TxContext){
+    public fun create_wrappable_transcript_object(_: &TeacherCap, history: u8, math: u8, literature: u8, ctx: &mut TxContext){
         let wrappableTranscript = WrappableTranscript {
             id: object::new(ctx),
             history,
@@ -73,17 +73,17 @@ module sui_intro_unit_two::transcript {
     }
 
     // You are allowed to view and edit the score but not allowed to delete it
-    public entry fun update_score(_: &TeacherCap, transcriptObject: &mut WrappableTranscript, score: u8){
+    public fun update_score(_: &TeacherCap, transcriptObject: &mut WrappableTranscript, score: u8){
         transcriptObject.literature = score
     }
 
     // You are allowed to do anything with the score, including view, edit, delete the entire transcript itself.
-    public entry fun delete_transcript(_: &TeacherCap, transcriptObject: WrappableTranscript){
+    public fun delete_transcript(_: &TeacherCap, transcriptObject: WrappableTranscript){
         let WrappableTranscript {id, history: _, math: _, literature: _ } = transcriptObject;
         object::delete(id);
     }
 
-    public entry fun request_transcript(transcript: WrappableTranscript, intended_address: address, ctx: &mut TxContext){
+    public fun request_transcript(transcript: WrappableTranscript, intended_address: address, ctx: &mut TxContext){
         let folderObject = Folder {
             id: object::new(ctx),
             transcript,
@@ -98,7 +98,7 @@ module sui_intro_unit_two::transcript {
         transfer::transfer(folderObject, intended_address);
     }
 
-    public entry fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){
+    public fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){
         // Check that the person unpacking the transcript is the intended viewer
         assert!(folder.intended_address == tx_context::sender(ctx), ENotIntendedAddress);
         let Folder {

@@ -22,7 +22,7 @@ Next, we need to modify the methods which should be callable by someone with the
 For example, for the `create_wrappable_transcript_object` method, we can modify it as the follows:
 
 ```rust
-    public entry fun create_wrappable_transcript_object(_: &TeacherCap, history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
+    public fun create_wrappable_transcript_object(_: &TeacherCap, history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
         let wrappableTranscript = WrappableTranscript {
             id: object::new(ctx),
             history,
@@ -73,7 +73,7 @@ The second object created from the above transaction is an instance of the `Teac
 In order to give additional addresses admin access, we can simply define a method to create and send additional `TeacherCap` objects as the following:
 
 ```rust
-    public entry fun add_additional_teacher(_: &TeacherCap, new_teacher_address: address, ctx: &mut TxContext){
+    public fun add_additional_teacher(_: &TeacherCap, new_teacher_address: address, ctx: &mut TxContext){
         transfer::transfer(
             TeacherCap {
                 id: object::new(ctx)

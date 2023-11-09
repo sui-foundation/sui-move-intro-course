@@ -40,7 +40,7 @@ use sui::object::{Self};
 use sui::tx_context::{Self, TxContext};
 use sui::transfer;
 
-public entry fun create_transcript_object(history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
+public fun create_transcript_object(history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
   let transcriptObject = TranscriptObject {
     id: object::new(ctx),
     history,

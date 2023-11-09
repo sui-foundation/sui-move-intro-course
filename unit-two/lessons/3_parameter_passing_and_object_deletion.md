@@ -13,12 +13,12 @@ public fun view_score(transcriptObject: &TranscriptObject): u8{
 }
 
 // You are allowed to view and edit the score but not allowed to delete it
-public entry fun update_score(transcriptObject: &mut TranscriptObject, score: u8){
+public fun update_score(transcriptObject: &mut TranscriptObject, score: u8){
     transcriptObject.literature = score
 }
 
 // You are allowed to do anything with the score, including view, edit, or delete the entire transcript itself.
-public entry fun delete_transcript(transcriptObject: TranscriptObject){
+public fun delete_transcript(transcriptObject: TranscriptObject){
     let TranscriptObject {id, history: _, math: _, literature: _ } = transcriptObject;
     object::delete(id);
 }
