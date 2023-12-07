@@ -39,7 +39,6 @@ module locked_coin::locked_coin {
         } else {
             locker.original_balance * elapsed_duration / total_duration
         };
-        // let total_vested_amount = locker.original_balance * percentage_unlocked;
         let available_vested_amount = total_vested_amount - (locker.original_balance-balance::value(&locker.balance));
         transfer::public_transfer(coin::take(&mut locker.balance, available_vested_amount, ctx), sender(ctx))
     }
@@ -50,7 +49,8 @@ module locked_coin::locked_coin {
         transfer::public_transfer(treasury_cap, sender(ctx))
     }
 
-
+    /// Mints and transfers a locker object with the input amount of coins and specified vesting schedule
+    /// 
     public fun locked_mint(treasury_cap: &mut TreasuryCap<LOCKED_COIN>, recipient: address, amount: u64, lock_up_duration: u64, clock: &Clock, ctx: &mut TxContext){
         
         let coin = coin::mint(treasury_cap, amount, ctx);
