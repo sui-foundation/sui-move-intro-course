@@ -14,7 +14,7 @@ public fun timestamp_ms(clock: &clock::Clock): u64
 
 the [`timestamp_ms`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/clock.md#function-timestamp_ms) function returns the current system timestamp, as a running total of milliseconds since an arbitrary point in the past.
 
-The [`clock`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/clock.md#0x2_clock_Clock) object has a unique identifier, `0x6`, that needs to be passed into function calls using it as one of the inputs. 
+The [`clock`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/clock.md#0x2_clock_Clock) object has a special reserved identifier, `0x6`, that needs to be passed into function calls using it as one of the inputs. 
 
 ## Locked Coin
 
@@ -32,7 +32,7 @@ Now that we know how to access time on-chain through `clock`, implementing a ves
         start_date: u64,
         final_date: u64,
         original_balance: u64,
-        balance: Balance<LOCKED_COIN>
+        current_balance: Balance<LOCKED_COIN>
 
     }
 ```
@@ -61,7 +61,7 @@ In the `locked_mint` method, we create and transfer a `Locker` with the specifie
             start_date: start_date,
             final_date: final_date,
             original_balance: amount,
-            balance: coin::into_balance(coin)
+            current_balance: coin::into_balance(coin)
         }, recipient);
     }
 ```
@@ -83,8 +83,8 @@ The `withdraw_vested` method contains the majority of the logic to compute the v
         } else {
             locker.original_balance * elapsed_duration / total_duration
         };
-        let available_vested_amount = total_vested_amount - (locker.original_balance-balance::value(&locker.balance));
-        transfer::public_transfer(coin::take(&mut locker.balance, available_vested_amount, ctx), sender(ctx))
+        let available_vested_amount = total_vested_amount - (locker.original_balance-balance::value(&locker.current_balance));
+        transfer::public_transfer(coin::take(&mut locker.current_balance, available_vested_amount, ctx), sender(ctx))
     }
 ```
 

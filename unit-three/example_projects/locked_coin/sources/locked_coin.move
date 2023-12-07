@@ -22,7 +22,7 @@ module locked_coin::locked_coin {
         start_date: u64,
         final_date: u64,
         original_balance: u64,
-        balance: Balance<LOCKED_COIN>
+        current_balance: Balance<LOCKED_COIN>
 
     }
 
@@ -39,8 +39,8 @@ module locked_coin::locked_coin {
         } else {
             locker.original_balance * elapsed_duration / total_duration
         };
-        let available_vested_amount = total_vested_amount - (locker.original_balance-balance::value(&locker.balance));
-        transfer::public_transfer(coin::take(&mut locker.balance, available_vested_amount, ctx), sender(ctx))
+        let available_vested_amount = total_vested_amount - (locker.original_balance-balance::value(&locker.current_balance));
+        transfer::public_transfer(coin::take(&mut locker.current_balance, available_vested_amount, ctx), sender(ctx))
     }
 
     fun init(otw: LOCKED_COIN, ctx: &mut TxContext){
@@ -62,7 +62,7 @@ module locked_coin::locked_coin {
             start_date: start_date,
             final_date: final_date,
             original_balance: amount,
-            balance: coin::into_balance(coin)
+            current_balance: coin::into_balance(coin)
         }, recipient);
     }
 }
