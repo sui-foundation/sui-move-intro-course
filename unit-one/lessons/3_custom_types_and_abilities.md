@@ -54,6 +54,8 @@ For now, just know that there are four abilities in Sui Move:
 - **key**: value can be used as a key for global storage operations
 - **store**: value can be stored inside global storage
 
+#### Assets
+
 Custom types that have the abilities `key` and `store` are considered to be **assets** in Sui Move. Assets are stored in global storage and can be transferred between accounts.  
 
 ### Hello World Custom Type

@@ -20,3 +20,13 @@ The [`clock`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/d
 
 Now that we know how to access time on-chain through `clock`, implementing a vesting fungible token is relatively straight forward. 
 
+### `Locker` Custom Type
+
+
+### Minting
+
+### Withdrawing Vested Tokens
+
+### Full Contract
+
+You can find the full smart contract for our implementation of a [`locked_coin`](../example_projects/locked_coin/sources/locked_coin.move) under the [example_projects/locked_coin](../example_projects/locked_coin/) folder.
