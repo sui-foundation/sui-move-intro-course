@@ -41,7 +41,9 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
 - [x] Create a multi-platform Docker image
 - [ ] Create exercises for each unit
 - [ ] Add content on Display.move
-- [ ] Add content on clock and example on token unlocking
+- [x] Add content on clock and example on token unlocking
+- [ ] Write advanced topic lesson on closed loop token standard
+- [ ] Write advanced topic lesson on package upgrades
 - [x] Check and update Unit One against latest version of Sui
 - [ ] Check and update Unit Two against latest version of Sui
 - [ ] Check and update Unit Three against latest version of Sui
