@@ -1,22 +1,24 @@
+// Copyright (c) 2022, Sui Foundation
+// SPDX-License-Identifier: Apache-2.0
+
+#[lint_allow(self_transfer)]
+/// Basic token locking and vesting example for Move on Sui. 
+/// Part of the the Sui Move intro course:
+/// https://github.com/sui-foundation/sui-move-intro-course
+/// 
 module locked_coin::locked_coin {
     use std::option;
     use sui::transfer;
     use sui::object::{Self, UID};
     use sui::tx_context::{sender, TxContext};
-    use sui::coin::{Self, TreasuryCap, CoinMetadata};
+    use sui::coin::{Self, TreasuryCap};
     use sui::balance::{Self, Balance};
     use sui::clock::{Self, Clock};
-    
-    //const LOCKUP_DURATION: u64 = 24 * 60 * 60 * 1000;
-
-    struct Registry has key {
+ 
+    /// Transferrable object for storing the vesting coins
+    ///
+    struct Locker has key, store {
         id: UID,
-        metadata: CoinMetadata<LOCKED_COIN>
-    }
-
-    struct LOCKED_COIN has drop {}
-
-    struct Locker has store {
         start_date: u64,
         final_date: u64,
         original_balance: u64,
@@ -24,16 +26,12 @@ module locked_coin::locked_coin {
 
     }
 
-    // Clock: shared object
-    // as immutable
-    // address: 0x6
-    //
-    // 
+    /// Witness
+    struct LOCKED_COIN has drop {}
 
     /// Withdraw the available vested amount assuming linear vesting
     ///
-    public fun withdraw_vested(self: &mut Registry, clock: &Clock, ctx: &mut TxContext){
-        let locker: &mut Locker = sui::dynamic_field::borrow_mut(&mut self.id, sender(ctx));
+    public fun withdraw_vested(locker: &mut Locker, clock: &Clock, ctx: &mut TxContext){
         let total_duration = locker.final_date - locker.start_date;
         let elapsed_duration = clock::timestamp_ms(clock) - locker.start_date;
         let total_vested_amount = if (elapsed_duration > total_duration) {
@@ -48,22 +46,23 @@ module locked_coin::locked_coin {
 
     fun init(otw: LOCKED_COIN, ctx: &mut TxContext){
         let (treasury_cap, metadata) = coin::create_currency<LOCKED_COIN>(otw, 8, b"LOCKED COIN", b"LOCK", b"", option::none(), ctx);
-        //transfer::public_freeze_object(metadata);
-        transfer::public_transfer(treasury_cap, sender(ctx));
-        transfer::share_object(Registry { id: object::new(ctx), metadata: metadata })
+        transfer::public_freeze_object(metadata);
+        transfer::public_transfer(treasury_cap, sender(ctx))
     }
 
-    public fun locked_mint(treasury_cap: &mut TreasuryCap<LOCKED_COIN>, self: &mut Registry, recipient: address, amount: u64, lock_up_duration: u64, clock: &Clock, ctx: &mut TxContext){
+
+    public fun locked_mint(treasury_cap: &mut TreasuryCap<LOCKED_COIN>, recipient: address, amount: u64, lock_up_duration: u64, clock: &Clock, ctx: &mut TxContext){
         
         let coin = coin::mint(treasury_cap, amount, ctx);
         let start_date = clock::timestamp_ms(clock);
         let final_date = start_date + lock_up_duration;
 
-        sui::dynamic_field::add(&mut self.id, recipient, Locker {
+        transfer::public_transfer(Locker {
+            id: object::new(ctx),
             start_date: start_date,
             final_date: final_date,
             original_balance: amount,
             balance: coin::into_balance(coin)
-        });
+        }, recipient);
     }
 }
