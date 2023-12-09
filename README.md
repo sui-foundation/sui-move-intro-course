@@ -82,7 +82,7 @@ If you want to join Sui's online communities, you can join via following links:
 
 Please [get in touch](mailto:henry@sui.io) if you want to help translate this into other languages. 
 
-## Videos and other Formats
+## Videos and Other Formats
 
 - [x] Encode Club Video Series (English) [YouTube playlist](https://www.youtube.com/playlist?list=PLfEHHr3qexv_aE7p6oDyVtD3WQsDsJngr) | [tutorial and code](https://github.com/sui-foundation/encode-sui-educate)
 - [x] [BuidlerDAO Video Series](https://www.bilibili.com/video/BV1RY411v7YU) (Chinese)

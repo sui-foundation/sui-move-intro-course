@@ -25,14 +25,14 @@ module fungible_tokens::managed {
     }
 
     /// Manager can mint new coins
-    public entry fun mint(
+    public fun mint(
         treasury_cap: &mut TreasuryCap<MANAGED>, amount: u64, recipient: address, ctx: &mut TxContext
     ) {
         coin::mint_and_transfer(treasury_cap, amount, recipient, ctx)
     }
 
     /// Manager can burn coins
-    public entry fun burn(treasury_cap: &mut TreasuryCap<MANAGED>, coin: Coin<MANAGED>) {
+    public fun burn(treasury_cap: &mut TreasuryCap<MANAGED>, coin: Coin<MANAGED>) {
         coin::burn(treasury_cap, coin);
     }
 
