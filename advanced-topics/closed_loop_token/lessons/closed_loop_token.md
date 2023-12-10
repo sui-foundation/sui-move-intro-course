@@ -56,6 +56,12 @@ There are three ways to confirm an action request.
 
 ## Setting Up Token Policy
 
-Create a Coin through `coin::create_currency` -> Create a policy for the respective token through `token::new_policy` -> Share the `TokenPolicy` Object -> Register, modify or remove `Rule`s from `TokenPolicy`
+- Create a Coin through `coin::create_currency`
+- Create a policy for the respective token through `token::new_policy`
+- Share the `TokenPolicy` Object 
+- Create the respective rules for any or all action types
+- Register, modify, or remove the rules from `TokenPolicy`
 
-Hierarchy: Coin/Token -> TokenPolicy -> Rules
+### Hierarchy
+
+Coin/Token -> TokenPolicy -> Rules
