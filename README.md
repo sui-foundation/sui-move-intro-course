@@ -24,7 +24,7 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
     - [Witness Design Pattern](./unit-three/lessons/3_witness_design_pattern.md)
     - [The `Coin` Resource and `create_currency` Method](./unit-three/lessons/4_the_coin_resource_and_create_currency.md)
     - [Managed Coin Example](./unit-three/lessons/5_managed_coin.md)
-    - [Clock and Locked Coin](./unit-three/lessons/6_clock_and_locked_coin.md)
+    - [`Clock` and Locked Coin](./unit-three/lessons/6_clock_and_locked_coin.md)
     - [Unit Testing](./unit-three/lessons/7_unit_testing.md)    
 - **Unit Four: Marketplace**
     - [Homogeneous Collections](./unit-four/lessons/1_homogeneous_collections.md)
