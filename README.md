@@ -11,7 +11,7 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
     - [Functions](./unit-one/lessons/4_functions.md)
     - [Contract Deployment](./unit-one/lessons/5_contract_deployment.md)
 - **Unit Two: Working with Sui Objects**
-    - [Introduction](./unit-two/lessons/1_working_wiith_sui_objects.md)
+    - [Introduction](./unit-two/lessons/1_working_with_sui_objects.md)
     - [Ownership](./unit-two/lessons/2_ownership.md)
     - [Parameter Passing and Object Deletion](./unit-two/lessons/3_parameter_passing_and_object_deletion.md)
     - [Object Wrapping](./unit-two/lessons/4_object_wrapping.md)
