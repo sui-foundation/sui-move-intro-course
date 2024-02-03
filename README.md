@@ -86,6 +86,7 @@ Please [get in touch](mailto:henry@sui.io) if you want to help translate this in
 
 - [x] Encode Club Video Series (English) [YouTube playlist](https://www.youtube.com/playlist?list=PLfEHHr3qexv_aE7p6oDyVtD3WQsDsJngr) | [tutorial and code](https://github.com/sui-foundation/encode-sui-educate)
 - [x] [BuidlerDAO Video Series](https://www.bilibili.com/video/BV1RY411v7YU) (Chinese)
+- [x] MoveBit Move on Sui Course (English) [YouTube playlist](https://www.youtube.com/playlist?list=PL3id4Z64z2sNED_aH7UYIFFwy6MsvKCN9) | [tutorial and code](https://github.com/movebit/sui-course-2023)
 
 ## FAQ
 
