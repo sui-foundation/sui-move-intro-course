@@ -44,6 +44,7 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
 - [x] Add content on clock and example on token unlocking
 - [ ] Write advanced topic lesson on closed loop token standard
 - [ ] Write advanced topic lesson on package upgrades
+- [ ] Write new lesson on kiosks
 - [x] Check and update Unit One against latest version of Sui
 - [ ] Check and update Unit Two against latest version of Sui
 - [ ] Check and update Unit Three against latest version of Sui
