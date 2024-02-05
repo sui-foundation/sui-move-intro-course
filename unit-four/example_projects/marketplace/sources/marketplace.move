@@ -1,8 +1,10 @@
-/// Copyright (c) Sui Foundation, Inc.
-/// SPDX-License-Identifier: Apache-2.0
-///
-/// Modified from https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/nfts/sources/marketplace.move
+// Copyright (c) Sui Foundation, Inc.
+// SPDX-License-Identifier: Apache-2.0
 
+// Modified from https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/nfts/sources/marketplace.move
+
+
+#[lint_allow(self_transfer)]
 module marketplace::marketplace {
     use sui::dynamic_object_field as ofield;
     use sui::tx_context::{Self, TxContext};
@@ -68,7 +70,7 @@ module marketplace::marketplace {
     fun delist<T: key + store, COIN>(
         marketplace: &mut Marketplace<COIN>,
         item_id: ID,
-        ctx: &mut TxContext
+        ctx: &TxContext
     ): T {
         let Listing {
             id,
@@ -141,7 +143,7 @@ module marketplace::marketplace {
     /// Internal function to take profits from selling items on the `Marketplace`.
     fun take_profits<COIN>(
         marketplace: &mut Marketplace<COIN>,
-        ctx: &mut TxContext
+        ctx: &TxContext
     ): Coin<COIN> {
         table::remove<address, Coin<COIN>>(&mut marketplace.payments, tx_context::sender(ctx))
     }

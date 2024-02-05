@@ -51,4 +51,7 @@ public fun create_transcript_object(history: u8, math: u8, literature: u8, ctx: 
 }
 ```
 
+*💡Note: the provided sample code generates a warning message: warning[Lint W01001]: non-composable transfer to sender. For further details, refer to the article ("Sui Linters and Warnings Update Increases Coder Velocity")[https://blog.sui.io/linter-compile-warnings-update/]*
+
 *💡Note: Move supports field punning, which allows us to skip the field values if the field name happens to be the same as the name of the value variable it is bound to.*
+

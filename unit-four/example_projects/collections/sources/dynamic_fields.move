@@ -1,6 +1,8 @@
 // Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
+#[lint_allow(self_transfer)]
+
 module collection::dynamic_fields {
 
     use sui::dynamic_object_field as ofield;

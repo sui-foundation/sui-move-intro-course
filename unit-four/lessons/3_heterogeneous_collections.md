@@ -2,7 +2,7 @@
 
 Homogeneous collections like `Vector` and `Table` can work for marketplaces (or other types of applications) where we need to hold a collection of objects of the same type, but what if we need to hold objects of different types, or if we do not know at compile time what types the objects we need to hold are going to be?
 
-For this type of marketplaces, we need to use a _heterogeneous_ collection to hold the items to be sold. Already having done the heavy lifting of understanding dynamic fields, heterogeneous collection in Sui should be very easy to understand. We will look at the `Bag` collection type more closely here. 
+For this type of marketplace, we need to use a _heterogeneous_ collection to hold the items to be sold. Already having done the heavy lifting of understanding dynamic fields, heterogeneous collection in Sui should be very easy to understand. We will look at the `Bag` collection type more closely here. 
 
 ## The `Bag` Type
 

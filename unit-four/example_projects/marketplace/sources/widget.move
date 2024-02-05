@@ -1,7 +1,10 @@
-/// Copyright (c) Sui Foundation, Inc.
-/// SPDX-License-Identifier: Apache-2.0
-///
-/// Modified from https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/nfts/sources/marketplace.move
+// Copyright (c) Sui Foundation, Inc.
+// SPDX-License-Identifier: Apache-2.0
+
+// Modified from https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/nfts/sources/marketplace.move
+
+
+#[lint_allow(self_transfer)]
 
 module marketplace::widget {
 

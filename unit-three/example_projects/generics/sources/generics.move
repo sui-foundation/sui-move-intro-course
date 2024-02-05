@@ -1,6 +1,7 @@
 // Copyright (c) 2022, Mysten Labs, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
+#[lint_allow(self_transfer)]
 /// Basic generics example for Sui Move
 /// 
 /// A part of the Sui Move intro course: 
