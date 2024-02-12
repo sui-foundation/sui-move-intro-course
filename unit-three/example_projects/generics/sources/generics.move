@@ -1,7 +1,6 @@
 // Copyright (c) 2022, Mysten Labs, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-#[lint_allow(self_transfer)]
 /// Basic generics example for Sui Move
 /// 
 /// A part of the Sui Move intro course: 
@@ -25,10 +24,12 @@ module generics::generics {
         id: UID,
     }
 
+    #[lint_allow(self_transfer)]
     public fun create_box<T: store>(value: T,  ctx: &mut TxContext){
         transfer::transfer(Box<T> {id: object::new(ctx), value }, tx_context::sender(ctx))
     }
 
+    #[lint_allow(self_transfer)]
     public fun create_simple_box(value: u8,  ctx: &mut TxContext){
         transfer::transfer(SimpleBox {id: object::new(ctx), value }, tx_context::sender(ctx))
     }

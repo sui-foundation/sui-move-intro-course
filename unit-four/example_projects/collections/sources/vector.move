@@ -1,7 +1,6 @@
 // Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-#[allow(unused_field)]
 
 module collection::vector {
 
@@ -10,6 +9,7 @@ module collection::vector {
     struct Widget {
     }
 
+    #[allow(unused_field)]
     // Vector for a specified  type
     struct WidgetVector {
         widgets: vector<Widget>

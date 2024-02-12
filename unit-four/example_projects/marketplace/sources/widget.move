@@ -4,7 +4,6 @@
 // Modified from https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/nfts/sources/marketplace.move
 
 
-#[lint_allow(self_transfer)]
 
 module marketplace::widget {
 
@@ -16,6 +15,7 @@ module marketplace::widget {
         id: UID,
     }
 
+    #[lint_allow(self_transfer)]
     public fun mint(ctx: &mut TxContext) {
         let object = Widget {
             id: object::new(ctx)

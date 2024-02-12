@@ -4,7 +4,6 @@
 // Modified from https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/nfts/sources/marketplace.move
 
 
-#[lint_allow(self_transfer)]
 module marketplace::marketplace {
     use sui::dynamic_object_field as ofield;
     use sui::tx_context::{Self, TxContext};
@@ -148,6 +147,7 @@ module marketplace::marketplace {
         table::remove<address, Coin<COIN>>(&mut marketplace.payments, tx_context::sender(ctx))
     }
 
+    #[lint_allow(self_transfer)]
     /// Call [`take_profits`] and transfer Coin object to the sender.
     public fun take_profits_and_keep<COIN>(
         marketplace: &mut Marketplace<COIN>,

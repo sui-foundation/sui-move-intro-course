@@ -1,7 +1,6 @@
 // Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-#[lint_allow(self_transfer)]
 
 module collection::dynamic_fields {
 
@@ -92,6 +91,7 @@ module collection::dynamic_fields {
         object::delete(id);
     }
 
+    #[lint_allow(self_transfer)]
     // Removes a DOFChild from the parent object and transfer it to the caller
     public fun reclaim_dofchild(parent: &mut Parent, child_name: vector<u8>, ctx: &mut TxContext) {
         let child = remove_dofchild(parent, child_name);
