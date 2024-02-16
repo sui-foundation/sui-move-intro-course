@@ -65,7 +65,7 @@ Export the `Marketplace` shared object's ID into an environmental variable:
 First, we mint a `widget` item to be listed:
 
 ```bash
-    sui client call --function mint --module widget --package  $PACKAGE_ID --gas-budget 10000000
+    sui client call --function mint --module widget --package $PACKAGE_ID --gas-budget 10000000
 ```
 
 Save the object item of the minted `widget` to an environmental variable:
@@ -106,7 +106,7 @@ Now, let's buy back the item that we just listed:
     sui client call --function buy_and_take --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID $PAYMENT_ID --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 10000000
 ```
 
-You should see a long list of transaction effects in the console after submit this transaction. We can verify that the `widget` is owned by our address, and the `payments` `Table` now has an entry with the key of our address and should be of size `1`.
+You should see a long list of transaction effects in the console after submitting this transaction. We can verify that the `widget` is owned by our address, and the `payments` `Table` now has an entry with the key of our address and should be of size `1`.
 
 ### Take Profits
 

@@ -1,11 +1,13 @@
 // Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
+
 module collection::table {
 
     use sui::table::{Table, Self};
     use sui::tx_context::{TxContext};
 
+    #[allow(unused_field)]
     // Defining a table with specified types for the key and value
     struct IntegerTable {
         table_values: Table<u8, u8>

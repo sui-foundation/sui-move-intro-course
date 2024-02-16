@@ -55,11 +55,11 @@ It's important to note that while a vector defined with a generic type can accep
 
 ## Table
 
-A `Table` is a map-like collection that dynamically stores key-value pairs. But unlike a traditional map collection, it's keys and values are not stored within the `Table` value, but instead are stored using Sui's object system. The `Table` struct acts only as a handle into the object system to retrieve those keys and values. 
+A `Table` is a map-like collection that dynamically stores key-value pairs. But unlike a traditional map collection, its keys and values are not stored within the `Table` value, but instead are stored using Sui's object system. The `Table` struct acts only as a handle into the object system to retrieve those keys and values. 
 
 The `key` type of a `Table` must have the ability constraint of `copy + drop + store`, and the `value` type must have the ability constraint of `store`. 
 
-`Table` is also a type of _homogeneous_ collection where the key and value fields can be specified or generic types, but all values and all keys in a `Table` collection must be of the _same_ types. 
+`Table` is also a type of _homogeneous_ collection where the key and value fields can be specified or generic types, but all values and all keys in a `Table` collection must be of the _same_ type. 
 
 *Quiz: Would two table objects containing the exact same key-value pairs be equal to each other when checked with the `===` operator? Try it out.*
 

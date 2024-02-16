@@ -1,7 +1,6 @@
 // Copyright (c) 2022, Sui Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-#[lint_allow(self_transfer)]
 /// Basic token locking and vesting example for Move on Sui. 
 /// Part of the the Sui Move intro course:
 /// https://github.com/sui-foundation/sui-move-intro-course
@@ -29,6 +28,7 @@ module locked_coin::locked_coin {
     /// Witness
     struct LOCKED_COIN has drop {}
 
+    #[lint_allow(self_transfer)]
     /// Withdraw the available vested amount assuming linear vesting
     ///
     public fun withdraw_vested(locker: &mut Locker, clock: &Clock, ctx: &mut TxContext){

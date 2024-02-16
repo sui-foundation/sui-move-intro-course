@@ -156,7 +156,7 @@ Buying an item is similar to delisting but with additional logic for handling pa
 
 ```
 
-The first part is the same as delisting an item from listing, but we also check if the payment sent in is the right amount. The second part will insert the payment coin object into our `payments` `Table`, and depending on if the seller already has some balance, it will either do an a simple `table::add` or `table::borrow_mut` and `coin::join` to merge the payment to existing balance. 
+The first part is the same as delisting an item from listing, but we also check if the payment sent in is the right amount. The second part will insert the payment coin object into our `payments` `Table`, and depending on if the seller already has some balance, it will either do a simple `table::add` or `table::borrow_mut` and `coin::join` to merge the payment to existing balance. 
 
 The entry function `buy_and_take` simply calls `buy` and transfers the purchased item to the buyer. 
 
