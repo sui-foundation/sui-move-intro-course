@@ -10,9 +10,20 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
     
     `cargo install --locked --git https://github.com/MystenLabs/sui.git --branch devnet sui`
 
-    Change the branch target here to `testnet` or `mainnet` if you are targeting one of those. 
+    Change the branch target here to `testnet` or `mainnet` if you are targeting one of those.
 
-3. Check binaries are installed successfully:
+   *Linux Users: The installation process will create build artifacts in /tmp directory. If you encountered `disk out of space` related issues during installation. Make sure to expand your tmpfs to at least 11GB.*
+    ```
+   To check your tmpfs usage on Linux systems:
+   
+   df /tmp
+   
+   You can expand the tmpfs by editing the `/etc/fstab` file and setting the size of tmpfs to 20G:
+   
+   tmpfs          /tmp        tmpfs   noatime,size=20G,mode=1777   0 0
+    ```
+
+4. Check binaries are installed successfully:
 
     `sui --version`
 
