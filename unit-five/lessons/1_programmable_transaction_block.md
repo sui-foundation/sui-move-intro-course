@@ -17,6 +17,7 @@ PTB is a built-in feature and supported natively by Sui Network and Sui VM. On S
 - When the transaction is executed, the commands are executed in the order they are defined when building the PTB. The outputs of one transaction command can be used as inputs for any subsequent commands.
 - Sui guarantees the atomicity of a PTB by applying the effects of all commands in the transaction (block) at the end of the transaction. If one command fails, the entire block fails and effects will not take place.
 - Each PTB can hold up to 1024 unique operations. This allows cheaper gas fee and faster execution compared to executng 1024 individual transactions in other traditional blockchains.
+- If the output returned by one command is non-`drop` value. It must be consumed by subsequent commands within the same PTB. Otherwise, the transaction (block) is considered to be failed.
 
 *💡Note: Refer to [documentation here](https://docs.sui.io/concepts/transactions/prog-txn-blocks) for full details on PTB*
 
