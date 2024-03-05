@@ -20,19 +20,35 @@ Sui Kiosk is created to answer these needs:
 ## Main Components
 
 Sui Kiosk consists these 2 main components:
-- `Kiosk` + `KioskOwnerCap`: `Kiosk` is the safe that will store our assets and display them for selling, it is implemented as a shared object allowing interactions between multiple parties. Each `Kiosk` will have a corresponding Kiosk Owner whoever holding the `KioskOwnerCap`. The Kiosk Owner still have the *logical ownership* over their assets even when they are *physically* put into the kiosk.
+- `Kiosk` + `KioskOwnerCap`: `Kiosk` is the safe that will store our assets and display them for selling, it is implemented as a shared object allowing interactions between multiple parties. Each `Kiosk` will have a corresponding Kiosk Owner whoever holding the `KioskOwnerCap`. The Kiosk Owner still have the *logical ownership* over their assets even when they are *physically* placed in the kiosk.
 - `TransferPolicy` + `TransferPolicyCap`: `TransferPolicy` defines the conditions in which the assets can be traded or sold. Each `TransferPolicy` consists a set of *rules*, with each rule specifies the requirements every trade must sastify. Rules can be enabled or disabled from the `TransferPolicy` by whoever owning the `TransferOwnerCap`. Greate example of `TransferPolicy`'s rule is the royalty fees guarantee.
-
-## Asset States in Sui Kiosk
-
-Sui Kiosk is a shared object that can store heterogeneous values, such as different sets of asset collectibles. When you add an asset to your kiosk, it has one of the following states:
-- `PLACED` - an item is placed inside the Kiosk
 
 ## Sui Kiosk Users
 
-Sui Kiosk serves these types of users. 
+Sui Kiosk use-cases is centered around these 3 types of users:
+- Kiosk Owner (Seller/KO): One must own the `KioskOwnerCap` to become the Kiosk Owner. KO can:
+    - Place their assets in kiosk.
+    - Withdraw the assets in kiosk if they're not *locked*.
+    - List assets for sale.
+    - Withdraw profits from sales.
+    - Borrow and mutate owned assets in kiosk.
+- Buyer: Buyer can be anyone who's willing to purchase the listed items. The buyers must satisfy the `TransferPolicy` for the trade to be considered successful.
+- Creator: Creator is a party that creates and controls the `TransferPolicy` for a single type. For example, authors of SuiFrens collectibles are the creators of `SuiFren<Capy>` type and act as creators in the Sui Kiosk system. Creators can:
+    - Set any rules for trades.
+    - Set multiple tracks of rules.
+    - Enable or disable trades at any moment with a policy.
+    - Enforce policies (eg royalties) on all trades.
+    - All operations are affected immediately and globally.
 
-### Kiosk Owner (Seller/KO)
+## Asset States in Sui Kiosk
 
-To become the Kiosk Owner, one must own the `KioskOwnerCap`. To create the Kiosk, we can use the 
+When you add an asset to your kiosk, it has one of the following states:
+- `PLACED` - an item is placed inside the kiosk. The Kiosk Owner can withdraw it and use it directly, borrow it (mutably or immutably), or list an item for sale.
+- `LOCKED` - an item is placed and locked in the kiosk. The Kiosk Owner can't withdraw a *locked* item from kiosk, but you can borrow it mutably and list it for sale.
+- `LISTED` - an item in the kiosk that is listed for sale. The Kiosk Owner can’t modify an item while listed, but you can borrow it immutably or delist it, which returns it to its previous state.
+
+*💡Note: there is another state called `LISTED EXCLUSIVELY`, which is not covered in this unit and will be covered in the future in advanced section*
+
+## 
+
 
