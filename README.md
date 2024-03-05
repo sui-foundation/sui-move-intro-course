@@ -32,6 +32,10 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
     - [Heterogeneous Collections](./unit-four/lessons/3_heterogeneous_collections.md)
     - [Marketplace Contract](./unit-four/lessons/4_marketplace_contract.md)
     - [Deployment and Testing](./unit-four/lessons/5_deployment_and_testing.md)
+- **Unit Five: Sui Kiosk**
+    - [Programmable Transaction Block](./unit-five/lessons/1_programmable_transaction_block.md)
+    - [Hot Potato Design Pattern][./unit-five/lessons/2_hot_potato_design_pattern.md]
+    - [Sui Kiosk]()
 - **Advanced Topics**
     - [BCS Encoding](./advanced-topics/BCS_encoding/lessons/BCS_encoding.md)
 
