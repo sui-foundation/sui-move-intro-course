@@ -6,8 +6,9 @@ module flashloan::flashloan {
     use sui::sui::SUI;
     use sui::coin::{Self, Coin};
     use sui::balance::{Self, Balance};
-    use sui::object::{UID};
+    use sui::object::{Self, UID};
     use sui::tx_context::{TxContext};
+    use sui::transfer::{Self};
 
     // === Errors ===
 
@@ -32,7 +33,25 @@ module flashloan::flashloan {
         amount: u64,
     }
 
+    /// A dummy NFT to represent the flashloan functionality
+    struct NFT has key{
+        id: UID,
+        price: Balance<SUI>,
+    }
+
+    fun init(ctx: &mut TxContext) {
+        let pool = LoanPool { 
+            id: object::new(ctx), 
+            amount: balance::zero() 
+        };
+        transfer::share_object(pool);
+    }
     // === Public-Mutative Functions ===
+
+    /// Deposit money into loan pool
+    public fun deposit_pool(pool: &mut LoanPool, deposit: Coin<SUI>) {
+        balance::join(&mut pool.amount, coin::into_balance(deposit));
+    }
 
     /// Function allows users to borrow from the loan pool.
     /// It returns the borrowed [`Coin<SUI>`] and the [`Loan`] position 
@@ -56,4 +75,19 @@ module flashloan::flashloan {
 
         balance::join(&mut pool.amount, coin::into_balance(payment));
     }
-}
+
+    /// Mint NFT
+    public fun mint_nft(payment: Coin<SUI>, ctx: &mut TxContext): NFT {
+        NFT {
+            id: object::new(ctx),
+            price: coin::into_balance(payment),
+        }
+    }
+
+    /// Sell NFT
+    public fun sell_nft(nft: NFT, ctx: &mut TxContext): Coin<SUI> {
+        let NFT {id, price} = nft;
+        object::delete(id);
+        coin::from_balance(price, ctx)
+    }
+}   

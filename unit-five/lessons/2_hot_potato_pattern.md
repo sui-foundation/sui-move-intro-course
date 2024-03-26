@@ -71,3 +71,64 @@ public fun repay(pool: &mut LoanPool, loan: Loan, payment: Coin<SUI>) {
 
 Users at some point must `repay()` the loan before the PTB ends. We consume the `Loan` by unpacking it, otherwise, you will receive compiler error if you use its fields with direct access `loan.amount` as `Loan` is non-`drop`. After unpacking, we simply use the loan amount to perform valid payment check and update the `LoanPool` accordingly.
 
+## Example
+
+Let's try to create an example with flashloan where we borrow some SUI amount, use it to mint a dummy NFT and sell it to repay the debt. We will learn how to use PTB with Sui CLI to execute this all in one transaction.
+
+```rust
+/// A dummy NFT to represent the flashloan functionality
+struct NFT has key{
+    id: UID,
+    price: Balance<SUI>,
+}
+
+/// Mint NFT
+    public fun mint_nft(payment: Coin<SUI>, ctx: &mut TxContext): NFT {
+        NFT {
+            id: object::new(ctx),
+            price: coin::into_balance(payment),
+        }
+    }
+
+/// Sell NFT
+public fun sell_nft(nft: NFT, ctx: &mut TxContext): Coin<SUI> {
+    let NFT {id, price} = nft;
+    object::delete(id);
+    coin::from_balance(price, ctx)
+}
+```
+
+You should able to publish the smart contract using the previous guide. After the smart deployment, we should have the package ID and the shared `LoanPool` object. Let's export them so we can use it later.
+
+```bash
+export LOAN_PACKAGE_ID=<package id>
+export LOAN_POOL_ID=<object id of the loan pool>
+```
+
+You need to deposit some SUI amount using `flashloan::deposit_pool` function. For demonstration purpose, we will deposit 10_000 MIST in the loan pool.
+
+```bash
+sui client ptb \
+--split-coins gas "[10000]" \
+--assign coin \
+--move-call $LOAN_PACKAGE_ID::flashloan::deposit_pool @$LOAN_POOL_ID coin.0 \
+--gas-budget 10000000
+```
+
+Now let's build a PTB that `borrow() -> mint_nft() -> sell_nft() -> repay()`.
+
+```bash
+sui client ptb \
+--move-call $LOAN_PACKAGE_ID::flashloan::borrow @$LOAN_POOL_ID 10000 \
+--assign borrow_res \
+--move-call $LOAN_PACKAGE_ID::flashloan::mint_nft borrow_res.0 \
+--assign nft \
+--move-call $LOAN_PACKAGE_ID::flashloan::sell_nft nft \
+--assign repay_coin \
+--move-call $LOAN_PACKAGE_ID::flashloan::repay @$LOAN_POOL_ID borrow_res.1 repay_coin \
+--gas-budget 10000000
+```
+
+*Quiz: What happen if you don't call `repay()` at the end of the PTB, please try it yourself*
+
+*💡Note: You may want to check out [SuiVision](https://testnet.suivision.xyz/) or [SuiScan](https://suiscan.xyz/testnet/home) to inspect the PTB for more details*
