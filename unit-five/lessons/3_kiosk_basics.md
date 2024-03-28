@@ -55,27 +55,6 @@ _💡Note: there is another state called `LISTED EXCLUSIVELY`, which is not cove
 
 ## Sui Kiosk Usage
 
-### Create Kiosk
-
-```rust
-module kiosk::kiosk {
-    use sui::kiosk::{Self, Kiosk, KioskOwnerCap};
-    use sui::tx_context::{TxContext};
-
-    /// Create new kiosk
-    public fun new_kiosk(ctx: &mut TxContext): (Kiosk, KioskOwnerCap) {
-        kiosk::new(ctx)
-    }
-}
-```
-
-There are 2 ways to create a new kiosk:
-
-- Use `kiosk::new()` to create new kiosk but we have to make the `Kiosk` shared object and transfer the `KioskOwnerCap` to the sender ourselves by using `sui::transfer` in the same PTB.
-- Use `kiosk::default()` to automatically do all above steps for us. However, remeber that `kiosk::default()` is an entry function, so we can't include other calls in the same PTB.
-
-_💡Note: Kiosk is heterogenous collection by default so that's why it doesn't need type parameter for their items_
-
 ### Place Item inside Kiosk
 
 ```rust

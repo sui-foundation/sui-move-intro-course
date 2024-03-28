@@ -5,7 +5,7 @@ module kiosk::kiosk {
     use sui::kiosk::{Self, Kiosk, KioskOwnerCap};
     use sui::tx_context::{TxContext, sender};
     use sui::object::{Self, UID};
-    use sui::coin::{Self, Coin};
+    use sui::coin::{Coin};
     use sui::sui::{SUI};
     use sui::transfer_policy::{Self, TransferRequest, TransferPolicy, TransferPolicyCap};
     use sui::package::{Self, Publisher};
@@ -28,9 +28,12 @@ module kiosk::kiosk {
         }
     }
 
+    #[allow(lint(share_owned, self_transfer))]
     /// Create new kiosk
-    public fun new_kiosk(ctx: &mut TxContext): (Kiosk, KioskOwnerCap) {
-        kiosk::new(ctx)
+    public fun new_kiosk(ctx: &mut TxContext) {
+        let (kiosk, kiosk_owner_cap) = kiosk::new(ctx);
+        transfer::public_share_object(kiosk);
+        transfer::public_transfer(kiosk_owner_cap, sender(ctx));
     }
 
     /// Place item inside Kiosk
