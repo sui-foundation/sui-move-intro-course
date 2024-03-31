@@ -61,8 +61,11 @@ module kiosk::kiosk {
         transfer_policy::confirm_request(policy, req);
     }
 
+    #[allow(lint(share_owned, self_transfer))]
     /// Create new policy for type `T`
-    public fun new_policy(publisher: &Publisher, ctx: &mut TxContext): (TransferPolicy<TShirt>, TransferPolicyCap<TShirt>) {
-        transfer_policy::new(publisher, ctx)
+    public fun new_policy(publisher: &Publisher, ctx: &mut TxContext) {
+        let (policy, policy_cap) = transfer_policy::new<TShirt>(publisher, ctx);
+        transfer::public_share_object(policy);
+        transfer::public_transfer(policy_cap, sender(ctx));
     }
 }

@@ -7,7 +7,7 @@ module kiosk::fixed_royalty_rule {
     use sui::sui::SUI;
     use sui::coin::{Self, Coin};
     use sui::transfer_policy::{
-        Self as policy,
+        Self,
         TransferPolicy,
         TransferPolicyCap,
         TransferRequest
@@ -43,7 +43,7 @@ module kiosk::fixed_royalty_rule {
         
     ) {
         assert!(amount_bp <= MAX_BPS, EIncorrectArgument);
-        policy::add_rule(Rule {}, policy, cap, Config { amount_bp, min_amount })
+        transfer_policy::add_rule(Rule {}, policy, cap, Config { amount_bp, min_amount })
     }
 
     /// Buyer action: Pay the royalty fee for the transfer.
@@ -52,19 +52,19 @@ module kiosk::fixed_royalty_rule {
         request: &mut TransferRequest<T>,
         payment: Coin<SUI>
     ) {
-        let paid = policy::paid(request);
+        let paid = transfer_policy::paid(request);
         let amount = fee_amount(policy, paid);
 
         assert!(coin::value(&payment) == amount, EInsufficientAmount);
 
-        policy::add_to_balance(Rule {}, policy, payment);
-        policy::add_receipt(Rule {}, request)
+        transfer_policy::add_to_balance(Rule {}, policy, payment);
+        transfer_policy::add_receipt(Rule {}, request)
     }
 
     /// Helper function to calculate the amount to be paid for the transfer.
     /// Can be used dry-runned to estimate the fee amount based on the Kiosk listing price.
     public fun fee_amount<T: key + store>(policy: &TransferPolicy<T>, paid: u64): u64 {
-        let config: &Config = policy::get_rule(Rule {}, policy);
+        let config: &Config = transfer_policy::get_rule(Rule {}, policy);
         let amount = (((paid as u128) * (config.amount_bp as u128) / 10_000) as u64);
 
         // If the amount is less than the minimum, use the minimum

@@ -1,4 +1,6 @@
-# Create Kiosk
+# Kiosk Basic Usage
+
+## Create Kiosk
 
 Let's first deploy the example kiosk smart contract and export the package ID for later use.
 ```bash
@@ -34,3 +36,46 @@ export KIOSK_OWNER_CAP=<Object id of newly created KioskOwnerCap>
 ```
 
 _💡Note: Kiosk is heterogenous collection by default so that's why it doesn't need type parameter for their items_
+
+## Place Item inside Kiosk
+
+```rust
+struct TShirt has key, store {
+    id: UID,
+}
+
+public fun new_tshirt(ctx: &mut TxContext): TShirt {
+    TShirt {
+        id: object::new(ctx),
+    }
+}
+
+/// Place item inside kiosk
+public fun place(kiosk: &mut Kiosk, cap: &KioskOwnerCap, item: TShirt) {
+    kiosk::place(kiosk, cap, item)
+}
+```
+
+We can use `kiosk::place()` API to place an item inside kiosk. Remember that only the Kiosk Owner can have access to this API.
+
+## Withdraw Item from Kiosk
+
+```rust
+/// Withdraw item from Kiosk
+public fun withdraw(kiosk: &mut Kiosk, cap: &KioskOwnerCap, item_id: object::ID): TShirt {
+    kiosk::take(kiosk, cap, item_id)
+}
+```
+
+We can use `kiosk::take()` API to withdraw an item from kiosk. Remember that only the Kiosk Owner can have access to this API.
+
+## List Item for Sale
+
+```rust
+/// List item for sale
+public fun list(kiosk: &mut Kiosk, cap: &KioskOwnerCap, item_id: object::ID, price: u64) {
+    kiosk::list<TShirt>(kiosk, cap, item_id, price)
+}
+```
+
+We can use `kiosk::list()` API to list an item for sale. Remember that only the Kiosk Owner can have access to this API.
