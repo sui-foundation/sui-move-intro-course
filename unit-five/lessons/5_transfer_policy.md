@@ -188,6 +188,6 @@ sui client ptb \
 --assign coin \
 --move-call $KIOSK_PACKAGE_ID::fixed_royalty_rule::pay "<$KIOSK_PACKAGE_ID::kiosk::TShirt>" @$KIOSK_TRANSFER_POLICY buy_res.1 coin.0 \
 --move-call $KIOSK_PACKAGE_ID::kiosk::confirm_request  @$KIOSK_TRANSFER_POLICY buy_res.1 \
---move-call 0x2::transfer::public_transfer "<$KIOSK_PACKAGE_ID::kiosk::TShirt>" buy_res.0 tester \
+--move-call 0x2::transfer::public_transfer "<$KIOSK_PACKAGE_ID::kiosk::TShirt>" buy_res.0 <buyer address> \
 --gas-budget 10000000
 ```
