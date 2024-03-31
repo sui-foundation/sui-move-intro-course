@@ -35,7 +35,9 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
 - **Unit Five: Sui Kiosk**
     - [Programmable Transaction Block](./unit-five/lessons/1_programmable_transaction_block.md)
     - [Hot Potato Design Pattern](./unit-five/lessons/2_hot_potato_pattern.md)
-    - [Sui Kiosk](./unit-five/lessons/3_kiosk.md)
+    - [Sui Kiosk Basic Concepts](./unit-five/lessons/3_kiosk_basics.md)
+    - [Sui Kiosk Basic Usage](./unit-five/lessons/4_kiosk_basic_usage.md)
+    - [Transfer Policy](./unit-five/lessons/5_transfer_policy.md)
 - **Advanced Topics**
     - [BCS Encoding](./advanced-topics/BCS_encoding/lessons/BCS_encoding.md)
 
