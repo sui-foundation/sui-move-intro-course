@@ -4,7 +4,7 @@ A hot potato is a struct that has no capabilities, therefore you can only pack a
 
 ## Type Definitions
 
-```rust
+```move
 module flashloan::flashloan {
     // === Imports ===
     use sui::sui::SUI;
@@ -38,7 +38,7 @@ We have a `LoanPool` shared object acting as a money vault ready for users to bo
 
 ## Borrow
 
-```rust
+```move
 /// Function allows users to borrow from the loan pool.
 /// It returns the borrowed [`Coin<SUI>`] and the [`Loan`] position
 /// enforcing users to fulfill before the PTB ends.
@@ -58,7 +58,7 @@ Users can borrow the money from the `LoanPool` by calling `borrow()`. Basically,
 
 ## Repay
 
-```rust
+```move
 /// Repay the loan
 /// Users must execute this function to ensure the loan is repaid before the transaction ends.
 public fun repay(pool: &mut LoanPool, loan: Loan, payment: Coin<SUI>) {
@@ -75,7 +75,7 @@ Users at some point must `repay()` the loan before the PTB ends. We consume the 
 
 Let's try to create an example with flashloan where we borrow some SUI amount, use it to mint a dummy NFT and sell it to repay the debt. We will learn how to use PTB with Sui CLI to execute this all in one transaction.
 
-```rust
+```move
 /// A dummy NFT to represent the flashloan functionality
 struct NFT has key{
     id: UID,

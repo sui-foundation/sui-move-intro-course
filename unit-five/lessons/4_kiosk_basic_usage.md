@@ -7,7 +7,7 @@ Let's first deploy the example kiosk smart contract and export the package ID fo
 export KIOSK_PACKAGE_ID=<Package ID of example kiosk smart contract>
 ```
 
-```rust
+```move
 module kiosk::kiosk {
     use sui::kiosk::{Self, Kiosk, KioskOwnerCap};
     use sui::tx_context::{TxContext};
@@ -39,7 +39,7 @@ _💡Note: Kiosk is heterogenous collection by default so that's why it doesn't 
 
 ## Place Item inside Kiosk
 
-```rust
+```move
 struct TShirt has key, store {
     id: UID,
 }
@@ -60,7 +60,7 @@ We can use `kiosk::place()` API to place an item inside kiosk. Remember that onl
 
 ## Withdraw Item from Kiosk
 
-```rust
+```move
 /// Withdraw item from Kiosk
 public fun withdraw(kiosk: &mut Kiosk, cap: &KioskOwnerCap, item_id: object::ID): TShirt {
     kiosk::take(kiosk, cap, item_id)
@@ -71,7 +71,7 @@ We can use `kiosk::take()` API to withdraw an item from kiosk. Remember that onl
 
 ## List Item for Sale
 
-```rust
+```move
 /// List item for sale
 public fun list(kiosk: &mut Kiosk, cap: &KioskOwnerCap, item_id: object::ID, price: u64) {
     kiosk::list<TShirt>(kiosk, cap, item_id, price)

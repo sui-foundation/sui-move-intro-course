@@ -7,7 +7,7 @@ In this section, we will learn how to create a `TransferPolicy` and use it to en
 
 `TransferPolicy` for type `T` must be created for that type `T` to be tradeable in the Kiosk system. `TransferPolicy` is a shared object acting as a central authority enforcing everyone to check their purchase is valid against the defined policy before the purchased item is transferred to the buyers.
 
-```rust
+```move
 use sui::tx_context::{TxContext, sender};
 use sui::transfer_policy::{Self, TransferRequest, TransferPolicy, TransferPolicyCap};
 use sui::package::{Self, Publisher};
@@ -56,7 +56,7 @@ _💡Note: There is a standard approach to implement the rules. Please checkout 
 
 #### Rule Witness & Rule Config
 
-```rust
+```move
 module kiosk::fixed_royalty_rule {
     /// The `amount_bp` passed is more than 100%.
     const EIncorrectArgument: u64 = 0;
@@ -83,7 +83,7 @@ module kiosk::fixed_royalty_rule {
 
 #### Add Rule to TransferPolicy
 
-```rust
+```move
 /// Function that adds a Rule to the `TransferPolicy`.
 /// Requires `TransferPolicyCap` to make sure the rules are
 /// added only by the publisher of T.
@@ -108,7 +108,7 @@ sui client call --package $KIOSK_PACKAGE_ID --module fixed_royalty_rule --functi
 
 #### Satisfy the Rule
 
-```rust
+```move
 /// Buyer action: Pay the royalty fee for the transfer.
 public fun pay<T: key + store>(
     policy: &mut TransferPolicy<T>,
@@ -145,7 +145,7 @@ We need a helper `fee_amount()` to calculate the royalty fee given the policy an
 
 ## Buy Item from Kiosk
 
-```rust
+```move
 use sui::transfer_policy::{Self, TransferRequest, TransferPolicy};
 
 /// Buy listed item
