@@ -56,7 +56,7 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
 - [Sui Developer Documentation](https://docs.sui.io/build)
 - [Sui Developer Portal](https://sui.io/developers)
 - [Sui GitHub](https://github.com/MystenLabs/sui)
-- [Sui Framework Documentaton](https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/docs)
+- [Sui Framework Documentation](https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/docs)
 - [Sui Typescript SDK (official)](https://github.com/MystenLabs/sui/tree/main/sdk/typescript)
 - [Sui Typescript SDK (community)](https://github.com/scallop-io/sui-kit)
 - [Sui Rust SDK (official)](https://github.com/MystenLabs/sui/tree/main/crates/sui-sdk)
