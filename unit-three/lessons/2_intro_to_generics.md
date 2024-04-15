@@ -45,7 +45,7 @@ module  generics::storage {
 
 💡It's important to note here that the inner type `T` in the above example must meet certain ability constraints due to the outer container type. In this example, `T` must have `store`, as `Box` has `store` and `key`. However, `T` can also have abilities that the container doesn't have, such as `drop` in this example.
 
-The intuition is that if the container is allowed to contain a type that does not follow the same rules that it does, the container would violate its own ability. How can a box be storeable if its content isn't also storeable?
+The intuition is that if the container is allowed to contain a type that does not follow the same rules that it does, the container would violate its own ability. How can a box be storable if its content isn't also storable?
 
 We will see in the next section that there is a way to get around this rule in certain cases using a special keyword, called `phantom`. 
 
