@@ -79,7 +79,7 @@ module kiosk::fixed_royalty_rule {
 }
 ```
 
-`Rule` represents a witness type to add to `TransferPolicy`, it helps to identify and distinguish between multiple rules adding to one policy. `Config` is the configuration of the `Rule`, as we implement fixed royaltee fee, the settings should include the percentage we want to deduct out of orignal payment.
+`Rule` represents a witness type to add to `TransferPolicy`, it helps to identify and distinguish between multiple rules adding to one policy. `Config` is the configuration of the `Rule`, as we implement fixed royaltee fee, the settings should include the percentage we want to deduct out of original payment.
 
 #### Add Rule to TransferPolicy
 
@@ -141,7 +141,7 @@ public fun fee_amount<T: key + store>(policy: &TransferPolicy<T>, paid: u64): u6
 
 We need a helper `fee_amount()` to calculate the royalty fee given the policy and the payment amount. We use `transfer_policy::get_rule()` to enquire the configuration and use it for fee calculation.
 
-`pay()` is a function that users must call themselves to fullfil the `TransferRequest` (described in the next section) before `transfer_policy::confirm_request()`. `transfer_policy::paid()` gives us original payment of the trade represented by `TransferRequest`. After royalty fee calculation, we will add the fee to the policy through `transfer_policy::add_to_balance()`, any fee collected by the policy is accumulated here and `TransferPolicyCap` owner can withdraw later. Last but not least, we use `transfer_policy::add_receipt()` to flag the `TransferRequest` that this rule is passed and ready to be confirmed with `transfer_policy::confirm_request()`.
+`pay()` is a function that users must call themselves to fulfill the `TransferRequest` (described in the next section) before `transfer_policy::confirm_request()`. `transfer_policy::paid()` gives us original payment of the trade represented by `TransferRequest`. After royalty fee calculation, we will add the fee to the policy through `transfer_policy::add_to_balance()`, any fee collected by the policy is accumulated here and `TransferPolicyCap` owner can withdraw later. Last but not least, we use `transfer_policy::add_receipt()` to flag the `TransferRequest` that this rule is passed and ready to be confirmed with `transfer_policy::confirm_request()`.
 
 ## Buy Item from Kiosk
 
@@ -174,7 +174,7 @@ Recall from the previous section, the item must be placed inside the kiosk, then
 export KIOSK_TSHIRT=<Object ID of the listed TShirt>
 ```
 
-Let's build a PTB to execute a trade. The flow is straightforward, we buy the listed item from the kiosk, the item and `TransferRequest` is returned, then, we call `fixed_royalty_fee::pay` to fullfil the `TransferRequest`, we confirm the `TransferRequest` with `confirm_request()` before finally transfer the item to the buyer.
+Let's build a PTB to execute a trade. The flow is straightforward, we buy the listed item from the kiosk, the item and `TransferRequest` is returned, then, we call `fixed_royalty_fee::pay` to fulfill the `TransferRequest`, we confirm the `TransferRequest` with `confirm_request()` before finally transfer the item to the buyer.
 ```bash
 sui client ptb \
 --assign price 10000 \

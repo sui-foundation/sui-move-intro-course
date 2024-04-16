@@ -35,7 +35,7 @@ export KIOSK=<Object id of newly created Kiosk>
 export KIOSK_OWNER_CAP=<Object id of newly created KioskOwnerCap>
 ```
 
-_💡Note: Kiosk is heterogenous collection by default so that's why it doesn't need type parameter for their items_
+_💡Note: Kiosk is heterogeneous collection by default so that's why it doesn't need type parameter for their items_
 
 ## Place Item inside Kiosk
 
