@@ -11,25 +11,25 @@ module sui_intro_unit_two::transcript {
     use sui::transfer;
     use sui::event;
 
-    struct WrappableTranscript has key, store {
+    public struct WrappableTranscript has key, store {
         id: UID,
         history: u8,
         math: u8,
         literature: u8,
     }
 
-    struct Folder has key {
+    public struct Folder has key {
         id: UID,
         transcript: WrappableTranscript,
         intended_address: address
     }
 
-    struct TeacherCap has key {
+    public struct TeacherCap has key {
         id: UID
     }
 
     /// Event marking when a transcript has been requested
-    struct TranscriptRequestEvent has copy, drop {
+    public struct TranscriptRequestEvent has copy, drop {
         // The Object ID of the transcript wrapper
         wrapper_id: ID,
         // The requester of the transcript

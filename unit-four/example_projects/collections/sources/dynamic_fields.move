@@ -11,17 +11,17 @@ module collection::dynamic_fields {
     use sui::tx_context::{Self, TxContext};
 
     // Parent struct
-    struct Parent has key {
+    public struct Parent has key {
         id: UID,
     }
 
     // Dynamic field child struct type containing a counter
-    struct DFChild has store {
+    public struct DFChild has store {
         count: u64
     }
 
     // Dynamic object field child struct type containing a counter
-    struct DOFChild has key, store {
+    public struct DOFChild has key, store {
         id: UID,
         count: u64,
     }

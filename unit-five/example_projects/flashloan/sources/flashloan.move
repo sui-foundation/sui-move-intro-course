@@ -21,7 +21,7 @@ module flashloan::flashloan {
 
     /// A "shared" loan pool.
     /// For demonstration purpose, we assume the loan pool only allows SUI.
-    struct LoanPool has key {
+    public struct LoanPool has key {
         id: UID,
         amount: Balance<SUI>,
     }
@@ -29,12 +29,12 @@ module flashloan::flashloan {
     /// A loan position.
     /// This is a hot potato struct, it enforces the users
     /// to repay the loan in the end of the transaction or within the same PTB.
-    struct Loan {
+    public struct Loan {
         amount: u64,
     }
 
     /// A dummy NFT to represent the flashloan functionality
-    struct NFT has key{
+    public struct NFT has key{
         id: UID,
         price: Balance<SUI>,
     }

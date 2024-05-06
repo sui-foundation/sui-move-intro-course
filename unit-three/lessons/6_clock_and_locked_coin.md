@@ -27,7 +27,7 @@ Now that we know how to access time on-chain through `clock`, implementing a ves
 ```rust
     /// Transferrable object for storing the vesting coins
     ///
-    struct Locker has key, store {
+    public struct Locker has key, store {
         id: UID,
         start_date: u64,
         final_date: u64,

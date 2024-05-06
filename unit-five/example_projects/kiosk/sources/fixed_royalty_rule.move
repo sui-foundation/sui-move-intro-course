@@ -22,10 +22,10 @@ module kiosk::fixed_royalty_rule {
     const MAX_BPS: u16 = 10_000;
 
     /// The Rule Witness to authorize the policy
-    struct Rule has drop {}
+    public struct Rule has drop {}
 
     /// Configuration for the Rule
-    struct Config has store, drop {
+    public struct Config has store, drop {
         /// Percentage of the transfer amount to be paid as royalty fee
         amount_bp: u16,
         /// This is used as royalty fee if the calculated fee is smaller than `min_amount`
@@ -65,7 +65,7 @@ module kiosk::fixed_royalty_rule {
     /// Can be used dry-runned to estimate the fee amount based on the Kiosk listing price.
     public fun fee_amount<T: key + store>(policy: &TransferPolicy<T>, paid: u64): u64 {
         let config: &Config = transfer_policy::get_rule(Rule {}, policy);
-        let amount = (((paid as u128) * (config.amount_bp as u128) / 10_000) as u64);
+        let mut amount = (((paid as u128) * (config.amount_bp as u128) / 10_000) as u64);
 
         // If the amount is less than the minimum, use the minimum
         if (amount < config.min_amount) {

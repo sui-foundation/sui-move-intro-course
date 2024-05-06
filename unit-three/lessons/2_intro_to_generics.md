@@ -14,7 +14,7 @@ First, without generics, we can define a `Box` that holds a `u64` type as the fo
 
 ```rust
 module  generics::storage {
-    struct Box {
+    public struct Box {
         value: u64
     }
 }
@@ -24,7 +24,7 @@ However, this type will only be able to hold a value of type `u64`. To make our 
 
 ```rust
 module  generics::storage {
-    struct Box<T> {
+    public struct Box<T> {
         value: T
     }
 }
@@ -37,7 +37,7 @@ We can add conditions to enforce that the type passed into the generic must have
 ```rust
 module  generics::storage {
     // T must be copyable and droppable 
-    struct Box<T: store + drop> has key, store {
+    public struct Box<T: store + drop> has key, store {
         value: T
     }
 }

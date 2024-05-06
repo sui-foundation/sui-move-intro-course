@@ -14,7 +14,7 @@ Developers can also define custom events on Sui. We can define a custom event ma
 
 ```rust
     /// Event marking when a transcript has been requested
-    struct TranscriptRequestEvent has copy, drop {
+    public struct TranscriptRequestEvent has copy, drop {
         // The Object ID of the transcript wrapper
         wrapper_id: ID,
         // The requester of the transcript

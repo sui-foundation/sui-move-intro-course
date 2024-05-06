@@ -40,7 +40,7 @@ _💡Note: Kiosk is heterogeneous collection by default so that's why it doesn't
 ## Place Item inside Kiosk
 
 ```move
-struct TShirt has key, store {
+public struct TShirt has key, store {
     id: UID,
 }
 

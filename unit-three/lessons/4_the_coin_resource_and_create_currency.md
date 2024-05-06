@@ -7,7 +7,7 @@ Now we know how generics and witness patterns work, let's revisit the `Coin` res
 Now we understand how generics work. We can revisit the `Coin` resource from `sui::coin`.  It's [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L28) as the following:
 
 ```rust
-struct Coin<phantom T> has key, store {
+public struct Coin<phantom T> has key, store {
         id: UID,
         balance: Balance<T>
     }
@@ -18,7 +18,7 @@ The `Coin` resource type is a struct that has a generic type `T` and two fields,
 `balance` is of the type [`sui::balance::Balance`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui-framework/balance.md#0x2_balance_Balance), and is [defined](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/balance.move#L29) as:
 
 ```rust 
-struct Balance<phantom T> has store {
+public struct Balance<phantom T> has store {
     value: u64
 }
 ```
@@ -77,7 +77,7 @@ The `TreasuryCap` is an asset and is guaranteed to be a singleton object by the 
 ```rust
     /// Capability allowing the bearer to mint and burn
     /// coins of type `T`. Transferable
-    struct TreasuryCap<phantom T> has key, store {
+    public struct TreasuryCap<phantom T> has key, store {
             id: UID,
             total_supply: Supply<T>
         }
@@ -88,7 +88,7 @@ It wraps a singleton field `total_supply` of type `Balance::Supply`:
 ```rust
 /// A Supply of T. Used for minting and burning.
     /// Wrapped into a `TreasuryCap` in the `Coin` module.
-    struct Supply<phantom T> has store {
+    public struct Supply<phantom T> has store {
         value: u64
     }
 ```

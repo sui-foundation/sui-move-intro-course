@@ -11,11 +11,11 @@ module kiosk::kiosk {
     use sui::package::{Self, Publisher};
     use sui::transfer::{Self};
 
-    struct TShirt has key, store {
+    public struct TShirt has key, store {
         id: UID,
     }
 
-    struct KIOSK has drop {}
+    public struct KIOSK has drop {}
 
     fun init(otw: KIOSK, ctx: &mut TxContext) {
         let publisher = package::claim(otw, ctx);

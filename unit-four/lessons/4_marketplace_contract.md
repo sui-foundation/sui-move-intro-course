@@ -14,7 +14,7 @@ First, we define the overall `Marketplace` struct:
     /// A shared `Marketplace`. Can be created by anyone using the
     /// `create` function. One instance of `Marketplace` accepts
     /// only one type of Coin - `COIN` for all its listings.
-    struct Marketplace<phantom COIN> has key {
+    public struct Marketplace<phantom COIN> has key {
         id: UID,
         items: Bag,
         payments: Table<address, Coin<COIN>>
@@ -34,7 +34,7 @@ Next, we define a `Listing` type:
 ```rust
     /// A single listing that contains the listed item and its
     /// price in [`Coin<COIN>`].
-    struct Listing has key, store {
+    public struct Listing has key, store {
         id: UID,
         ask: u64,
         owner: address,
