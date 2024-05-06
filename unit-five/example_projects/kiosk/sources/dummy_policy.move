@@ -15,11 +15,11 @@ module kiosk::dummy_rule {
 
     /// The Rule Witness; has no fields and is used as a
     /// static authorization method for the rule.
-    struct Rule has drop {}
+    public struct Rule has drop {}
 
     /// Configuration struct with any fields (as long as it
     /// has `drop`). Managed by the Rule module.
-    struct Config has store, drop {}
+    public struct Config has store, drop {}
 
     /// Function that adds a Rule to the `TransferPolicy`.
     /// Requires `TransferPolicyCap` to make sure the rules are

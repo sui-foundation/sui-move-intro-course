@@ -64,7 +64,7 @@ We define the object in our Hello World example as the following:
 
 ```rust
 /// An object that contains an arbitrary string
-struct HelloWorldObject has key, store {
+public struct HelloWorldObject has key, store {
   	id: UID,
   	/// A string contained in the object
   	text: string::String

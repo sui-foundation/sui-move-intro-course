@@ -10,17 +10,17 @@ module generics::generics {
     use sui::object::{Self, UID};
     use sui::tx_context::{Self, TxContext};
 
-    struct Box<T: store> has key, store {
+    public struct Box<T: store> has key, store {
         id: UID,
         value: T
     }
 
-    struct SimpleBox has key, store {
+    public struct SimpleBox has key, store {
         id: UID,
         value: u8
     }
 
-    struct PhantomBox<phantom T: drop> has key {
+    public struct PhantomBox<phantom T: drop> has key {
         id: UID,
     }
 

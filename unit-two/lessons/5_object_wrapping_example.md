@@ -11,7 +11,7 @@ First, we need to make some adjustments to our two custom types `WrappableTransc
 Remember that custom types with the abilities `key` and `store` are considered to be assets in Sui Move. 
 
 ```rust
-struct WrappableTranscript has key, store {
+public struct WrappableTranscript has key, store {
         id: UID,
         history: u8,
         math: u8,
@@ -22,7 +22,7 @@ struct WrappableTranscript has key, store {
 2. We need to add an additional field `intended_address` to the `Folder` struct that indicates the address of the intended viewer of the wrapped transcript. 
 
 ``` rust
-struct Folder has key {
+public struct Folder has key {
     id: UID,
     transcript: WrappableTranscript,
     intended_address: address

@@ -19,7 +19,7 @@ module collection::bag {
     use sui::tx_context::{TxContext};
 
     // Defining a table with generic types for the key and value 
-    struct GenericBag {
+    public struct GenericBag {
        items: Bag
     }
 

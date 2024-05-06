@@ -13,7 +13,7 @@ use sui::transfer_policy::{Self, TransferRequest, TransferPolicy, TransferPolicy
 use sui::package::{Self, Publisher};
 use sui::transfer::{Self};
 
-struct KIOSK has drop {}
+public struct KIOSK has drop {}
 
 fun init(witness: KIOSK, ctx: &mut TxContext) {
     let publisher = package::claim(otw, ctx);
@@ -67,10 +67,10 @@ module kiosk::fixed_royalty_rule {
     const MAX_BPS: u16 = 10_000;
 
     /// The Rule Witness to authorize the policy
-    struct Rule has drop {}
+    public struct Rule has drop {}
 
     /// Configuration for the Rule
-    struct Config has store, drop {
+    public struct Config has store, drop {
         /// Percentage of the transfer amount to be paid as royalty fee
         amount_bp: u16,
         /// This is used as royalty fee if the calculated fee is smaller than `min_amount`

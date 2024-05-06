@@ -7,7 +7,7 @@ Sui Move is a fully object-centric language. Transactions on Sui are expressed a
 Let's first start with an example that represents a transcript recording a student's grades:
 
 ```rust
-struct Transcript {
+public struct Transcript {
     history: u8,
     math: u8,
     literature: u8,
@@ -19,7 +19,7 @@ The above definition is a regular Move struct, but it is not a Sui object. In or
 ```rust
 use sui::object::{UID};
 
-struct TranscriptObject has key {
+public struct TranscriptObject has key {
     id: UID,
     history: u8,
     math: u8,

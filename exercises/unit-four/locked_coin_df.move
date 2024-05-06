@@ -9,14 +9,14 @@ module locked_coin::locked_coin_df {
 
     /// Shared objected used to attach the lockers 
     /// 
-    struct Registry has key {
+    public struct Registry has key {
         id: UID,
         metadata: CoinMetadata<LOCKED_COIN>
     }
 
-    struct LOCKED_COIN has drop {}
+    public struct LOCKED_COIN has drop {}
 
-    struct Locker has store {
+    public struct Locker has store {
         start_date: u64,
         final_date: u64,
         original_balance: u64,

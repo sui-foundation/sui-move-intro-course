@@ -4,11 +4,11 @@ module bcs_move::bcs_object {
     use sui::object::{Self, ID};
     use sui::event;
 
-    struct Metadata has drop, copy {
+    public struct Metadata has drop, copy {
         name: std::ascii::String
     }
 
-    struct BCSObject has drop, copy {
+    public struct BCSObject has drop, copy {
         id: ID,
         owner: address,
         meta: Metadata
@@ -16,7 +16,7 @@ module bcs_move::bcs_object {
 
     public fun object_from_bytes(bcs_bytes: vector<u8>): BCSObject {
 
-        let bcs = bcs::new(bcs_bytes);
+        let mut bcs = bcs::new(bcs_bytes);
 
         // Use `peel_*` functions to peel values from the serialized bytes. 
         // Order has to be the same as we used in serialization!

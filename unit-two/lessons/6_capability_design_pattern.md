@@ -6,7 +6,7 @@ Capability is a commonly used pattern in Move that allows fine-tuned access cont
 
 ```rust
   // Type that marks the capability to create, update, and delete transcripts
-  struct TeacherCap has key {
+public struct TeacherCap has key {
     id: UID
   }
 ```

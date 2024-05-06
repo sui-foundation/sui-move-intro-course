@@ -11,7 +11,7 @@ module closed_loop_token::parity_rule {
     const EWrongParity: u64 = 0;
 
     /// The Rule witness.
-    struct ParityRule has drop {}
+    public struct ParityRule has drop {}
 
     /// Verifies that the sender and the recipient (if set) are not on the
     /// denylist for the given action.

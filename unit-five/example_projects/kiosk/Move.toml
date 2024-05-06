@@ -1,6 +1,7 @@
 [package]
 name = "kiosk"
 version = "0.0.1"
+edition = "2024.beta"
 
 # edition = "2024.alpha" # To use the Move 2024 edition, currently in alpha
 # license = ""           # e.g., "MIT", "GPL", "Apache 2.0"

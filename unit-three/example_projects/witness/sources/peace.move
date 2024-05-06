@@ -7,12 +7,12 @@
 
         /// Phantom parameter T can only be initialized in the `create_guardian`
         /// function. But the types passed here must have `drop`.
-        struct Guardian<phantom T: drop> has key, store {
+        public struct Guardian<phantom T: drop> has key, store {
             id: UID
         }
 
         /// This type is the witness resource and is intended to be used only once.
-        struct PEACE has drop {}
+        public struct PEACE has drop {}
 
         /// The first argument of this function is an actual instance of the
         /// type T with `drop` ability. It is dropped as soon as received.
