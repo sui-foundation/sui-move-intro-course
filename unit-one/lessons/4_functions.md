@@ -39,7 +39,7 @@ In Sui Move, entry functions are simply functions that can be called by transact
 
 Functions called directly through a transaction typically have an instance of `TxContext` as the last parameter. This is a special parameter set by the Sui Move VM and does not need to be specified by the user calling the function. 
 
-The `TxContext` object contains [essential information](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/tx_context.move) about the transaction used to call the entry function, such as the sender's address, the signer's address, the tx's epoch, etc. 
+The `TxContext` object contains [essential information](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/tx_context.move) about the transaction used to call the entry function, such as the sender's address, the tx's digest ID, the tx's epoch, etc. 
 
 ## Create the `mint` Function 
 
