@@ -8,7 +8,7 @@ Sui Move functions have three types of visibility:
 
 - **private**: the default visibility of a function; it can only be accessed by functions inside the same module
 - **public**: the function is accessible by functions inside the same module and by functions defined in another module
-- **public(package)**: the function is accessible by functions inside the same module
+- **public(package)**: the function is accessible by functions inside the same module 
 
 ## Return Value
 
