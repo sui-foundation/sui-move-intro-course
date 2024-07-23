@@ -52,7 +52,7 @@ For now, just know that there are four abilities in Sui Move:
 - **copy**: value can be copied (or cloned by value)
 - **drop**: value can be dropped by the end of the scope
 - **key**: value can be used as a key for global storage operations
-- **store**: value can be stored inside global storage
+- **store**: value can be held inside a struct in global storage
 
 #### Assets
 
