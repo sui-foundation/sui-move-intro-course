@@ -23,7 +23,7 @@ Sui Kiosk is created to answer these needs:
 Sui Kiosk consists these 2 main components:
 
 - `Kiosk` + `KioskOwnerCap`: `Kiosk` is the safe that will store our assets and display them for selling, it is implemented as a shared object allowing interactions between multiple parties. Each `Kiosk` will have a corresponding Kiosk Owner whoever holding the `KioskOwnerCap`. The Kiosk Owner still have the _logical ownership_ over their assets even when they are _physically_ placed in the kiosk.
-- `TransferPolicy` + `TransferPolicyCap`: `TransferPolicy` is a shared object defines the conditions in which the assets can be traded or sold. Each `TransferPolicy` consists a set of _rules_, with each rule specifies the requirements every trade must sastify. Rules can be enabled or disabled from the `TransferPolicy` by whoever owning the `TransferOwnerCap`. Greate example of `TransferPolicy`'s rule is the royalty fees guarantee.
+- `TransferPolicy` + `TransferPolicyCap`: `TransferPolicy` is a shared object defines the conditions in which the assets can be traded or sold. Each `TransferPolicy` consists a set of _rules_, with each rule specifies the requirements every trade must sastify. Rules can be enabled or disabled from the `TransferPolicy` by whoever owning the `TransferOwnerCap`. Greater example of `TransferPolicy`'s rule is the royalty fees guarantee.
 
 ## Sui Kiosk Users
 
