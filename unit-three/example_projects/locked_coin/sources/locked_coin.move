@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /// Basic token locking and vesting example for Move on Sui. 
-/// Part of the the Sui Move intro course:
+/// Part of the Sui Move intro course:
 /// https://github.com/sui-foundation/sui-move-intro-course
 /// 
 module locked_coin::locked_coin {
@@ -14,7 +14,7 @@ module locked_coin::locked_coin {
     use sui::balance::{Self, Balance};
     use sui::clock::{Self, Clock};
  
-    /// Transferrable object for storing the vesting coins
+    /// Transferable object for storing the vesting coins
     ///
     struct Locker has key, store {
         id: UID,
