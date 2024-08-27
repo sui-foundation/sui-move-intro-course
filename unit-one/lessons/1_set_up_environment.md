@@ -53,6 +53,14 @@ Welcome to the Sui Move introduction course. In this first unit, we will walk yo
 
     `cargo install --git https://github.com/move-language/move move-analyzer --features "address20"`
 
+## (Optional) Configure VS Code with Sui Extension
+
+1. Install [Sui Extension](https://marketplace.visualstudio.com/items?itemName=zktxio.sui-extension) from VS Marketplace
+
+2. After installation, you can access the Sui extension through the side toolbar.
+
+![Sui Extension](../images/sui-extension.png)
+
 ## Sui CLI Basic Usage
 
 [Reference Page](https://docs.sui.io/build/cli-client)
