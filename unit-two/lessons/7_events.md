@@ -1,8 +1,8 @@
 # Events
 
-Events are important for Sui Move smart contracts, as it is the main way for indexers to track actions on-chain. You can understand it as logging on server backends, and indexers as parsers.
+Events are important for Sui Move smart contracts, as it is the main way for indexers to track actions on-chain. You can understand it as logging on server backends and indexers as parsers.
 
-Events on Sui are also represented as objects. There are several types of system level events in Sui, including Move event, Publish event, Transfer object event, and so on. For the full list of system event types, please refer to the [Sui Events API page here](https://docs.sui.io/build/event_api).
+Events on Sui are also represented as objects. There are several types of system-level events in Sui, including Move event, Publish event, Transfer object event, and so on. For the complete list of system event types, please refer to the [Sui Events API page here](https://docs.sui.io/build/event_api).
 
 The event details of a transaction can be viewed on the [Sui Explorer](https://suiexplorer.com/) under the `Events` tab:
 
@@ -24,9 +24,9 @@ Developers can also define custom events on Sui. We can define a custom event ma
     }
 ```
 
-The type representing an event has the abilities `copy` and `drop`. Event objects aren't representing assets, and we are only interested in the data contained within, so they can be duplicated, and dropped at the end of scopes.
+The type representing an event has the abilities `copy` and `drop`. Event objects aren't representing assets, and we are only interested in the data contained within, so they can be duplicated and dropped at the end of scopes.
 
-To emit an event in Sui, you just need to use the [`sui::event::emit` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/event.md#function-emit).
+To emit an event in Sui, you just need to use the [`sui::event::emit` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/event.md#function-emit).
 
 Let's modify our `request_transcript` method to emit this event:
 
