@@ -25,7 +25,7 @@ module kiosk::kiosk {
 There are 2 ways to create a new kiosk:
 1. Use `kiosk::new()` to create new kiosk but we have to make the `Kiosk` shared object and transfer the `KioskOwnerCap` to the sender ourselves by using `sui::transfer`.
 ```bash
-sui client call --package $KIOSK_PACKAGE_ID --module kiosk --function new_kiosk --gas-budget 10000000
+sui client call --package $KIOSK_PACKAGE_ID --module kiosk --function new_kiosk
 ```
 2. Use `entry kiosk::default()` to automatically do all above steps for us.
 

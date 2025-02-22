@@ -12,10 +12,8 @@ the local node. Just set the Sui CLI to the respective network and have enough t
 The Sui CLI command for deploying the package is the following:
 
 ```bash
-sui client publish --gas-budget <gas_budget> [absolute file path to the package that needs to be published]
+sui client publish [absolute file path to the package that needs to be published]
 ```
-
-For the `gas_budget`, we can use a standard value like `20000000`.
 
 If the absolute file path to the package is not provided, it will default to `.` or the current directory. 
 
@@ -40,7 +38,7 @@ Note that we are able to do this because `mint` is an entry function.
 The command for this using Sui CLI is:
 
 ```bash
-sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 10000000
+sui client call --function mint --module hello_world --package $PACKAGE_ID 
 ```
 
 The console output should look like this if the `mint` function was successfully called and a Hello World object was created and transferred:
