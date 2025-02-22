@@ -89,7 +89,7 @@ To call a function with generics in its signature from the Sui CLI, you must def
 The following is an example that calls the `create_box` function to create a box that contains a coin of the type `0x2::sui::SUI`:
 
 ```bash
-sui client call --package $PACKAGE --module $MODULE --function "create_box" --args $OBJECT_ID --type-args 0x2::sui::SUI --gas-budget 10000000
+sui client call --package $PACKAGE --module $MODULE --function "create_box" --args $OBJECT_ID --type-args 0x2::sui::SUI
 ```
 
 ## Advanced Generics Syntax

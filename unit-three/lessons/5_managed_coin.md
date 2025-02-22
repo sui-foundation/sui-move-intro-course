@@ -21,7 +21,7 @@ The `TreasuryCap` [Capability](../../unit-two/lessons/6_capability_design_patter
 Under the [fungible_tokens](../example_projects/fungible_tokens/) project folder, run:
 
 ```bash
-    sui client publish --gas-budget 10000000
+    sui client publish 
 ```
 
 You should see console output similar to:
@@ -44,7 +44,7 @@ export TREASURYCAP_ID=<treasury cap object ID from previous output>
 To mint some `MNG` tokens, we can use the following CLI command:
 
 ```bash
-    sui client call --function mint --module managed --package $PACKAGE_ID --args $TREASURYCAP_ID <amount to mint> <recipient address> --gas-budget 10000000
+    sui client call --function mint --module managed --package $PACKAGE_ID --args $TREASURYCAP_ID <amount to mint> <recipient address> 
 ```
 
 *💡Note: as of Sui binary version 0.21.0, `u64` inputs must be escaped as strings, thus the above CLI command format. This might change in a future version.*
@@ -64,7 +64,7 @@ Verify that the `Supply` field under the `TreasuryCap<MANAGED>` object should be
 To burn an existing `COIN<MANAGED>` object, we use the following CLI command:
 
 ```bash
-    sui client call --function burn --module managed --package $PACKAGE_ID --args $TREASURYCAP_ID $COIN_ID --gas-budget 10000000
+    sui client call --function burn --module managed --package $PACKAGE_ID --args $TREASURYCAP_ID $COIN_ID 
 ```
 
 ![Burning](../images/burning.png)

@@ -33,7 +33,7 @@ Create a `TransferPolicy<T>` requires the proof of publisher `Publisher` of the 
 
 - Use `transfer_policy::new()` to create new policy, make the `TransferPolicy` shared object and transfer the `TransferPolicyCap` to the sender by using `sui::transfer`.
 ```bash
-sui client call --package $KIOSK_PACKAGE_ID --module kiosk --function new_policy --args $KIOSK_PUBLISHER --gas-budget 10000000
+sui client call --package $KIOSK_PACKAGE_ID --module kiosk --function new_policy --args $KIOSK_PUBLISHER 
 ```
 - Use `entry transfer_policy::default()` to automatically do all above steps for us.
 
@@ -103,7 +103,7 @@ We use `transfer_policy::add_rule()` to add the rule with its configuration to t
 
 Let's execute this function from the client to add the `Rule` to the `TransferPolicy`, otherwise, it is disabled. In this example, we configure the percentage of royalty fee is `0.1%` ~ `10 basis points` and the minimum amount royalty fee is `100 MIST`. 
 ```bash
-sui client call --package $KIOSK_PACKAGE_ID --module fixed_royalty_rule --function add --args $KIOSK_TRANSFER_POLICY $KIOSK_TRANSFER_POLICY_CAP 10 100 --type-args $KIOSK_PACKAGE_ID::kiosk::TShirt --gas-budget 10000000
+sui client call --package $KIOSK_PACKAGE_ID --module fixed_royalty_rule --function add --args $KIOSK_TRANSFER_POLICY $KIOSK_TRANSFER_POLICY_CAP 10 100 --type-args $KIOSK_PACKAGE_ID::kiosk::TShirt 
 ```
 
 #### Satisfy the Rule
@@ -189,5 +189,5 @@ sui client ptb \
 --move-call $KIOSK_PACKAGE_ID::fixed_royalty_rule::pay "<$KIOSK_PACKAGE_ID::kiosk::TShirt>" @$KIOSK_TRANSFER_POLICY buy_res.1 coin.0 \
 --move-call $KIOSK_PACKAGE_ID::kiosk::confirm_request  @$KIOSK_TRANSFER_POLICY buy_res.1 \
 --move-call 0x2::transfer::public_transfer "<$KIOSK_PACKAGE_ID::kiosk::TShirt>" buy_res.0 <buyer address> \
---gas-budget 10000000
+
 ```

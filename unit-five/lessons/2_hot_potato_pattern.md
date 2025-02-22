@@ -112,7 +112,7 @@ sui client ptb \
 --split-coins gas "[10000]" \
 --assign coin \
 --move-call $LOAN_PACKAGE_ID::flashloan::deposit_pool @$LOAN_POOL_ID coin.0 \
---gas-budget 10000000
+
 ```
 
 Now let's build a PTB that `borrow() -> mint_nft() -> sell_nft() -> repay()`.
@@ -126,7 +126,7 @@ sui client ptb \
 --move-call $LOAN_PACKAGE_ID::flashloan::sell_nft nft \
 --assign repay_coin \
 --move-call $LOAN_PACKAGE_ID::flashloan::repay @$LOAN_POOL_ID borrow_res.1 repay_coin \
---gas-budget 10000000
+
 ```
 
 *Quiz: What happen if you don't call `repay()` at the end of the PTB, please try it yourself*

@@ -36,10 +36,6 @@ In Sui, every object must have an owner, which can be either an address, another
 We will discuss object ownership more in-depth in the next section. 
 
 ```rust
-use sui::object::{Self};
-use sui::tx_context::{Self, TxContext};
-use sui::transfer;
-
 public fun create_transcript_object(history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
   let transcriptObject = TranscriptObject {
     id: object::new(ctx),
