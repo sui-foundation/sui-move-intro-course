@@ -7,11 +7,9 @@
 ///
 module locked_coin::locked_coin;
 
-use std::option;
 use sui::balance::{Self, Balance};
 use sui::clock::{Self, Clock};
 use sui::coin::{Self, TreasuryCap};
-use sui::transfer;
 use sui::tx_context::sender;
 
 /// Transferable object for storing the vesting coins
