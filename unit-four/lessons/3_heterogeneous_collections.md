@@ -13,53 +13,52 @@ A `Bag` is a heterogeneous map-like collection. The collection is similar to `Ta
 Sample code of common `Bag` operations is included below: 
 
 ```move
-module collection::bag {
+module collection::bag;
 
-    use sui::bag::{Bag, Self};
-    use sui::tx_context::{TxContext};
+use sui::bag::{Bag, Self};
 
-    // Defining a table with generic types for the key and value 
-    public struct GenericBag {
-       items: Bag
-    }
+// Defining a table with generic types for the key and value 
+public struct GenericBag {
+    items: Bag
+}
 
-    // Create a new, empty GenericBag
-    public fun create(ctx: &mut TxContext): GenericBag {
-        GenericBag{
-            items: bag::new(ctx)
-        }
-    }
-
-    // Adds a key-value pair to GenericBag
-    public fun add<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K, v: V) {
-       bag::add(&mut bag.items, k, v);
-    }
-
-    /// Removes the key-value pair from the GenericBag with the provided key and returns the value.   
-    public fun remove<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K): V {
-        bag::remove(&mut bag.items, k)
-    }
-
-    // Borrows an immutable reference to the value associated with the key in GenericBag
-    public fun borrow<K: copy + drop + store, V: store>(bag: &GenericBag, k: K): &V {
-        bag::borrow(&bag.items, k)
-    }
-
-    /// Borrows a mutable reference to the value associated with the key in GenericBag
-    public fun borrow_mut<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K): &mut V {
-        bag::borrow_mut(&mut bag.items, k)
-    }
-
-    /// Check if a value associated with the key exists in the GenericBag
-    public fun contains<K: copy + drop + store>(bag: &GenericBag, k: K): bool {
-        bag::contains<K>(&bag.items, k)
-    }
-
-    /// Returns the size of the GenericBag, the number of key-value pairs
-    public fun length(bag: &GenericBag): u64 {
-        bag::length(&bag.items)
+// Create a new, empty GenericBag
+public fun create(ctx: &mut TxContext): GenericBag {
+    GenericBag{
+        items: bag::new(ctx)
     }
 }
+
+// Adds a key-value pair to GenericBag
+public fun add<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K, v: V) {
+    bag::add(&mut bag.items, k, v);
+}
+
+/// Removes the key-value pair from the GenericBag with the provided key and returns the value.   
+public fun remove<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K): V {
+    bag::remove(&mut bag.items, k)
+}
+
+// Borrows an immutable reference to the value associated with the key in GenericBag
+public fun borrow<K: copy + drop + store, V: store>(bag: &GenericBag, k: K): &V {
+    bag::borrow(&bag.items, k)
+}
+
+/// Borrows a mutable reference to the value associated with the key in GenericBag
+public fun borrow_mut<K: copy + drop + store, V: store>(bag: &mut GenericBag, k: K): &mut V {
+    bag::borrow_mut(&mut bag.items, k)
+}
+
+/// Check if a value associated with the key exists in the GenericBag
+public fun contains<K: copy + drop + store>(bag: &GenericBag, k: K): bool {
+    bag::contains<K>(&bag.items, k)
+}
+
+/// Returns the size of the GenericBag, the number of key-value pairs
+public fun length(bag: &GenericBag): u64 {
+    bag::length(&bag.items)
+}
+
 ```
 
 The function signatures for interacting with Bag collections are very similar to the function signatures for interacting with Table collections. The main difference is that you don't need to declare any types when creating a new Bag, and the key-value pairs that you add to a Bag can be of different types.

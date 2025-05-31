@@ -5,32 +5,31 @@ A hot potato is a struct that has no capabilities, therefore you can only pack a
 ## Type Definitions
 
 ```move
-module flashloan::flashloan {
-    // === Imports ===
-    use sui::sui::SUI;
-    use sui::coin::{Self, Coin};
-    use sui::balance::{Self, Balance};
-    use sui::object::{UID};
-    use sui::tx_context::{TxContext};
+module flashloan::flashloan;
+// === Imports ===
+use sui::sui::SUI;
+use sui::coin::{Self, Coin};
+use sui::balance::{Self, Balance};
+use sui::object::{UID};
+use sui::tx_context::{TxContext};
 
-    /// For when the loan amount exceed the pool amount
-    const ELoanAmountExceedPool: u64 = 0;
-    /// For when the repay amount do not match the initial loan amount
-    const ERepayAmountInvalid: u64 = 1;
+/// For when the loan amount exceed the pool amount
+const ELoanAmountExceedPool: u64 = 0;
+/// For when the repay amount do not match the initial loan amount
+const ERepayAmountInvalid: u64 = 1;
 
-    /// A "shared" loan pool.
-    /// For demonstration purpose, we assume the loan pool only allows SUI.
-    public struct LoanPool has key {
-        id: UID,
-        amount: Balance<SUI>,
-    }
+/// A "shared" loan pool.
+/// For demonstration purpose, we assume the loan pool only allows SUI.
+public struct LoanPool has key {
+    id: UID,
+    amount: Balance<SUI>,
+}
 
-    /// A loan position.
-    /// This is a hot potato struct, it enforces the users
-    /// to repay the loan in the end of the transaction or within the same PTB.
-    public struct Loan {
-        amount: u64,
-    }
+/// A loan position.
+/// This is a hot potato struct, it enforces the users
+/// to repay the loan in the end of the transaction or within the same PTB.
+public struct Loan {
+    amount: u64,
 }
 ```
 

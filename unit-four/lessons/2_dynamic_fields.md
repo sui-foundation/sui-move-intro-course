@@ -34,21 +34,21 @@ To illustrate how to work with dynamic fields, we define the following structs:
 Here's the API to use for adding **dynamic fields** or **dynamic object fields** to an object:
 
 ```move
-  module collection::dynamic_fields {
+  module collection::dynamic_fields ;
 
-      use sui::dynamic_object_field as ofield;
-      use sui::dynamic_field as field;
+    use sui::dynamic_object_field as ofield;
+    use sui::dynamic_field as field;
 
-    // Adds a DFChild to the parent object under the provided name
-    public fun add_dfchild(parent: &mut Parent, child: DFChild, name: vector<u8>) {
-        field::add(&mut parent.id, name, child);
-    }
+// Adds a DFChild to the parent object under the provided name
+public fun add_dfchild(parent: &mut Parent, child: DFChild, name: vector<u8>) {
+    field::add(&mut parent.id, name, child);
+}
 
-    // Adds a DOFChild to the parent object under the provided name
-    public fun add_dofchild(parent: &mut Parent, child: DOFChild, name: vector<u8>) {
-        ofield::add(&mut parent.id, name, child);
-    } 
-  }
+// Adds a DOFChild to the parent object under the provided name
+public fun add_dofchild(parent: &mut Parent, child: DOFChild, name: vector<u8>) {
+    ofield::add(&mut parent.id, name, child);
+} 
+  
 ```
 
 ### Accessing and Mutating a Dynamic Field
