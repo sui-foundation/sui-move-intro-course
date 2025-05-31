@@ -5,23 +5,23 @@ Next we can deploy and test our marketplace contract through the SUI CLI.
 We create a simple `marketplace::widget` module so we can mint some items for us to list to help with testing.
 
 ```move
-module marketplace::widget {
+module marketplace::widget;
 
-    use sui::object::{Self, UID};
-    use sui::transfer;
-    use sui::tx_context::{Self, TxContext};
+use sui::object::{Self, UID};
+use sui::transfer;
+use sui::tx_context::{Self, TxContext};
 
-    public struct Widget has key, store {
-        id: UID,
-    }
-
-    public fun mint(ctx: &mut TxContext) {
-        let object = Widget {
-            id: object::new(ctx)
-        };
-        transfer::transfer(object, tx_context::sender(ctx));
-    }
+public struct Widget has key, store {
+    id: UID,
 }
+
+public fun mint(ctx: &mut TxContext) {
+    let object = Widget {
+        id: object::new(ctx)
+    };
+    transfer::transfer(object, tx_context::sender(ctx));
+}
+
 ```
 
 This is basically the Hello World project from Unit One, but made even simpler. 

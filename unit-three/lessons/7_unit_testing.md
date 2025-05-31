@@ -9,11 +9,11 @@ Test functions or modules start with the `#[test]` or `#[test_only]` annotation.
 
 ```move
 #[test_only]
-module fungible_tokens::managed_tests {
-  #[test]
-  fun mint_burn() {
-  }
+module fungible_tokens::managed_tests;
+#[test]
+fun mint_burn() {
 }
+
 ```
 
 We will put the unit tests for `Managed Coin` into a separate testing module called `managed_tests`. 

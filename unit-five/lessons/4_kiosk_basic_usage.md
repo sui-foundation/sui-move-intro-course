@@ -8,18 +8,18 @@ export KIOSK_PACKAGE_ID=<Package ID of example kiosk smart contract>
 ```
 
 ```move
-module kiosk::kiosk {
-    use sui::kiosk::{Self, Kiosk, KioskOwnerCap};
-    use sui::tx_context::{TxContext};
+module kiosk::kiosk;
+use sui::kiosk::{Self, Kiosk, KioskOwnerCap};
+use sui::tx_context::{TxContext};
 
-    #[allow(lint(share_owned, self_transfer))]
-    /// Create new kiosk
-    public fun new_kiosk(ctx: &mut TxContext) {
-        let (kiosk, kiosk_owner_cap) = kiosk::new(ctx);
-        transfer::public_share_object(kiosk);
-        transfer::public_transfer(kiosk_owner_cap, sender(ctx));
-    }
+#[allow(lint(share_owned, self_transfer))]
+/// Create new kiosk
+public fun new_kiosk(ctx: &mut TxContext) {
+    let (kiosk, kiosk_owner_cap) = kiosk::new(ctx);
+    transfer::public_share_object(kiosk);
+    transfer::public_transfer(kiosk_owner_cap, sender(ctx));
 }
+
 ```
 
 There are 2 ways to create a new kiosk:

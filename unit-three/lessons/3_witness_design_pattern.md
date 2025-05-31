@@ -11,40 +11,40 @@ In the below example, the `witness` resource is `PEACE`, while the type `A` that
 The `witness` resource type must have the `drop` keyword so that this resource can be dropped after being passed into a function. We see that the instance of `PEACE` resource is passed into the `create_guardian` method and dropped (note the underscore before `witness`), ensuring that only one instance of `Guardian` can be created.
 
 ```move
-    /// Module that defines a generic type `Guardian<T>` which can only be
-    /// instantiated with a witness.
-    module witness::peace {
-        use sui::object::{Self, UID};
-        use sui::transfer;
-        use sui::tx_context::{Self, TxContext};
+/// Module that defines a generic type `Guardian<T>` which can only be
+/// instantiated with a witness.
+module witness::peace;
+    use sui::object::{Self, UID};
+    use sui::transfer;
+    use sui::tx_context::{Self, TxContext};
 
-        /// Phantom parameter T can only be initialized in the `create_guardian`
-        /// function. But the types passed here must have `drop`.
-        public struct Guardian<phantom T: drop> has key, store {
-            id: UID
-        }
-
-        /// This type is the witness resource and is intended to be used only once.
-        public struct PEACE has drop {}
-
-        /// The first argument of this function is an actual instance of the
-        /// type T with `drop` ability. It is dropped as soon as received.
-        public fun create_guardian<T: drop>(
-            _witness: T, ctx: &mut TxContext
-        ): Guardian<T> {
-            Guardian { id: object::new(ctx) }
-        }
-
-        /// Module initializer is the best way to ensure that the
-        /// code is called only once. With `Witness` pattern it is
-        /// often the best practice.
-        fun init(witness: PEACE, ctx: &mut TxContext) {
-            transfer::transfer(
-                create_guardian(witness, ctx),
-                tx_context::sender(ctx)
-            )
-        }
+    /// Phantom parameter T can only be initialized in the `create_guardian`
+    /// function. But the types passed here must have `drop`.
+    public struct Guardian<phantom T: drop> has key, store {
+        id: UID
     }
+
+    /// This type is the witness resource and is intended to be used only once.
+    public struct PEACE has drop {}
+
+    /// The first argument of this function is an actual instance of the
+    /// type T with `drop` ability. It is dropped as soon as received.
+    public fun create_guardian<T: drop>(
+        _witness: T, ctx: &mut TxContext
+    ): Guardian<T> {
+        Guardian { id: object::new(ctx) }
+    }
+
+    /// Module initializer is the best way to ensure that the
+    /// code is called only once. With `Witness` pattern it is
+    /// often the best practice.
+    fun init(witness: PEACE, ctx: &mut TxContext) {
+        transfer::transfer(
+            create_guardian(witness, ctx),
+            tx_context::sender(ctx)
+        )
+    }
+
 ```
 
 *The example above is modified from the excellent book [Sui Move by Example](https://examples.sui.io/patterns/witness.html) by [Damir Shamanaev](https://github.com/damirka).*

@@ -17,8 +17,6 @@ public struct Transcript {
 The above definition is a regular Move struct, but it is not a Sui object. In order to make a custom Move type instantiate a Sui object in global storage, we need to add the `key` ability, and a globally unique `id: UID` field inside the struct definition. 
 
 ```move
-use sui::object::{UID};
-
 public struct TranscriptObject has key {
     id: UID,
     history: u8,

@@ -8,7 +8,7 @@ In this section, we will learn how to create a `TransferPolicy` and use it to en
 `TransferPolicy` for type `T` must be created for that type `T` to be tradeable in the Kiosk system. `TransferPolicy` is a shared object acting as a central authority enforcing everyone to check their purchase is valid against the defined policy before the purchased item is transferred to the buyers.
 
 ```move
-use sui::tx_context::{TxContext, sender};
+use sui::tx_context::{sender};
 use sui::transfer_policy::{Self, TransferRequest, TransferPolicy, TransferPolicyCap};
 use sui::package::{Self, Publisher};
 use sui::transfer::{Self};
@@ -57,26 +57,26 @@ _💡Note: There is a standard approach to implement the rules. Please checkout 
 #### Rule Witness & Rule Config
 
 ```move
-module kiosk::fixed_royalty_rule {
-    /// The `amount_bp` passed is more than 100%.
-    const EIncorrectArgument: u64 = 0;
-    /// The `Coin` used for payment is not enough to cover the fee.
-    const EInsufficientAmount: u64 = 1;
+module kiosk::fixed_royalty_rule;
+/// The `amount_bp` passed is more than 100%.
+const EIncorrectArgument: u64 = 0;
+/// The `Coin` used for payment is not enough to cover the fee.
+const EInsufficientAmount: u64 = 1;
 
-    /// Max value for the `amount_bp`.
-    const MAX_BPS: u16 = 10_000;
+/// Max value for the `amount_bp`.
+const MAX_BPS: u16 = 10_000;
 
-    /// The Rule Witness to authorize the policy
-    public struct Rule has drop {}
+/// The Rule Witness to authorize the policy
+public struct Rule has drop {}
 
-    /// Configuration for the Rule
-    public struct Config has store, drop {
-        /// Percentage of the transfer amount to be paid as royalty fee
-        amount_bp: u16,
-        /// This is used as royalty fee if the calculated fee is smaller than `min_amount`
-        min_amount: u64,
-    }
+/// Configuration for the Rule
+public struct Config has store, drop {
+    /// Percentage of the transfer amount to be paid as royalty fee
+    amount_bp: u16,
+    /// This is used as royalty fee if the calculated fee is smaller than `min_amount`
+    min_amount: u64,
 }
+
 ```
 
 `Rule` represents a witness type to add to `TransferPolicy`, it helps to identify and distinguish between multiple rules adding to one policy. `Config` is the configuration of the `Rule`, as we implement fixed royaltee fee, the settings should include the percentage we want to deduct out of original payment.
