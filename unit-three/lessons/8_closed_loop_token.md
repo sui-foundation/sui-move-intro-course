@@ -1,4 +1,4 @@
-#  (Optional) Closed Loop Token Standard
+#  [Optional] Closed Loop Token Standard
 
 Closed Loop token is a Sui token standard that allows the contract deployer to define token policies that control how the token can be transferred, spent, minted, etc. 
 
@@ -76,7 +76,7 @@ The example allows minting in odd parity amounts of the token only.
 
 ### Defining and Adding Token Policy
 
-The specific token policy is defined in [parity_rule.move](../example_projects/closed_loop_token/sources/parity_rule.move).
+The specific token policy is defined in the [parity_rule.move](../example_projects/closed_loop_token/sources/parity_rule.move) contract.
 
 Then this rule is added to the defined `PARITY` token in the `init` function of the [parity.move](../example_projects/closed_loop_token/sources/parity.move) contract.
 
