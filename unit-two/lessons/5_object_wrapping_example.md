@@ -88,5 +88,5 @@ We are using a default 0 for our error code above, but we can also define a cust
 
 This error code then can be consumed at the application level and handled appropriately. 
 
-**Here is the second work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_2.move_wip)**
+**Here is the second work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_wip_2.move)**
 
