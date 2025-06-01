@@ -26,7 +26,7 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
     - [Managed Coin Example](./unit-three/lessons/5_managed_coin.md)
     - [`Clock` and Locked Coin](./unit-three/lessons/6_clock_and_locked_coin.md)
     - [Unit Testing](./unit-three/lessons/7_unit_testing.md) 
-    - [(Optional)Closed Loop Token](./unit-three/lessons/8_closed_loop_token.md)   
+    - [[Optional] Closed Loop Token](./unit-three/lessons/8_closed_loop_token.md)   
 - **Unit Four: Marketplace**
     - [Homogeneous Collections](./unit-four/lessons/1_homogeneous_collections.md)
     - [Dynamic Fields](./unit-four/lessons/2_dynamic_fields.md)
