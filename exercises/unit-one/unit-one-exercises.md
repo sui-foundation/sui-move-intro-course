@@ -6,17 +6,17 @@ We introduced [abilities](../../unit-one/lessons/3_custom_types_and_abilities.md
 
 Mark the following ability combinations as either legal or illegal:
 
-1. Copy + Drop
-2. Copy + Key
-3. Copy + Store
-4. Drop + Key
-5. Drop + Store
-6. Store + Key
-7. Copy + Drop + Store
-8. Copy + Drop + Key
-9. Copy + Key + Store
-10. Drop + Key + Store
-11. Copy + Drop + Key + Store
+1. `copy` + `drop`
+2. `copy` + `key`
+3. `copy` + `store`
+4. `drop` + `key`
+5. `drop` + `store`
+6. `store` + `key`
+7. `copy` + `drop` + `store`
+8. `copy` + `drop` + `key`
+9. `copy` + `key` + `store`
+10. `drop` + `key` + `store`
+11. `copy` + `drop` + `key` + `store`
 
 For each of the illegal combinations, briefly describe the conflicting behavior that would occur if the combination was allowed. 
 
