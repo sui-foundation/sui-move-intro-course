@@ -64,7 +64,7 @@ There are three ways to confirm an action request.
 
 ### Hierarchy
 
-Coin/Token -> TokenPolicy -> Rules
+`Coin/Token Type` -> `TokenPolicy` -> `Rules`
 
 ## Parity Token Example
 
@@ -74,9 +74,9 @@ The example allows minting in odd parity amounts of the token only.
 
 ### Defining and Adding Token Policy
 
-The specific token policy is defined in [`parity_rule.move`](../example_projects/closed_loop_token/sources/parity_rule.move).
+The specific token policy is defined in [parity_rule.move](../example_projects/closed_loop_token/sources/parity_rule.move).
 
-Then this rule is added to the defined `PARITY` token in the `init` function of the [`parity.move`](../example_projects/closed_loop_token/sources/parity.move) contract.
+Then this rule is added to the defined `PARITY` token in the `init` function of the [parity.move](../example_projects/closed_loop_token/sources/parity.move) contract.
 
 ### Full Contract
 
