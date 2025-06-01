@@ -48,14 +48,14 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
 - [ ] Create exercises for each unit
 - [ ] Add content on Display.move
 - [x] Add content on clock and example on token unlocking
-- [ ] Write advanced topic lesson on closed loop token standard
+- [x] Write advanced topic lesson on closed loop token standard
 - [ ] Write advanced topic lesson on package upgrades
-- [ ] Write new lesson on kiosks
+- [x] Write new lesson on kiosks
 - [x] Check and update Unit One against latest version of Sui
-- [ ] Check and update Unit Two against latest version of Sui
-- [ ] Check and update Unit Three against latest version of Sui
-- [ ] Check and update Unit Four against latest version of Sui
-- [ ] Check and update Advanced Topics against latest version of Sui
+- [x] Check and update Unit Two against latest version of Sui
+- [x] Check and update Unit Three against latest version of Sui
+- [x] Check and update Unit Four against latest version of Sui
+- [x] Check and update Advanced Topics against latest version of Sui
 
 ## General Developer Resources
 
