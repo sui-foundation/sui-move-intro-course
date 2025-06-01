@@ -1,4 +1,4 @@
-# Closed Loop Token Standard
+#  (Optional) Closed Loop Token Standard
 
 ## Relationship with `Coin` and `Balance`
 
@@ -52,7 +52,7 @@ There are three ways to confirm an action request.
 
 - By `TreasuryCap`
 - By `TokenPolicyCap`
-- Through token policy
+- Through a defined token policy
 
 ## Setting Up Token Policy
 
@@ -68,6 +68,16 @@ Coin/Token -> TokenPolicy -> Rules
 
 ## Parity Token Example
 
+This is a simple closed loop token example illustrating how token policy can be defined and used.
+
+The example allows minting in odd parity amounts of the token only. 
+
+### Defining and Adding Token Policy
+
+The specific token policy is defined in [`parity_rule.move`](../example_projects/closed_loop_token/sources/parity_rule.move).
+
+Then this rule is added to the defined `PARITY` token in the `init` function of the [`parity.move`](../example_projects/closed_loop_token/sources/parity.move) contract.
+
 ### Full Contract
 
-See here for the full Parity Token example project: [Parity Token](../example_projects/closed_loop_token/)
+The full Parity Token example project is provided here: [Parity Token](../example_projects/closed_loop_token/)
