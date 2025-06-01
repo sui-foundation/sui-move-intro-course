@@ -85,4 +85,4 @@ In order to give additional addresses admin access, we can simply define a metho
 
 This method re-uses the `TeacherCap` to control access, but if needed, you can also define a new capability struct indicating sudo access. 
 
-**Here is the third work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_wip_3.move)**
+**Here is the third work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_3.move_wip)**

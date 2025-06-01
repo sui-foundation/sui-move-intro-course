@@ -10,6 +10,8 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
     - [Custom Types and Abilities](./unit-one/lessons/3_custom_types_and_abilities.md)
     - [Functions](./unit-one/lessons/4_functions.md)
     - [Contract Deployment](./unit-one/lessons/5_contract_deployment.md)
+    - [Unit One Exercises](./exercises/unit-one/unit-one-exercises.md)
+    - [Exercise Answer Key](./exercises/unit-one/unit-one-exercises-answer-key.md)
 - **Unit Two: Working with Sui Objects**
     - [Introduction](./unit-two/lessons/1_working_with_sui_objects.md)
     - [Ownership](./unit-two/lessons/2_ownership.md)
@@ -33,6 +35,8 @@ Introductory course to the Move language maintained by [Sui Foundation](https://
     - [Heterogeneous Collections](./unit-four/lessons/3_heterogeneous_collections.md)
     - [Marketplace Contract](./unit-four/lessons/4_marketplace_contract.md)
     - [Deployment and Testing](./unit-four/lessons/5_deployment_and_testing.md)
+    - [Unit Four Exercises](./exercises/unit-four/unit-four-exercises.md)
+    - [Exercise Answer Key](./exercises/unit-four/unit-four-exercises-answer-key.md)
 - **Unit Five: Sui Kiosk**
     - [Programmable Transaction Block](./unit-five/lessons/1_programmable_transaction_block.md)
     - [Hot Potato Design Pattern](./unit-five/lessons/2_hot_potato_pattern.md)

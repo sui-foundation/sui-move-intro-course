@@ -25,6 +25,10 @@ public struct TeacherCap has key {
     id: UID,
 }
 
+public struct TestStruct has drop, store, copy {
+    //id: UID,
+}
+
 /// Event marking when a transcript has been requested
 public struct TranscriptRequestEvent has copy, drop {
     // The Object ID of the transcript wrapper

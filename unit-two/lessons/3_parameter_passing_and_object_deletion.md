@@ -39,7 +39,7 @@ Following these rules, if you want to modify your struct outside its defining mo
 
 *💡Note: the, `_`, underscore in the above method denotes unused variables or parameters. This will consume the variable or parameter immediately.*
 
-**Here is the work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript__wip_1.move)**
+**Here is the work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript__1.move_wip)**
 
 
 
