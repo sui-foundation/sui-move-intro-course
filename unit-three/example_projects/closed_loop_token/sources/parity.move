@@ -38,16 +38,7 @@ fun init(witness: PARITY, ctx: &mut TxContext) {
     transfer::public_transfer(treasury_cap, tx_context::sender(ctx))
 }
 
-/// Manager can mint new coins
-public fun mint(
-    treasury_cap: &mut TreasuryCap<PARITY>,
-    amount: u64,
-    recipient: address,
-    ctx: &mut TxContext,
-) {
-    coin::mint_and_transfer(treasury_cap, amount, recipient, ctx)
-}
-
+// Example of confirming a protected action with treasury cap 
 public fun treasure_cap_mint_token(
     treasury_cap: &mut TreasuryCap<PARITY>,
     amount: u64,
@@ -59,6 +50,7 @@ public fun treasure_cap_mint_token(
     token::keep(_token, ctx)
 }
 
+// Example of confirming a protected action with a token policy
 public fun policy_mint_token(
     treasury_cap: &mut TreasuryCap<PARITY>,
     policy: &TokenPolicy<PARITY>,
@@ -70,6 +62,16 @@ public fun policy_mint_token(
     parity_rule::verify(policy, &mut _request, ctx);
     token::confirm_request(policy, _request, ctx);
     token::keep(_token, ctx)
+}
+
+/// Manager can mint new coins
+public fun mint(
+    treasury_cap: &mut TreasuryCap<PARITY>,
+    amount: u64,
+    recipient: address,
+    ctx: &mut TxContext,
+) {
+    coin::mint_and_transfer(treasury_cap, amount, recipient, ctx)
 }
 
 /// Manager can burn coins

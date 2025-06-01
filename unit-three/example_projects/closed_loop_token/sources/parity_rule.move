@@ -1,13 +1,13 @@
 // Copyright (c) 2022, Sui Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-/// An implementation of a simple parity rule for the Closed Loop system.
+/// An implementation of a simple parity rule for the closed loop standard.
 ///
 module closed_loop_token::parity_rule;
 
 use sui::token::{Self, TokenPolicy, ActionRequest};
 
-/// Trying to `verify` but the sender or the recipient is on the denylist.
+/// Trying to `verify` but the parity is not correct for the action.
 const EWrongParity: u64 = 0;
 
 /// The Rule witness.
