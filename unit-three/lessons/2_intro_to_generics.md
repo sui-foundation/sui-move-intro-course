@@ -13,20 +13,20 @@ Let's look at a basic example of how to use generics to create a container `Box`
 First, without generics, we can define a `Box` that holds a `u64` type as the following:
 
 ```move
-module  generics::storage {
-    public struct Box {
-        value: u64
-    }
+module  generics::storage;
+
+public struct Box {
+    value: u64
 }
+
 ```
 
 However, this type will only be able to hold a value of type `u64`. To make our `Box` able to hold any generic type, we will need to use generics. The code would be modified as follows:
 
 ```move
-module  generics::storage {
-    public struct Box<T> {
-        value: T
-    }
+module  generics::storage;
+public struct Box<T> {
+    value: T
 }
 ```
 
@@ -35,12 +35,12 @@ module  generics::storage {
 We can add conditions to enforce that the type passed into the generic must have certain abilities. The syntax looks like the following:
 
 ```move
-module  generics::storage {
-    // T must be copyable and droppable 
-    public struct Box<T: store + drop> has key, store {
-        value: T
-    }
+module  generics::storage;
+// T must be copyable and droppable 
+public struct Box<T: store + drop> has key, store {
+    value: T
 }
+
 ```
 
 💡It's important to note here that the inner type `T` in the above example must meet certain ability constraints due to the outer container type. In this example, `T` must have `store`, as `Box` has `store` and `key`. However, `T` can also have abilities that the container doesn't have, such as `drop` in this example.
