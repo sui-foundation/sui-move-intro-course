@@ -1,6 +1,6 @@
 # BCS Encoding
 
-Binary Canonical Serialization, or BCS, is a serialization format developed in the context of the Diem blockchain, and is now extensively used in most of the blockchains based on Move (Sui, Starcoin, Aptos, 0L). BCS is not only used in the Move VM, but also used in transaction and event coding, such as serializing transactions before signing, or parsing event data. 
+Binary Canonical Serialization, or BCS, is a serialization format developed in the context of the Diem blockchain and is now extensively used in most of the blockchains based on Move (Sui, Starcoin, Aptos, 0L). BCS is not only used in the Move VM, but also used in transaction and event coding, such as serializing transactions before signing, or parsing event data. 
 
 Knowing how BCS works is crucial if you want to understand how Move works at a deeper level and become a Move expert. Let's dive in.
 
@@ -55,7 +55,7 @@ Let's use the JavaScript library to serialize and de-serialize some simple data 
 ```javascript
 import { BCS, getSuiMoveConfig } from "@mysten/bcs";
 
-// initialize the serializer with default Sui Move configurations
+//Initialize the serializer with default Sui Move configurations
 const bcs = new BCS(getSuiMoveConfig());
 
 // Define some test data types
@@ -85,7 +85,7 @@ Let's take a close look at the serialized and deserialized fields:
 # ints are little-endian hexadecimals
 0a00
 10
-# the first element of a vector indicates the total length,
+# The first element of a vector indicates the total length,
 # then it's just whatever elements are in the vector
 0401020304
 1,2,3,4
@@ -147,7 +147,7 @@ Now, let's write the function to deserialize an object in a Sui contract.
 ```move
     public fun object_from_bytes(bcs_bytes: vector<u8>): BCSObject {
 
-        // Initializes the bcs bytes instance
+        // Initializes the BCS bytes instance
         let bcs = bcs::new(bcs_bytes);
 
         // Use `peel_*` functions to peel values from the serialized bytes. 
@@ -170,7 +170,7 @@ _Quiz: What would happen if `BSCObject` had a `UID` type instead of an `ID` type
 
 ## Complete Ser/De Example
 
-Find the full JavaScript and Sui Move sample codes in the [`example_projects`](../example_projects/) folder.
+Find the full JavaScript and Sui Move sample codes in the [`example_projects`](https://github.com/sui-foundation/sui-move-intro-course/tree/main/advanced-topics/BCS_encoding/example_projects) folder.
 
 First, we serialize a test object using the JavaScript program:
 
@@ -203,7 +203,7 @@ You should see this in the console:
 
 ```bash
 BUILDING bcs_move
-Running Move unit tests
+Running the Move unit tests
 [ PASS    ] 0x0::bcs_object::test_deserialization
 Test result: OK. Total tests: 1; passed: 1; failed: 0
 ```
