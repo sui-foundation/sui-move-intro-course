@@ -1,30 +1,27 @@
-import { BCS, getSuiMoveConfig } from "@mysten/bcs";
+import { bcs, fromHex, toHex } from "@mysten/bcs";
 
-const bcs = new BCS(getSuiMoveConfig());
-
-// Simply follow the definition onchain
-bcs.registerStructType("Metadata", {
-  name: BCS.STRING,
-});
-
-// Same for the main object that we intend to read
-bcs.registerStructType("BCSObject", {
-  // BCS.ADDRESS is used for ID types as well as address types
-  id: BCS.ADDRESS,
-  owner: BCS.ADDRESS,
-  meta: "Metadata",
+// Define Address as a 32-byte array, then add a transform to/from hex strings
+const Address = bcs.fixedArray(32, bcs.u8()).transform({
+	input: (id) => fromHex(id),
+	output: (id) => toHex(Uint8Array.from(id)),
 });
 
 // We construct a test object to serialize, note that we can specify the format of the output to hex
-let _bytes = bcs
-  .ser("BCSObject", {
-    id: "0x0000000000000000000000000000000000000005",
-    owner: "0x000000000000000000000000000000000000000a",
-    meta: {name: "aaa"}
-  })
-  .toString("hex");
+const bcsStruct = bcs.struct("BCSObject", {
+  id: Address,
+  owner: Address,
+  meta: bcs.struct("Metadata", {
+    name: bcs.string(),
+  }),
+});
 
-const de_string = bcs.de("BCSObject", _bytes, "hex");
+const serialized = bcsStruct.serialize({
+  id: "0x0000000000000000000000000000000000000000000000000000000000000005",
+  owner: "0x000000000000000000000000000000000000000000000000000000000000000A",
+  meta: {
+    name: "aaa"
+  }
+});
 
-console.log(_bytes.toString());
-console.log(de_string);
+console.log("Hex:", serialized.toHex());
+console.log("Deserialized:", serialized.parse());
