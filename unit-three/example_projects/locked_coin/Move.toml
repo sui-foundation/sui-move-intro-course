@@ -6,4 +6,4 @@ edition = "2024.beta"
 [dependencies]
 
 [addresses]
-locked_coin =  "0x0"
+locked_coin = "0x0"

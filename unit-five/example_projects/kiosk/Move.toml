@@ -8,8 +8,6 @@ edition = "2024.beta"
 # authors = ["..."]      # e.g., ["Joe Smith (joesmith@noemail.com)", "John Snow (johnsnow@noemail.com)"]
 
 [dependencies]
-Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
-
 # For remote import, use the `{ git = "...", subdir = "...", rev = "..." }`.
 # Revision can be a branch, a tag, and a commit hash.
 # MyRemotePackage = { git = "https://some.remote/host.git", subdir = "remote/path", rev = "main" }
@@ -38,4 +36,3 @@ sui = "0x2"
 # The dev-addresses section allows overwriting named addresses for the `--test`
 # and `--dev` modes.
 # alice = "0xB0B"
-

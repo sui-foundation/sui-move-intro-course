@@ -1,9 +1,9 @@
 [package]
 name = "closed_loop_token"
 version = "0.0.1"
-edition = "2024"
+edition = "2024.beta"
 
 [dependencies]
 
 [addresses]
-closed_loop_token =  "0x0"
+closed_loop_token = "0x0"

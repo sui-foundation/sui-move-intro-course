@@ -3,21 +3,20 @@
 In this section, we will learn how to create a `TransferPolicy` and use it to enforce rules the buyers must comply before the purchased item is owned by them.
 
 ## `TransferPolicy`
+
 ### Create a `TransferPolicy`
 
 `TransferPolicy` for type `T` must be created for that type `T` to be tradeable in the Kiosk system. `TransferPolicy` is a shared object acting as a central authority enforcing everyone to check their purchase is valid against the defined policy before the purchased item is transferred to the buyers.
 
 ```move
-use sui::tx_context::{sender};
 use sui::transfer_policy::{Self, TransferRequest, TransferPolicy, TransferPolicyCap};
 use sui::package::{Self, Publisher};
-use sui::transfer::{Self};
 
 public struct KIOSK has drop {}
 
 fun init(witness: KIOSK, ctx: &mut TxContext) {
     let publisher = package::claim(otw, ctx);
-    transfer::public_transfer(publisher, sender(ctx));
+    transfer::public_transfer(publisher, ctx.sender());
 }
 
 #[allow(lint(share_owned, self_transfer))]
@@ -25,24 +24,28 @@ fun init(witness: KIOSK, ctx: &mut TxContext) {
 public fun new_policy(publisher: &Publisher, ctx: &mut TxContext) {
     let (policy, policy_cap) = transfer_policy::new<TShirt>(publisher, ctx);
     transfer::public_share_object(policy);
-    transfer::public_transfer(policy_cap, sender(ctx));
+    transfer::public_transfer(policy_cap, ctx.sender());
 }
 ```
 
 Create a `TransferPolicy<T>` requires the proof of publisher `Publisher` of the module comprising `T`. This ensures only the creator of type `T` can create `TransferPolicy<T>`. There are 2 ways to create the policy:
 
 - Use `transfer_policy::new()` to create new policy, make the `TransferPolicy` shared object and transfer the `TransferPolicyCap` to the sender by using `sui::transfer`.
+
 ```bash
-sui client call --package $KIOSK_PACKAGE_ID --module kiosk --function new_policy --args $KIOSK_PUBLISHER 
+sui client call --package $KIOSK_PACKAGE_ID --module kiosk --function new_policy --args $KIOSK_PUBLISHER
 ```
+
 - Use `entry transfer_policy::default()` to automatically do all above steps for us.
 
 You should already receive the `Publisher` object when publish the package. Let's export it for later use.
+
 ```bash
 export KIOSK_PUBLISHER=<Publisher object ID>
 ```
 
 You should see the newly created `TransferPolicy` object and `TransferPolicyCap` object in the terminal. Let's export it for later use.
+
 ```bash
 export KIOSK_TRANSFER_POLICY=<TransferPolicy object ID>
 export KIOSK_TRANSFER_POLICY_CAP=<TransferPolicyCap object ID>
@@ -58,6 +61,7 @@ _💡Note: There is a standard approach to implement the rules. Please checkout 
 
 ```move
 module kiosk::fixed_royalty_rule;
+
 /// The `amount_bp` passed is more than 100%.
 const EIncorrectArgument: u64 = 0;
 /// The `Coin` used for payment is not enough to cover the fee.
@@ -76,7 +80,6 @@ public struct Config has store, drop {
     /// This is used as royalty fee if the calculated fee is smaller than `min_amount`
     min_amount: u64,
 }
-
 ```
 
 `Rule` represents a witness type to add to `TransferPolicy`, it helps to identify and distinguish between multiple rules adding to one policy. `Config` is the configuration of the `Rule`, as we implement fixed royaltee fee, the settings should include the percentage we want to deduct out of original payment.
@@ -92,18 +95,24 @@ public fun add<T>(
     cap: &TransferPolicyCap<T>,
     amount_bp: u16,
     min_amount: u64
-    
+
 ) {
     assert!(amount_bp <= MAX_BPS, EIncorrectArgument);
-    transfer_policy::add_rule(Rule {}, policy, cap, Config { amount_bp, min_amount })
+    transfer_policy::add_rule(
+        Rule {},
+        policy,
+        cap,
+        Config { amount_bp, min_amount },
+    )
 }
 ```
 
 We use `transfer_policy::add_rule()` to add the rule with its configuration to the policy.
 
-Let's execute this function from the client to add the `Rule` to the `TransferPolicy`, otherwise, it is disabled. In this example, we configure the percentage of royalty fee is `0.1%` ~ `10 basis points` and the minimum amount royalty fee is `100 MIST`. 
+Let's execute this function from the client to add the `Rule` to the `TransferPolicy`, otherwise, it is disabled. In this example, we configure the percentage of royalty fee is `0.1%` ~ `10 basis points` and the minimum amount royalty fee is `100 MIST`.
+
 ```bash
-sui client call --package $KIOSK_PACKAGE_ID --module fixed_royalty_rule --function add --args $KIOSK_TRANSFER_POLICY $KIOSK_TRANSFER_POLICY_CAP 10 100 --type-args $KIOSK_PACKAGE_ID::kiosk::TShirt 
+sui client call --package $KIOSK_PACKAGE_ID --module fixed_royalty_rule --function add --args $KIOSK_TRANSFER_POLICY $KIOSK_TRANSFER_POLICY_CAP 10 100 --type-args $KIOSK_PACKAGE_ID::kiosk::TShirt
 ```
 
 #### Satisfy the Rule
@@ -113,12 +122,12 @@ sui client call --package $KIOSK_PACKAGE_ID --module fixed_royalty_rule --functi
 public fun pay<T: key + store>(
     policy: &mut TransferPolicy<T>,
     request: &mut TransferRequest<T>,
-    payment: Coin<SUI>
+    payment: Coin<SUI>,
 ) {
     let paid = transfer_policy::paid(request);
     let amount = fee_amount(policy, paid);
 
-    assert!(coin::value(&payment) == amount, EInsufficientAmount);
+    assert!(payment.value() == amount, EInsufficientAmount);
 
     transfer_policy::add_to_balance(Rule {}, policy, payment);
     transfer_policy::add_receipt(Rule {}, request)
@@ -126,9 +135,14 @@ public fun pay<T: key + store>(
 
 /// Helper function to calculate the amount to be paid for the transfer.
 /// Can be used dry-runned to estimate the fee amount based on the Kiosk listing price.
-public fun fee_amount<T: key + store>(policy: &TransferPolicy<T>, paid: u64): u64 {
+public fun fee_amount<T: key + store>(
+    policy: &TransferPolicy<T>,
+    paid: u64,
+): u64 {
     let config: &Config = transfer_policy::get_rule(Rule {}, policy);
-    let amount = (((paid as u128) * (config.amount_bp as u128) / 10_000) as u64);
+    let mut amount = (
+        ((paid as u128) * (config.amount_bp as u128) / 10_000) as u64,
+    );
 
     // If the amount is less than the minimum, use the minimum
     if (amount < config.min_amount) {
@@ -149,13 +163,20 @@ We need a helper `fee_amount()` to calculate the royalty fee given the policy an
 use sui::transfer_policy::{Self, TransferRequest, TransferPolicy};
 
 /// Buy listed item
-public fun buy(kiosk: &mut Kiosk, item_id: object::ID, payment: Coin<SUI>): (TShirt, TransferRequest<TShirt>){
-    kiosk::purchase(kiosk, item_id, payment)
+public fun buy(
+    kiosk: &mut Kiosk,
+    item_id: object::ID,
+    payment: Coin<SUI>,
+): (TShirt, TransferRequest<TShirt>) {
+    kiosk.purchase(item_id, payment)
 }
 
 /// Confirm the TransferRequest
-public fun confirm_request(policy: &TransferPolicy<TShirt>, req: TransferRequest<TShirt>) {
-    transfer_policy::confirm_request(policy, req);
+public fun confirm_request(
+    policy: &TransferPolicy<TShirt>,
+    req: TransferRequest<TShirt>,
+) {
+    policy.confirm_request(req);
 }
 ```
 
@@ -170,11 +191,13 @@ _Buyer -> `kiosk::purchase()` -> `Item` + `TransferRequest` -> Subsequent calls 
 ## Kiosk Full Flow Example
 
 Recall from the previous section, the item must be placed inside the kiosk, then it must be listed to become sellable. Assuming the item is already listed with price `10_000 MIST`, let's export the listed item as terminal variable.
+
 ```bash
 export KIOSK_TSHIRT=<Object ID of the listed TShirt>
 ```
 
 Let's build a PTB to execute a trade. The flow is straightforward, we buy the listed item from the kiosk, the item and `TransferRequest` is returned, then, we call `fixed_royalty_fee::pay` to fulfill the `TransferRequest`, we confirm the `TransferRequest` with `confirm_request()` before finally transfer the item to the buyer.
+
 ```bash
 sui client ptb \
 --assign price 10000 \
