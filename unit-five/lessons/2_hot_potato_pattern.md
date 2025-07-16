@@ -6,6 +6,7 @@ A hot potato is a struct that has no capabilities, therefore you can only pack a
 
 ```move
 module flashloan::flashloan;
+
 // === Imports ===
 use sui::sui::SUI;
 use sui::coin::{Self, Coin};

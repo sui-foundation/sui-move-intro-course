@@ -16,7 +16,7 @@ And create the empty module as follows:
 
 ```move
 module hello_world::hello_world;
-    // module contents
+// module contents
 ```
 
 ### Import Statements

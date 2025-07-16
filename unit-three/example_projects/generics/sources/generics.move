@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Mysten Labs, Inc.
+// Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
 /// Basic generics example for Sui Move

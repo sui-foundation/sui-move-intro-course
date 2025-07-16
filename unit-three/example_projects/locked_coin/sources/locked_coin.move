@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Sui Foundation
+// Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
 /// Basic token locking and vesting example for Move on Sui.

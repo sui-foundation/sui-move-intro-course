@@ -47,8 +47,6 @@ To mint some `MNG` tokens, we can use the following CLI command:
 sui client call --function mint --module managed --package $PACKAGE_ID --args $TREASURYCAP_ID <amount to mint> <recipient address>
 ```
 
-_💡Note: as of Sui binary version 0.21.0, `u64` inputs must be escaped as strings, thus the above CLI command format. This might change in a future version._
-
 ![Minting](../images/minting.png)
 
 Export the object ID of the newly minted `COIN<MANAGED>` object to a bash variable:

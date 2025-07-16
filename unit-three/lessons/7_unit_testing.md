@@ -1,6 +1,6 @@
 # Unit Testing
 
-Sui supports the [Move Testing Framework](https://github.com/move-language/move/blob/main/language/documentation/book/src/unit-testing.md). Here, we will create some unit tests for `Managed Coin` to show how to write unit tests and run them.
+Sui supports the [Move Testing Framework](https://move-book.com/move-basics/testing). Here, we will create some unit tests for `Managed Coin` to show how to write unit tests and run them.
 
 ## Testing Environment
 
@@ -10,10 +10,10 @@ Test functions or modules start with the `#[test]` or `#[test_only]` annotation.
 ```move
 #[test_only]
 module fungible_tokens::managed_tests;
+
 #[test]
 fun mint_burn() {
 }
-
 ```
 
 We will put the unit tests for `Managed Coin` into a separate testing module called `managed_tests`.
@@ -85,7 +85,7 @@ To test burning a token, the procedure is very similar to testing minting. The o
 
 ## Running Unit Tests
 
-The full [`managed_tests`](../example_projects/fungible_tokens/sources/managed_tests.move) module source code can be found under `example_projects` folder.
+The full [`managed_tests`](../example_projects/fungible_tokens/tests/managed_tests.move) module source code can be found under `example_projects/fungible_tokens/tests/` folder.
 
 To execute the unit tests, navigate to the project directory in CLI and enter the following command:
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Sui Foundation
+// Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
 /// A basic object example for Sui Move, part of the Sui Move intro course:

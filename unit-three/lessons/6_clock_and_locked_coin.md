@@ -12,9 +12,9 @@ The main method that you will need to access is the following:
 public fun timestamp_ms(clock: &clock::Clock): u64
 ```
 
-the [`timestamp_ms`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/clock.md#0x2_clock_timestamp_ms) function returns the current system timestamp, as a running total of milliseconds since an arbitrary point in the past.
+the [`timestamp_ms`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/clock.md#function-timestamp_ms) function returns the current system timestamp, as a running total of milliseconds since an arbitrary point in the past.
 
-The [`clock`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/clock.md#0x2_clock_Clock) object has a special reserved identifier, `0x6`, that needs to be passed into function calls using it as one of the inputs.
+The [`clock`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/clock.md#sui_clock_Clock) object has a special reserved identifier, `0x6`, that needs to be passed into function calls using it as one of the inputs.
 
 ## Locked Coin
 

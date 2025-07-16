@@ -48,7 +48,7 @@ We also want to pass in the `witness` resource, `PEACE`, into `Guardian`, but `P
 
 We can use the keyword `phantom` to get around this situation. When a type parameter is either not used inside the struct definition or is only used as an argument to another `phantom` type parameter, we can use the `phantom` keyword to ask the Move type system to relax the ability constraint rules on inner types. We see that `Guardian` doesn't use the type `T` in any of its fields, so we can safely declare `T` to be a `phantom` type.
 
-For a more in-depth explanation of the `phantom` keyword, please check the [relevant section](https://github.com/move-language/move/blob/main/language/documentation/book/src/generics.md#phantom-type-parameters) of the Move language documentation.
+For a more in-depth explanation of the `phantom` keyword, please check the [relevant section](https://move-book.com/reference/generics#phantom-type-parameters) of the Move Book.
 
 ## One Time Witness
 

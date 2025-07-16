@@ -18,7 +18,7 @@ The first two types of ownership fall under the `Owned Objects` category. Owned 
 Let's continue using our `transcript` example here. This type of ownership is pretty straightforward as the object is owned by an address to which the object is transferred upon object creation, such as in the above example at this line:
 
 ```move
-    transfer::transfer(transcript_object, ctx.sender()) // where ctx.sender() is the recipient
+transfer::transfer(transcript_object, ctx.sender()) // where ctx.sender() is the recipient
 ```
 
 where the `transcript_object` is transferred to the address of the transaction sender upon creation.
@@ -36,7 +36,7 @@ Certain objects in Sui cannot be mutated by anyone, and because of this, these o
 To make an object immutable manually, one can call the following special function:
 
 ```move
-    transfer::freeze_object(obj);
+transfer::freeze_object(obj);
 ```
 
 ## Shared Mutable Objects
@@ -46,7 +46,7 @@ Shared objects in Sui can be read or mutated by anyone. Shared object transactio
 To create a shared object, one can call this method:
 
 ```move
-    transfer::share_object(obj);
+transfer::share_object(obj);
 ```
 
 Once an object is shared, it stays mutable and can be accessed by anyone to send a transaction to mutate the object.

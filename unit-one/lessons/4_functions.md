@@ -19,9 +19,9 @@ A function's last line (of execution) without a semicolon is the return value.
 Example:
 
 ```move
-    public fun addition (a: u8, b: u8): u8 {
-        a + b
-    }
+public fun addition (a: u8, b: u8): u8 {
+    a + b
+}
 ```
 
 <!--
@@ -46,13 +46,13 @@ The `TxContext` object contains [essential information](https://github.com/Myste
 We can define our minting function in the Hello World example as the following:
 
 ```move
-    public fun mint(ctx: &mut TxContext) {
-        let object = HelloWorldObject {
-            id: object::new(ctx),
-            text: b"Hello World!".to_string()
-        };
-        transfer::public_transfer(object, ctx.sender());
-    }
+public fun mint(ctx: &mut TxContext) {
+    let object = HelloWorldObject {
+        id: object::new(ctx),
+        text: b"Hello World!".to_string()
+    };
+    transfer::public_transfer(object, ctx.sender());
+}
 ```
 
 This function simply creates a new instance of the `HelloWorldObject` custom type, then uses the Sui system [`public_transfer`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/transfer.md#function-public_transfer) function to send it to the transaction caller.

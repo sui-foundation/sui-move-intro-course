@@ -78,7 +78,7 @@ where the boolean expression must evaluate to true, otherwise it will abort with
 We are using a default 0 for our error code above, but we can also define a custom error constant in the following way:
 
 ```move
-    const ENotIntendedAddress: u64 = 1;
+const ENotIntendedAddress: u64 = 1;
 ```
 
 This error code then can be consumed at the application level and handled appropriately.

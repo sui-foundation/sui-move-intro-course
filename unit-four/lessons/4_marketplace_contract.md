@@ -104,7 +104,7 @@ public fun delist_and_take<T: key + store, COIN>(
 }
 ```
 
-Note how the delisted `Listing` object is unpacked and deleted, and the listed item object is retrieved through [`ofield::remove`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/dynamic_object_field.move#L71). Remember that Sui assets cannot be destroyed outside of their defining module, so we must transfer the item to the delister.
+Note how the delisted `Listing` object is unpacked and deleted, and the listed item object is retrieved through [`dof::remove`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/dynamic_object_field.move#L59). Remember that Sui assets cannot be destroyed outside of their defining module, so we must transfer the item to the delister.
 
 ## Purchasing and Payments
 

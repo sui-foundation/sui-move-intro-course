@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Sui Foundation
+// Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
 module closed_loop_token::parity;

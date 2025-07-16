@@ -17,7 +17,7 @@ use sui::kiosk::{Self, Kiosk, KioskOwnerCap};
 public fun new_kiosk(ctx: &mut TxContext) {
     let (kiosk, kiosk_owner_cap) = kiosk::new(ctx);
     transfer::public_share_object(kiosk);
-    transfer::public_transfer(kiosk_owner_cap, sender(ctx));
+    transfer::public_transfer(kiosk_owner_cap, ctx.sender());
 }
 ```
 

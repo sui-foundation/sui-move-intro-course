@@ -13,7 +13,7 @@ Let's look at a basic example of how to use generics to create a container `Box`
 First, without generics, we can define a `Box` that holds a `u64` type as the following:
 
 ```move
-module  generics::storage;
+module generics::storage;
 
 public struct Box {
     value: u64
@@ -23,7 +23,7 @@ public struct Box {
 However, this type will only be able to hold a value of type `u64`. To make our `Box` able to hold any generic type, we will need to use generics. The code would be modified as follows:
 
 ```move
-module  generics::storage;
+module generics::storage;
 public struct Box<T> {
     value: T
 }
@@ -34,7 +34,7 @@ public struct Box<T> {
 We can add conditions to enforce that the type passed into the generic must have certain abilities. The syntax looks like the following:
 
 ```move
-module  generics::storage;
+module generics::storage;
 // T must be copyable and droppable
 public struct Box<T: store + drop> has key, store {
     value: T
@@ -92,6 +92,6 @@ sui client call --package $PACKAGE --module $MODULE --function "create_box" --ar
 
 ## Advanced Generics Syntax
 
-For more advanced syntax involving the use of generics in Sui Move, such as multiple generic types, please refer to the excellent [section on generics in the Move Book](https://move-book.com/advanced-topics/understanding-generics.html).
+For more advanced syntax involving the use of generics in Sui Move, such as multiple generic types, please refer to the excellent [section on generics in the Move Book](https://move-book.com/reference/generics).
 
 But for our current lesson on fungible tokens, you already know enough about how generics work to proceed.

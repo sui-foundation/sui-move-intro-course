@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Sui Foundation
+// Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
 /// An implementation of a simple parity rule for the closed loop standard.
