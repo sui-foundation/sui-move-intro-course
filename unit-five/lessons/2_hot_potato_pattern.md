@@ -6,6 +6,7 @@ A hot potato is a struct that has no capabilities, therefore you can only pack a
 
 ```move
 module flashloan::flashloan;
+
 // === Imports ===
 use sui::sui::SUI;
 use sui::coin::{Self, Coin};
@@ -41,14 +42,17 @@ We have a `LoanPool` shared object acting as a money vault ready for users to bo
 /// Function allows users to borrow from the loan pool.
 /// It returns the borrowed [`Coin<SUI>`] and the [`Loan`] position
 /// enforcing users to fulfill before the PTB ends.
-public fun borrow(pool: &mut LoanPool, amount: u64, ctx: &mut TxContext): (Coin<SUI>, Loan) {
-    assert!(amount <= balance::value(&pool.amount), ELoanAmountExceedPool);
-
+public fun borrow(
+    pool: &mut LoanPool,
+    amount: u64,
+    ctx: &mut TxContext,
+): (Coin<SUI>, Loan) {
+    assert!(amount <= pool.amount.value(), ELoanAmountExceedPool);
     (
-        coin::from_balance(balance::split(&mut pool.amount, amount), ctx),
+        pool.amount.split(amount).into_coin(ctx),
         Loan {
-            amount
-        }
+            amount,
+        },
     )
 }
 ```
@@ -59,12 +63,13 @@ Users can borrow the money from the `LoanPool` by calling `borrow()`. Basically,
 
 ```move
 /// Repay the loan
-/// Users must execute this function to ensure the loan is repaid before the transaction ends.
+/// Users must execute this function to ensure the loan is repaid before the
+/// transaction ends.
 public fun repay(pool: &mut LoanPool, loan: Loan, payment: Coin<SUI>) {
     let Loan { amount } = loan;
-    assert!(coin::value(&payment) == amount, ERepayAmountInvalid);
+    assert!(payment.value() == amount, ERepayAmountInvalid);
 
-    balance::join(&mut pool.amount, coin::into_balance(payment));
+    pool.amount.join(payment.into_balance());
 }
 ```
 
@@ -76,24 +81,24 @@ Let's try to create an example with flashloan where we borrow some SUI amount, u
 
 ```move
 /// A dummy NFT to represent the flashloan functionality
-public struct NFT has key{
+public struct NFT has key {
     id: UID,
     price: Balance<SUI>,
 }
 
 /// Mint NFT
-    public fun mint_nft(payment: Coin<SUI>, ctx: &mut TxContext): NFT {
-        NFT {
-            id: object::new(ctx),
-            price: coin::into_balance(payment),
-        }
+public fun mint_nft(payment: Coin<SUI>, ctx: &mut TxContext): NFT {
+    NFT {
+        id: object::new(ctx),
+        price: payment.into_balance(),
     }
+}
 
 /// Sell NFT
 public fun sell_nft(nft: NFT, ctx: &mut TxContext): Coin<SUI> {
-    let NFT {id, price} = nft;
-    object::delete(id);
-    coin::from_balance(price, ctx)
+    let NFT { id, price } = nft;
+    id.delete();
+    price.into_coin(ctx)
 }
 ```
 
@@ -128,6 +133,6 @@ sui client ptb \
 
 ```
 
-*Quiz: What happen if you don't call `repay()` at the end of the PTB, please try it yourself*
+_Quiz: What happen if you don't call `repay()` at the end of the PTB, please try it yourself_
 
-*💡Note: You may want to check out [SuiVision](https://testnet.suivision.xyz/) or [SuiScan](https://suiscan.xyz/testnet/home) to inspect the PTB for more details*
+_💡Note: You may want to check out [SuiVision](https://testnet.suivision.xyz/) or [SuiScan](https://suiscan.xyz/testnet/home) to inspect the PTB for more details_

@@ -1,9 +1,9 @@
 [package]
 name = "hello_world"
 version = "0.0.1"
-edition = "2024"
+edition = "2024.beta"
 
 [dependencies]
 
 [addresses]
-hello_world =  "0x0"
+hello_world = "0x0"

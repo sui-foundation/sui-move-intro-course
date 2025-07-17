@@ -13,7 +13,7 @@ public struct PEACE has drop {}
 
 /// The first argument of this function is an actual instance of the
 /// type T with `drop` ability. It is dropped as soon as received.
-public fun create_guardian<T: drop>(_witness: T, ctx: &mut TxContext): Guardian<T> {
+public fun create_guardian<T: drop>(_: T, ctx: &mut TxContext): Guardian<T> {
     Guardian { id: object::new(ctx) }
 }
 
@@ -21,8 +21,5 @@ public fun create_guardian<T: drop>(_witness: T, ctx: &mut TxContext): Guardian<
 /// code is called only once. With `Witness` pattern it is
 /// often the best practice.
 fun init(witness: PEACE, ctx: &mut TxContext) {
-    transfer::transfer(
-        create_guardian(witness, ctx),
-        tx_context::sender(ctx),
-    )
+    transfer::public_transfer(create_guardian(witness, ctx), ctx.sender())
 }

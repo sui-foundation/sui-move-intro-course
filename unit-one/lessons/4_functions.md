@@ -1,6 +1,6 @@
 # Functions
 
-In this section, we will introduce functions in Sui Move and write our first Sui Move function as a part of the Hello World example. 
+In this section, we will introduce functions in Sui Move and write our first Sui Move function as a part of the Hello World example.
 
 ## Function Visibility
 
@@ -12,16 +12,16 @@ Sui Move functions have three types of visibility:
 
 ## Return Value
 
-The return type of a function is specified in the function signature after the function parameters, separated by a colon. 
+The return type of a function is specified in the function signature after the function parameters, separated by a colon.
 
-A function's last line (of execution) without a semicolon is the return value. 
+A function's last line (of execution) without a semicolon is the return value.
 
 Example:
 
 ```move
-    public fun addition (a: u8, b: u8): u8 {
-        a + b    
-    }
+public fun addition (a: u8, b: u8): u8 {
+    a + b
+}
 ```
 
 <!--
@@ -37,23 +37,22 @@ In Sui Move, entry functions are simply functions that can be called by transact
 
 ## Transaction Context
 
-Functions called directly through a transaction typically have an instance of `TxContext` as the last parameter. This is a special parameter set by the Sui Move VM and does not need to be specified by the user calling the function. 
+Functions called directly through a transaction typically have an instance of `TxContext` as the last parameter. This is a special parameter set by the Sui Move VM and does not need to be specified by the user calling the function.
 
-The `TxContext` object contains [essential information](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/tx_context.move) about the transaction used to call the entry function, such as the sender's address, the tx's digest ID, the tx's epoch, etc. 
+The `TxContext` object contains [essential information](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/tx_context.move) about the transaction used to call the entry function, such as the sender's address, the tx's digest ID, the tx's epoch, etc.
 
-## Create the `mint` Function 
+## Create the `mint` Function
 
 We can define our minting function in the Hello World example as the following:
 
 ```move
-    public fun mint(ctx: &mut TxContext) {
-        let object = HelloWorldObject {
-            id: object::new(ctx),
-            text: string::utf8(b"Hello World!")
-        };
-        transfer::public_transfer(object, tx_context::sender(ctx));
-    }
+public fun mint(ctx: &mut TxContext) {
+    let object = HelloWorldObject {
+        id: object::new(ctx),
+        text: b"Hello World!".to_string()
+    };
+    transfer::public_transfer(object, ctx.sender());
+}
 ```
 
-This function simply creates a new instance of the `HelloWorldObject` custom type, then uses the Sui system [`public_transfer`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/transfer.md#function-public_transfer) function to send it to the transaction caller. 
-
+This function simply creates a new instance of the `HelloWorldObject` custom type, then uses the Sui system [`public_transfer`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/transfer.md#function-public_transfer) function to send it to the transaction caller.

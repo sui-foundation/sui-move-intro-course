@@ -18,26 +18,32 @@ fun mint_burn() {
 
     // Run the managed coin module init function
     {
-        managed::test_init(ctx(&mut scenario))
+        managed::test_init(scenario.ctx())
     };
 
     // Mint a `Coin<MANAGED>` object
-    next_tx(&mut scenario, addr1);
+    scenario.next_tx(addr1);
     {
-        let mut treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
-        managed::mint(&mut treasurycap, 100, addr1, test_scenario::ctx(&mut scenario));
-        test_scenario::return_to_address<TreasuryCap<MANAGED>>(addr1, treasurycap);
+        let mut treasurycap = scenario.take_from_sender<TreasuryCap<MANAGED>>();
+        managed::mint(&mut treasurycap, 100, addr1, scenario.ctx());
+        test_scenario::return_to_address<TreasuryCap<MANAGED>>(
+            addr1,
+            treasurycap,
+        );
     };
 
     // Burn a `Coin<MANAGED>` object
     next_tx(&mut scenario, addr1);
     {
-        let coin = test_scenario::take_from_sender<Coin<MANAGED>>(&scenario);
-        let mut treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
+        let coin = scenario.take_from_sender<Coin<MANAGED>>();
+        let mut treasurycap = scenario.take_from_sender<TreasuryCap<MANAGED>>();
         managed::burn(&mut treasurycap, coin);
-        test_scenario::return_to_address<TreasuryCap<MANAGED>>(addr1, treasurycap);
+        test_scenario::return_to_address<TreasuryCap<MANAGED>>(
+            addr1,
+            treasurycap,
+        );
     };
 
     // Cleans up the scenario object
-    test_scenario::end(scenario);
+    scenario.end();
 }

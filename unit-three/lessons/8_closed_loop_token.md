@@ -1,6 +1,6 @@
-#  [Optional] Closed Loop Token Standard
+# [Optional] Closed Loop Token Standard
 
-Closed Loop token is a Sui token standard that allows the contract deployer to define token policies that control how the token can be transferred, spent, minted, etc. 
+Closed Loop token is a Sui token standard that allows the contract deployer to define token policies that control how the token can be transferred, spent, minted, etc.
 
 ## Relationship with `Coin` and `Balance`
 
@@ -25,7 +25,7 @@ Closed Loop token is a Sui token standard that allows the contract deployer to d
 
 ### Action Request
 
-Protected actions generate an `ActionRequest` which need to be confirmed. 
+Protected actions generate an `ActionRequest` which need to be confirmed.
 
 ```move
 public struct ActionRequest<phantom T> {
@@ -48,9 +48,10 @@ public struct ActionRequest<phantom T> {
     approvals: VecSet<TypeName>,
 }
 ```
+
 ## Confirming Action Requests
 
-There are three ways to confirm an action request. 
+There are three ways to confirm an action request.
 
 - By `TreasuryCap`
 - By `TokenPolicyCap`
@@ -60,7 +61,7 @@ There are three ways to confirm an action request.
 
 - Create a Coin through `coin::create_currency`
 - Create a policy for the respective token through `token::new_policy`
-- Share the `TokenPolicy` Object 
+- Share the `TokenPolicy` Object
 - Create the respective rules for any or all action types
 - Register, modify, or remove the rules from `TokenPolicy`
 
@@ -72,7 +73,7 @@ There are three ways to confirm an action request.
 
 This is a simple closed loop token example illustrating how token policy can be defined and used.
 
-The example allows minting in odd parity amounts of the token only. 
+The example allows minting in odd parity amounts of the token only.
 
 ### Defining and Adding Token Policy
 

@@ -6,8 +6,8 @@
 module marketplace::marketplace;
 
 use sui::bag::{Self, Bag};
-use sui::coin::{Self, Coin};
-use sui::dynamic_object_field as ofield;
+use sui::coin::Coin;
+use sui::dynamic_object_field as dof;
 use sui::table::{Self, Table};
 
 /// For when amount paid does not match the expected.
@@ -55,29 +55,29 @@ public fun list<T: key + store, COIN>(
     let mut listing = Listing {
         ask,
         id: object::new(ctx),
-        owner: tx_context::sender(ctx),
+        owner: ctx.sender(),
     };
 
-    ofield::add(&mut listing.id, true, item);
-    bag::add(&mut marketplace.items, item_id, listing)
+    dof::add(&mut listing.id, true, item);
+    marketplace.items.add(item_id, listing)
 }
 
-/// Internal function to remove listing and get an item back. Only owner can do that.
+/// Internal function to remove listing and get an item back. Only owner can do
+/// that.
 fun delist<T: key + store, COIN>(
     marketplace: &mut Marketplace<COIN>,
     item_id: ID,
     ctx: &TxContext,
 ): T {
-    let Listing {
-        mut id,
-        owner,
-        ask: _,
-    } = bag::remove(&mut marketplace.items, item_id);
+    let Listing { mut id, owner, .. } = bag::remove(
+        &mut marketplace.items,
+        item_id,
+    );
 
-    assert!(tx_context::sender(ctx) == owner, ENotOwner);
+    assert!(ctx.sender() == owner, ENotOwner);
 
-    let item = ofield::remove(&mut id, true);
-    object::delete(id);
+    let item = dof::remove(&mut id, true);
+    id.delete();
     item
 }
 
@@ -88,10 +88,11 @@ public fun delist_and_take<T: key + store, COIN>(
     ctx: &mut TxContext,
 ) {
     let item = delist<T, COIN>(marketplace, item_id, ctx);
-    transfer::public_transfer(item, tx_context::sender(ctx));
+    transfer::public_transfer(item, ctx.sender());
 }
 
-/// Internal function to purchase an item using a known Listing. Payment is done in Coin<C>.
+/// Internal function to purchase an item using a known Listing. Payment is done
+/// in Coin<C>.
 /// Amount paid must match the requested amount. If conditions are met,
 /// owner of the item gets the payment and buyer receives their item.
 fun buy<T: key + store, COIN>(
@@ -103,23 +104,20 @@ fun buy<T: key + store, COIN>(
         mut id,
         ask,
         owner,
-    } = bag::remove(&mut marketplace.items, item_id);
+    } = marketplace.items.remove(item_id);
 
-    assert!(ask == coin::value(&paid), EAmountIncorrect);
+    assert!(ask == paid.value(), EAmountIncorrect);
 
     // Check if there's already a Coin hanging and merge `paid` with it.
     // Otherwise attach `paid` to the `Marketplace` under owner's `address`.
-    if (table::contains<address, Coin<COIN>>(&marketplace.payments, owner)) {
-        coin::join(
-            table::borrow_mut<address, Coin<COIN>>(&mut marketplace.payments, owner),
-            paid,
-        )
+    if (marketplace.payments.contains(owner)) {
+        marketplace.payments.borrow_mut(owner).join(paid)
     } else {
-        table::add(&mut marketplace.payments, owner, paid)
+        marketplace.payments.add(owner, paid)
     };
 
-    let item = ofield::remove(&mut id, true);
-    object::delete(id);
+    let item = dof::remove(&mut id, true);
+    id.delete();
     item
 }
 
@@ -132,20 +130,26 @@ public fun buy_and_take<T: key + store, COIN>(
 ) {
     transfer::public_transfer(
         buy<T, COIN>(marketplace, item_id, paid),
-        tx_context::sender(ctx),
+        ctx.sender(),
     )
 }
 
 /// Internal function to take profits from selling items on the `Marketplace`.
-fun take_profits<COIN>(marketplace: &mut Marketplace<COIN>, ctx: &TxContext): Coin<COIN> {
-    table::remove<address, Coin<COIN>>(&mut marketplace.payments, tx_context::sender(ctx))
+fun take_profits<COIN>(
+    marketplace: &mut Marketplace<COIN>,
+    ctx: &TxContext,
+): Coin<COIN> {
+    marketplace.payments.remove(ctx.sender())
 }
 
 #[lint_allow(self_transfer)]
 /// Call [`take_profits`] and transfer Coin object to the sender.
-public fun take_profits_and_keep<COIN>(marketplace: &mut Marketplace<COIN>, ctx: &mut TxContext) {
+public fun take_profits_and_keep<COIN>(
+    marketplace: &mut Marketplace<COIN>,
+    ctx: &mut TxContext,
+) {
     transfer::public_transfer(
         take_profits(marketplace, ctx),
-        tx_context::sender(ctx),
+        ctx.sender(),
     )
 }

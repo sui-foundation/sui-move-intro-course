@@ -16,8 +16,6 @@
 
 ## Q2
 
-`transfer` require the object to have `key`, and the object must be defined in the same module where `transfer` is invoked. 
+`transfer` require the object to have `key`, and the object must be defined in the same module where `transfer` is invoked.
 
-`public_transfer` requires the object to be transferred to have both the `key` and the `store` abilities, but it can be invoked outside of the module where the object is defined. 
-
-
+`public_transfer` requires the object to be transferred to have both the `key` and the `store` abilities, but it can be invoked outside of the module where the object is defined.

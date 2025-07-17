@@ -4,7 +4,7 @@
 module flashloan::flashloan;
 
 use sui::balance::{Self, Balance};
-use sui::coin::{Self, Coin};
+use sui::coin::Coin;
 use sui::sui::SUI;
 
 // === Errors ===
@@ -47,17 +47,20 @@ fun init(ctx: &mut TxContext) {
 
 /// Deposit money into loan pool
 public fun deposit_pool(pool: &mut LoanPool, deposit: Coin<SUI>) {
-    balance::join(&mut pool.amount, coin::into_balance(deposit));
+    pool.amount.join(deposit.into_balance());
 }
 
 /// Function allows users to borrow from the loan pool.
 /// It returns the borrowed [`Coin<SUI>`] and the [`Loan`] position
 /// enforcing users to fulfill before the PTB ends.
-public fun borrow(pool: &mut LoanPool, amount: u64, ctx: &mut TxContext): (Coin<SUI>, Loan) {
-    assert!(amount <= balance::value(&pool.amount), ELoanAmountExceedPool);
-
+public fun borrow(
+    pool: &mut LoanPool,
+    amount: u64,
+    ctx: &mut TxContext,
+): (Coin<SUI>, Loan) {
+    assert!(amount <= pool.amount.value(), ELoanAmountExceedPool);
     (
-        coin::from_balance(balance::split(&mut pool.amount, amount), ctx),
+        pool.amount.split(amount).into_coin(ctx),
         Loan {
             amount,
         },
@@ -65,25 +68,26 @@ public fun borrow(pool: &mut LoanPool, amount: u64, ctx: &mut TxContext): (Coin<
 }
 
 /// Repay the loan
-/// Users must execute this function to ensure the loan is repaid before the transaction ends.
+/// Users must execute this function to ensure the loan is repaid before the
+/// transaction ends.
 public fun repay(pool: &mut LoanPool, loan: Loan, payment: Coin<SUI>) {
     let Loan { amount } = loan;
-    assert!(coin::value(&payment) == amount, ERepayAmountInvalid);
+    assert!(payment.value() == amount, ERepayAmountInvalid);
 
-    balance::join(&mut pool.amount, coin::into_balance(payment));
+    pool.amount.join(payment.into_balance());
 }
 
 /// Mint NFT
 public fun mint_nft(payment: Coin<SUI>, ctx: &mut TxContext): NFT {
     NFT {
         id: object::new(ctx),
-        price: coin::into_balance(payment),
+        price: payment.into_balance(),
     }
 }
 
 /// Sell NFT
 public fun sell_nft(nft: NFT, ctx: &mut TxContext): Coin<SUI> {
     let NFT { id, price } = nft;
-    object::delete(id);
-    coin::from_balance(price, ctx)
+    id.delete();
+    price.into_coin(ctx)
 }

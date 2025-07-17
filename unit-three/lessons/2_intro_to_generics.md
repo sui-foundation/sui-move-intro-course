@@ -2,7 +2,7 @@
 
 Generics are abstract stand-ins for concrete types or other properties. They work similarly to [generics in Rust](https://doc.rust-lang.org/stable/book/ch10-00-generics.html), and can be used to allow greater flexibility and avoid logic duplication while writing Sui Move code.
 
-Generics are a key concept in Sui Move, and it's important to understand and have an intuition for how they work, so take your time with this section and understand every part fully. 
+Generics are a key concept in Sui Move, and it's important to understand and have an intuition for how they work, so take your time with this section and understand every part fully.
 
 ## Generics Usage
 
@@ -13,18 +13,17 @@ Let's look at a basic example of how to use generics to create a container `Box`
 First, without generics, we can define a `Box` that holds a `u64` type as the following:
 
 ```move
-module  generics::storage;
+module generics::storage;
 
 public struct Box {
     value: u64
 }
-
 ```
 
 However, this type will only be able to hold a value of type `u64`. To make our `Box` able to hold any generic type, we will need to use generics. The code would be modified as follows:
 
 ```move
-module  generics::storage;
+module generics::storage;
 public struct Box<T> {
     value: T
 }
@@ -35,21 +34,20 @@ public struct Box<T> {
 We can add conditions to enforce that the type passed into the generic must have certain abilities. The syntax looks like the following:
 
 ```move
-module  generics::storage;
-// T must be copyable and droppable 
+module generics::storage;
+// T must be copyable and droppable
 public struct Box<T: store + drop> has key, store {
     value: T
 }
-
 ```
 
 💡It's important to note here that the inner type `T` in the above example must meet certain ability constraints due to the outer container type. In this example, `T` must have `store`, as `Box` has `store` and `key`. However, `T` can also have abilities that the container doesn't have, such as `drop` in this example.
 
 The intuition is that if the container is allowed to contain a type that does not follow the same rules that it does, the container would violate its own ability. How can a box be storable if its content isn't also storable?
 
-We will see in the next section that there is a way to get around this rule in certain cases using a special keyword, called `phantom`. 
+We will see in the next section that there is a way to get around this rule in certain cases using a special keyword, called `phantom`.
 
-*💡See the [generics project](../example_projects/generics/) under `example_projects` for some examples of generic types.*
+_💡See the [generics project](../example_projects/generics/) under `example_projects` for some examples of generic types._
 
 ### Using Generics in Functions
 
@@ -57,19 +55,19 @@ To write a function that returns an instance of `Box` that can accept a paramete
 
 ```move
 public fun create_box<T>(value: T): Box<T> {
-        Box<T> { value }
-    }
+    Box<T> { value }
+}
 ```
 
 If we want to restrict the function to only accept a specific type for `value`, we simply specify that type in the function signature as follows:
 
 ```move
 public fun create_box(value: u64): Box<u64> {
-        Box<u64>{ value }
-    }
+    Box<u64>{ value }
+}
 ```
 
-This will only accept inputs of the type `u64` for the `create_box` method, while still using the same generic `Box` struct. 
+This will only accept inputs of the type `u64` for the `create_box` method, while still using the same generic `Box` struct.
 
 #### Calling Functions with Generics
 
@@ -77,9 +75,9 @@ To call a function with a signature that contains generics, we must specify the 
 
 ```move
 // value will be of type storage::Box<bool>
-    let bool_box = storage::create_box<bool>(true);
+let bool_box = storage::create_box<bool>(true);
 // value will be of the type storage::Box<u64>
-    let u64_box = storage::create_box<u64>(1000000);
+let u64_box = storage::create_box<u64>(1000000);
 ```
 
 #### Calling Functions with Generics using Sui CLI
@@ -94,6 +92,6 @@ sui client call --package $PACKAGE --module $MODULE --function "create_box" --ar
 
 ## Advanced Generics Syntax
 
-For more advanced syntax involving the use of generics in Sui Move, such as multiple generic types, please refer to the excellent [section on generics in the Move Book](https://move-book.com/advanced-topics/understanding-generics.html). 
+For more advanced syntax involving the use of generics in Sui Move, such as multiple generic types, please refer to the excellent [section on generics in the Move Book](https://move-book.com/reference/generics).
 
-But for our current lesson on fungible tokens, you already know enough about how generics work to proceed. 
+But for our current lesson on fungible tokens, you already know enough about how generics work to proceed.

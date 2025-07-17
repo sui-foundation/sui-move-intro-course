@@ -1,22 +1,17 @@
-// Copyright (c) 2022, Sui Foundation
+// Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
 /// A basic object example for Sui Move, part of the Sui Move intro course:
 /// https://github.com/sui-foundation/sui-move-intro-course
-/// 
-module sui_intro_unit_two::transcript; 
+module sui_intro_unit_two::transcript;
 
-use sui::object::{Self, UID};
-use sui::tx_context::{Self, TxContext};
-use sui::transfer;
-
-struct Transcript {
+public struct Transcript {
     history: u8,
     math: u8,
     literature: u8,
 }
 
-struct TranscriptObject has key {
+public struct TranscriptObject has key {
     id: UID,
     history: u8,
     math: u8,
@@ -24,28 +19,34 @@ struct TranscriptObject has key {
 }
 
 #[allow(lint(self_transfer))]
-public fun create_transcript_object(history: u8, math: u8, literature: u8, ctx: &mut TxContext) {
-    let transcriptObject = TranscriptObject {
+public fun create_transcript_object(
+    history: u8,
+    math: u8,
+    literature: u8,
+    ctx: &mut TxContext,
+) {
+    let transcript_object = TranscriptObject {
         id: object::new(ctx),
         history,
         math,
         literature,
     };
-    transfer::transfer(transcriptObject, tx_context::sender(ctx))
+    transfer::transfer(transcript_object, ctx.sender())
 }
 
 // You are allowed to retrieve the score but cannot modify it
-public fun view_score(transcriptObject: &TranscriptObject): u8{
-    transcriptObject.literature
+public fun view_score(transcript_object: &TranscriptObject): u8 {
+    transcript_object.literature
 }
 
 // You are allowed to view and edit the score but not allowed to delete it
-public fun update_score(transcriptObject: &mut TranscriptObject, score: u8){
-    transcriptObject.literature = score
+public fun update_score(transcript_object: &mut TranscriptObject, score: u8) {
+    transcript_object.literature = score
 }
 
-// You are allowed to do anything with the score, including view, edit, delete the entire transcript itself.
-public fun delete_transcript(transcriptObject: TranscriptObject){
-    let TranscriptObject {id, history: _, math: _, literature: _ } = transcriptObject;
-    object::delete(id);
+// You are allowed to do anything with the score, including view, edit, delete
+// the entire transcript itself.
+public fun delete_transcript(transcript_object: TranscriptObject) {
+    let TranscriptObject { id, .. } = transcript_object;
+    id.delete();
 }

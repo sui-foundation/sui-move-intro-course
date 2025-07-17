@@ -1,13 +1,18 @@
 // Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-// The code is taken here https://github.com/MystenLabs/apps/blob/main/kiosk/docs/creating_a_rule_guide.md#rule-structure-dummy
-
+// The code is taken here
+// https://github.com/MystenLabs/apps/blob/main/kiosk/docs/creating_a_rule_guide.md#rule-structure-dummy
 module kiosk::dummy_rule;
 
 use sui::coin::Coin;
 use sui::sui::SUI;
-use sui::transfer_policy::{Self as policy, TransferPolicy, TransferPolicyCap, TransferRequest};
+use sui::transfer_policy::{
+    Self as policy,
+    TransferPolicy,
+    TransferPolicyCap,
+    TransferRequest
+};
 
 /// The Rule Witness; has no fields and is used as a
 /// static authorization method for the rule.

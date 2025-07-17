@@ -1,4 +1,4 @@
-// Copyright (c) 2022, Sui Foundation
+// Copyright (c) Sui Foundation, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
 /// A basic Hello World example for Sui Move, part of the Sui Move intro course:
@@ -19,7 +19,7 @@ public struct HelloWorldObject has key, store {
 public fun mint(ctx: &mut TxContext) {
     let object = HelloWorldObject {
         id: object::new(ctx),
-        text: string::utf8(b"Hello World!"),
+        text: b"Hello World!".to_string(),
     };
-    transfer::public_transfer(object, tx_context::sender(ctx));
+    transfer::public_transfer(object, ctx.sender());
 }

@@ -4,10 +4,11 @@ use std::option;
 use sui::balance::{Self, Balance};
 use sui::clock::{Self, Clock};
 use sui::coin::{Self, TreasuryCap, CoinMetadata};
-use sui::tx_context::{sender};
+use sui::dynamic_field as df;
+use sui::dynamic_object_field as dof;
+use sui::tx_context::sender;
 
-/// Shared objected used to attach the lockers
-///
+/// Shared object used to attach the lockers
 public struct Registry has key {
     id: UID,
     metadata: CoinMetadata<LOCKED_COIN>,
@@ -23,22 +24,25 @@ public struct Locker has store {
 }
 
 /// Withdraw the available vested amount assuming linear vesting
-///
-public fun withdraw_vested(self: &mut Registry, clock: &Clock, ctx: &mut TxContext) {
-    let locker: &mut Locker = sui::dynamic_field::borrow_mut(&mut self.id, sender(ctx));
+public fun withdraw_vested(
+    self: &mut Registry,
+    clock: &Clock,
+    ctx: &mut TxContext,
+) {
+    let locker: &mut Locker = df::borrow_mut(&mut self.id, sender(ctx));
     let total_duration = locker.final_date - locker.start_date;
-    let elapsed_duration = clock::timestamp_ms(clock) - locker.start_date;
+    let elapsed_duration = clock.timestamp_ms() - locker.start_date;
     let total_vested_amount = if (elapsed_duration > total_duration) {
         locker.original_balance
     } else {
         locker.original_balance * elapsed_duration / total_duration
     };
-    // let total_vested_amount = locker.original_balance * percentage_unlocked;
     let available_vested_amount =
-        total_vested_amount - (locker.original_balance-balance::value(&locker.balance));
+        total_vested_amount - (locker.original_balance - locker.balance.value());
+
     transfer::public_transfer(
         coin::take(&mut locker.balance, available_vested_amount, ctx),
-        sender(ctx),
+        ctx.sender(),
     )
 }
 
@@ -52,9 +56,12 @@ fun init(otw: LOCKED_COIN, ctx: &mut TxContext) {
         option::none(),
         ctx,
     );
-    //transfer::public_freeze_object(metadata);
-    transfer::public_transfer(treasury_cap, sender(ctx));
-    transfer::share_object(Registry { id: object::new(ctx), metadata: metadata })
+    // transfer::public_freeze_object(metadata);
+    transfer::public_transfer(treasury_cap, ctx.sender());
+    transfer::share_object(Registry {
+        id: object::new(ctx),
+        metadata,
+    })
 }
 
 public fun locked_mint(
@@ -66,18 +73,18 @@ public fun locked_mint(
     clock: &Clock,
     ctx: &mut TxContext,
 ) {
-    let coin = coin::mint(treasury_cap, amount, ctx);
-    let start_date = clock::timestamp_ms(clock);
+    let coin = treasury_cap.mint(amount, ctx);
+    let start_date = clock.timestamp_ms();
     let final_date = start_date + lock_up_duration;
 
-    sui::dynamic_field::add(
+    df::add(
         &mut self.id,
         recipient,
         Locker {
-            start_date: start_date,
-            final_date: final_date,
+            start_date,
+            final_date,
             original_balance: amount,
-            balance: coin::into_balance(coin),
+            balance: coin.into_balance(),
         },
     );
 }
