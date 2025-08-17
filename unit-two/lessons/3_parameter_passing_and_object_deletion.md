@@ -37,4 +37,4 @@ Following these rules, if you want to modify your struct outside its defining mo
 
 \_💡Note: the `..` (dot dot) in the above method denotes that we're ignoring the remaining fields in the struct unpacking. This allows us to extract only the fields we need while ignoring the rest.\_
 
-**Here is the work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript__1.move_wip)**
+**Here is the work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_1.move_wip)**
