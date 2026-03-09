@@ -11,7 +11,7 @@ public struct TeacherCap has key {
 }
 ```
 
-We define a new struct `TeacherCap` that marks the capability to perform privileged actions on transcripts. If we want the capability to be non-transferrable, we simply do not add the `store` ability to the struct.
+We define a new struct `TeacherCap` that marks the capability to perform privileged actions on transcripts. If we want the capability to be non-transferable, we simply do not add the `store` ability to the struct.
 
 \*💡Note: This is also how the equivalent of soulbound tokens (SBT) can be easily implemented in Move. You simply define a struct that has the `key` ability, but not the `store` ability.
 

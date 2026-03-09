@@ -6,7 +6,7 @@ We will implement an example of object wrapping to our transcript example, so th
 
 First, we need to make some adjustments to our two custom types `WrappableTranscript` and `Folder` from the previous section
 
-1. We need to add the `key` ability to our type definitions for `WrappableTranscript`, so that they become assets and are transferrable.
+1. We need to add the `key` ability to our type definitions for `WrappableTranscript`, so that they become assets and are transferable.
 
 Remember that custom types with the abilities `key` and `store` are considered to be assets in Sui Move.
 

@@ -25,7 +25,7 @@ public struct Balance<phantom T> has store {
 
 Recall our discussion on [`phantom`](./3_witness_design_pattern.md#the-phantom-keyword), The type `T` is used in `Coin` only as an argument to another phantom type for `Balance`, and in `Balance`, it's not used in any of its fields, thus `T` is a `phantom` type parameter.
 
-`Coin<T>` serves as a transferrable asset representation of a certain amount of the fungible token type `T` that can be transferred between addresses or consumed by smart contract function calls.
+`Coin<T>` serves as a transferable asset representation of a certain amount of the fungible token type `T` that can be transferred between addresses or consumed by smart contract function calls.
 
 ## The `create_currency` Method
 

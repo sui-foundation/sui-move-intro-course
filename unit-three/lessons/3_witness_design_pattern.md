@@ -42,7 +42,7 @@ _The example above is modified from the excellent book [Sui Move by Example](htt
 
 ### The `phantom` Keyword
 
-In the above example, we want the `Guardian` type to have the `key` and `store` abilities, so that it's an asset and is transferrable and persists in global storage.
+In the above example, we want the `Guardian` type to have the `key` and `store` abilities, so that it's an asset and is transferable and persists in global storage.
 
 We also want to pass in the `witness` resource, `PEACE`, into `Guardian`, but `PEACE` only has the `drop` ability. Recall our previous discussion on [ability constraints](./2_intro_to_generics.md#ability-constraints) and inner types, the rule implies that `PEACE` should also have `key` and `storage` given that the outer type `Guardian` does. But in this case, we do not want to add unnecessary abilities to our `witness` type, because doing so could cause undesirable behaviors and vulnerabilities.
 

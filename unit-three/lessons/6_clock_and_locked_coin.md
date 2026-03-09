@@ -25,7 +25,7 @@ Now that we know how to access time on-chain through `clock`, implementing a ves
 `locked_coin` builds on top of the `managed_coin` implementation with the addition of one more custom type, `Locker`:
 
 ```move
-/// Transferrable object for storing the vesting coins
+/// Transferable object for storing the vesting coins
 public struct Locker has key, store {
     id: UID,
     start_date: u64,
@@ -36,7 +36,7 @@ public struct Locker has key, store {
 }
 ```
 
-Locker is a transferrable [asset](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/lessons/3_custom_types_and_abilities.md#assets) that encodes the information related to the vesting schedule and vesting status of tokens issued.
+Locker is a transferable [asset](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/lessons/3_custom_types_and_abilities.md#assets) that encodes the information related to the vesting schedule and vesting status of tokens issued.
 
 `start_date` and `final_date` are timestamps obtained from `clock`, marking the start and end of the vesting term.
 
