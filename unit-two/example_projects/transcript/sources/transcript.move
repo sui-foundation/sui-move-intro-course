@@ -8,6 +8,13 @@ module sui_intro_unit_two::transcript;
 
 use sui::event;
 
+// === Constants ===
+
+// Error code when a non-intended address tries to unpack the transcript wrapper.
+const ENotIntendedAddress: u64 = 1;
+
+// === Structs ===
+
 public struct WrappableTranscript has key, store {
     id: UID,
     history: u8,
@@ -27,21 +34,16 @@ public struct TeacherCap has key {
 
 public struct TestStruct has drop, store, copy {}
 
-/// Event marking when a transcript has been requested
-public struct TranscriptRequestEvent has copy, drop {
-    // The Object ID of the transcript wrapper
+/// Event emitted when a transcript has been requested.
+public struct TranscriptRequested has copy, drop {
     wrapper_id: ID,
-    // The requester of the transcript
     requester: address,
-    // The intended address of the transcript
     intended_address: address,
 }
 
-// Error code for when a non-intended address tries to unpack the transcript
-// wrapper
-const ENotIntendedAddress: u64 = 1;
+// === Init ===
 
-/// Module initializer is called only once on module publish.
+/// Called only once on module publish.
 fun init(ctx: &mut TxContext) {
     transfer::transfer(
         TeacherCap {
@@ -50,6 +52,8 @@ fun init(ctx: &mut TxContext) {
         ctx.sender(),
     )
 }
+
+// === Public Functions ===
 
 public fun add_additional_teacher(
     _: &TeacherCap,
@@ -81,25 +85,24 @@ public fun create_wrappable_transcript_object(
     transfer::public_transfer(wrappable_transcript, ctx.sender())
 }
 
-// You are allowed to retrieve the score but cannot modify it
+/// Returns the literature score (read-only).
 public fun view_score(wrappable_transcript: &WrappableTranscript): u8 {
     wrappable_transcript.literature
 }
 
-// You are allowed to view and edit the score but not allowed to delete it
+/// Updates the literature score; requires TeacherCap. Parameter order: mutable object, capability, primitives.
 public fun update_score(
-    _: &TeacherCap,
     wrappable_transcript: &mut WrappableTranscript,
+    _: &TeacherCap,
     score: u8,
 ) {
     wrappable_transcript.literature = score
 }
 
-// You are allowed to do anything with the score, including view, edit, delete
-// the entire transcript itself.
+/// Deletes the transcript object; requires TeacherCap. Parameter order: object, capability.
 public fun delete_transcript(
-    _: &TeacherCap,
     transcript_object: WrappableTranscript,
+    _: &TeacherCap,
 ) {
     let WrappableTranscript { id, .. } = transcript_object;
     id.delete();
@@ -115,18 +118,16 @@ public fun request_transcript(
         transcript,
         intended_address,
     };
-    event::emit(TranscriptRequestEvent {
-        wrapper_id: folder_object.id.to_inner(),
+    event::emit(TranscriptRequested {
+        wrapper_id: object::id(&folder_object),
         requester: ctx.sender(),
         intended_address,
     });
-    // e transfer the wrapped transcript object directly to the intended address
     transfer::transfer(folder_object, intended_address);
 }
 
 #[allow(lint(self_transfer))]
 public fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext) {
-    // Check that the person unpacking the transcript is the intended viewer
     assert!(folder.intended_address == ctx.sender(), ENotIntendedAddress);
     let Folder { id, transcript, .. } = folder;
     transfer::transfer(transcript, ctx.sender());

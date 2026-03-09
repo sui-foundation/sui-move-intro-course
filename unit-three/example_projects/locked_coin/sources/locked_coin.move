@@ -9,10 +9,12 @@ module locked_coin::locked_coin;
 use sui::balance::Balance;
 use sui::clock::Clock;
 use sui::coin::{Self, TreasuryCap};
-use sui::tx_context::sender;
+use sui::coin_registry;
+
+// === Types ===
 
 /// Transferable object for storing the vesting coins
-public struct Locker has key, store {
+public struct Locker has key {
     id: UID,
     start_date: u64,
     final_date: u64,
@@ -20,8 +22,27 @@ public struct Locker has key, store {
     current_balance: Balance<LOCKED_COIN>,
 }
 
-/// Witness
+/// Witness (OTW: name matches module in ALL_CAPS)
 public struct LOCKED_COIN has drop {}
+
+// === Init ===
+
+fun init(otw: LOCKED_COIN, ctx: &mut TxContext) {
+    let (builder, treasury_cap) = coin_registry::new_currency_with_otw<LOCKED_COIN>(
+        otw,
+        8,
+        b"LOCK".to_string(),
+        b"LOCKED COIN".to_string(),
+        b"".to_string(),
+        b"".to_string(),
+        ctx,
+    );
+    let metadata_cap = builder.finalize(ctx);
+    transfer::public_transfer(treasury_cap, ctx.sender());
+    transfer::public_transfer(metadata_cap, ctx.sender())
+}
+
+// === Public ===
 
 #[lint_allow(self_transfer)]
 /// Withdraw the available vested amount assuming linear vesting
@@ -45,20 +66,6 @@ public fun withdraw_vested(
     )
 }
 
-fun init(otw: LOCKED_COIN, ctx: &mut TxContext) {
-    let (treasury_cap, metadata) = coin::create_currency<LOCKED_COIN>(
-        otw,
-        8,
-        b"LOCKED COIN",
-        b"LOCK",
-        b"",
-        option::none(),
-        ctx,
-    );
-    transfer::public_freeze_object(metadata);
-    transfer::public_transfer(treasury_cap, ctx.sender())
-}
-
 /// Mints and transfers a locker object with the input amount of coins and
 /// specified vesting schedule
 public fun locked_mint(
@@ -73,7 +80,7 @@ public fun locked_mint(
     let start_date = clock.timestamp_ms();
     let final_date = start_date + lock_up_duration;
 
-    transfer::public_transfer(
+    transfer::transfer(
         Locker {
             id: object::new(ctx),
             start_date,

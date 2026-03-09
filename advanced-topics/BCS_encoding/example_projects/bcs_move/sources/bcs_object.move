@@ -1,5 +1,6 @@
 module bcs_move::bcs_object;
 
+
 use std::ascii;
 use sui::bcs;
 use sui::event;
@@ -37,7 +38,7 @@ public fun emit_object(bcs_bytes: vector<u8>) {
 }
 
 #[test]
-fun test_deserialization() {
+fun deserialization() {
     // using Base16 (HEX) encoded string from our JavaScript sample
     // In Move, byte vectors can be defined with `x"<hex>"`
     let bytes =
@@ -45,7 +46,7 @@ fun test_deserialization() {
 
     let bcs_object = object_from_bytes(bytes);
     // test against values generated in JavaScript
-    assert!(bcs_object.id == @0x5.to_id(), 0);
-    assert!(bcs_object.owner == @0xA, 0);
-    assert!(bcs_object.meta.name == std::ascii::string(b"aaa"), 0);
+    assert!(bcs_object.id == @0x5.to_id());
+    assert!(bcs_object.owner == @0xA);
+    assert!(bcs_object.meta.name == std::ascii::string(b"aaa"));
 }

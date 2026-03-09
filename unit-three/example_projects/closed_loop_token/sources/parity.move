@@ -4,28 +4,32 @@
 module closed_loop_token::parity;
 
 use closed_loop_token::parity_rule::{Self, ParityRule};
-use sui::coin::{Self, Coin, TreasuryCap};
+use sui::coin::{Coin, TreasuryCap};
+use sui::coin_registry;
 use sui::token::{Self, TokenPolicy};
 
+// === Types ===
+
 /// Name of the coin. By convention, this type has the same name as its parent
-/// module and has no fields. The full type of the coin defined by this module
-/// will be `COIN<PARITY>`.
+/// module and has no fields. The full type of the coin will be `COIN<PARITY>`.
 public struct PARITY has drop {}
+
+// === Init ===
 
 /// Register the PARITY currency to acquire its `TreasuryCap`.
 /// Because this is a module initializer, it ensures the currency only gets
 /// registered once.
 fun init(witness: PARITY, ctx: &mut TxContext) {
-    let (treasury_cap, metadata) = coin::create_currency<PARITY>(
+    let (builder, treasury_cap) = coin_registry::new_currency_with_otw<PARITY>(
         witness,
         2,
-        b"PARITY",
-        b"MNG",
-        b"",
-        option::none(),
+        b"MNG".to_string(),
+        b"PARITY".to_string(),
+        b"".to_string(),
+        b"".to_string(),
         ctx,
     );
-    transfer::public_freeze_object(metadata);
+    let metadata_cap = builder.finalize(ctx);
     let (mut policy, policy_cap) = token::new_policy<PARITY>(
         &treasury_cap,
         ctx,
@@ -37,9 +41,12 @@ fun init(witness: PARITY, ctx: &mut TxContext) {
         ctx,
     );
     policy.share_policy();
+    transfer::public_transfer(metadata_cap, ctx.sender());
     transfer::public_transfer(policy_cap, ctx.sender());
     transfer::public_transfer(treasury_cap, ctx.sender())
 }
+
+// === Public ===
 
 /// Example of confirming a protected action with treasury cap
 public fun treasure_cap_mint_token(

@@ -13,24 +13,24 @@ There are some high-level properties of BCS encoding that are good to keep in mi
 - Wrapper types are ignored, so `OuterType` and `UnnestedType` will have the same BCS representation:
 
   ```move
-  public struct OuterType {
-      owner: InnerType
+  public struct OuterType has copy, drop {
+      owner: InnerType,
   }
-  public struct InnerType {
-      address: address
+  public struct InnerType has copy, drop {
+      address: address,
   }
-  public struct UnnestedType {
-      address: address
+  public struct UnnestedType has copy, drop {
+      address: address,
   }
   ```
 
 - Types containing the generic type fields can be parsed up to the first generic type field. So it's a good practice to put the generic type field(s) last if it's a custom type that will be ser/de'd.
   ```move
-  public struct BCSObject<T> has drop, copy {
+  public struct BCSObject<T> has copy, drop {
       id: ID,
       owner: address,
       meta: Metadata,
-      generic: T
+      generic: T,
   }
   ```
   In this example, we can deserialize everything up to the `meta` field.
@@ -220,7 +220,7 @@ You should see this in the console:
 ```bash
 BUILDING bcs_move
 Running the Move unit tests
-[ PASS    ] 0x0::bcs_object::test_deserialization
+[ PASS    ] 0x0::bcs_object::deserialization
 Test result: OK. Total tests: 1; passed: 1; failed: 0
 ```
 

@@ -6,11 +6,17 @@ module closed_loop_token::parity_rule;
 
 use sui::token::{Self, TokenPolicy, ActionRequest};
 
+// === Constants ===
+
 /// Trying to `verify` but the parity is not correct for the action.
 const EWrongParity: u64 = 0;
 
+// === Types ===
+
 /// The Rule witness.
 public struct ParityRule has drop {}
+
+// === Public ===
 
 /// Verifies that the sender and the recipient (if set) are not on the denylist
 /// for the given action.

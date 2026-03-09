@@ -54,11 +54,11 @@ For a more in-depth explanation of the `phantom` keyword, please check the [rele
 
 One Time Witness (OTW) is a sub-pattern of the Witness pattern, where we utilize the module `init` function to ensure that only one instance of the `witness` resource is created (so type `A` is guaranteed to be a singleton).
 
-In Sui Move a type is considered an OTW if its definition has the following properties:
+In Sui Move (Move 2024) a type is considered an OTW if its definition has the following properties:
 
-- The type is named after the module but uppercased
+- The type is named after the module but in **ALL_CAPS** (e.g. module `peace` → type `PEACE`)
 - The type only has the `drop` ability
 
-To get an instance of this type, you need to add it as the first argument to the module `init` function as in the above example. The Sui runtime will then generate the OTW struct automatically at module publish time.
+To get an instance of this type, you add it as the first argument to the module `init` function, as in the example above. The Sui runtime generates the OTW instance automatically at module publish time.
 
-The above example uses the One Time Witness design pattern to guarantee that `Guardian` is a singtleton.
+The above example uses the One Time Witness design pattern to guarantee that `Guardian` is a singleton.

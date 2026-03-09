@@ -75,12 +75,12 @@ where the boolean expression must evaluate to true, otherwise it will abort with
 
 ### Custom Errors
 
-We are using a default 0 for our error code above, but we can also define a custom error constant in the following way:
+We use a custom error constant so the abort can be handled at the application level. In Sui Move, error constants use **EPascalCase**:
 
 ```move
 const ENotIntendedAddress: u64 = 1;
 ```
 
-This error code then can be consumed at the application level and handled appropriately.
+This error code can be consumed at the application level and handled appropriately.
 
 **Here is the second work-in-progress version of what we have written so far: [WIP transcript.move](../example_projects/transcript/sources/transcript_2.move_wip)**

@@ -6,9 +6,11 @@ In this section, we will introduce functions in Sui Move and write our first Sui
 
 Sui Move functions have three types of visibility:
 
-- **private**: the default visibility of a function; it can only be accessed by functions inside the same module
-- **public**: the function is accessible by functions inside the same module and by functions defined in another module
-- **public(package)**: the function is accessible by functions of modules inside the same package
+- **private**: the default; the function can only be called from within the same module
+- **public**: the function can be called from any module (and can be used as a transaction entry point or composed in PTBs)
+- **public(package)**: the function can only be called from modules in the same package (use this instead of the deprecated `public(friend)`)
+
+**Entry functions** are transaction endpoints: they are denoted with the `entry` keyword, must have no return value, and are callable directly by transactions. Do not combine `public` and `entry` on the same function—use one or the other.
 
 ## Return Value
 
@@ -24,16 +26,6 @@ public fun addition (a: u8, b: u8): u8 {
 }
 ```
 
-<!--
-## Entry Functions
-
-In Sui Move, entry functions are simply functions that can be called by transactions. They must satisfy the following three requirements:
-
-- Denoted by the keyword `entry`
-- have no return value
-- (optional) have a mutable reference to an instance of the `TxContext` type in the last parameter
-
--->
 
 ## Transaction Context
 
@@ -43,16 +35,16 @@ The `TxContext` object contains [essential information](https://github.com/Myste
 
 ## Create the `mint` Function
 
-We can define our minting function in the Hello World example as the following:
+We define the minting function as an **entry** function so it can be called directly by a transaction. Entry functions must have no return value:
 
 ```move
-public fun mint(ctx: &mut TxContext) {
+entry fun mint(ctx: &mut TxContext) {
     let object = HelloWorldObject {
         id: object::new(ctx),
-        text: b"Hello World!".to_string()
+        text: b"Hello World!".to_string(),
     };
     transfer::public_transfer(object, ctx.sender());
 }
 ```
 
-This function simply creates a new instance of the `HelloWorldObject` custom type, then uses the Sui system [`public_transfer`](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/transfer.md#function-public_transfer) function to send it to the transaction caller.
+This function creates a new `HelloWorldObject` and uses the Sui framework's `public_transfer` to send it to the transaction sender.

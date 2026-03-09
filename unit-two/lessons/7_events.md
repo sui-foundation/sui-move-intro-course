@@ -10,11 +10,11 @@ The event details of a transaction can be viewed on the [Sui Explorer](https://s
 
 ## Custom Events
 
-Developers can also define custom events on Sui. We can define a custom event marking when a transcript has been requested in the following way.
+Developers can also define custom events on Sui. Events should be named in **past tense** (they describe something that already happened). For example, an event for when a transcript has been requested:
 
 ```move
-/// Event marking when a transcript has been requested
-public struct TranscriptRequestEvent has copy, drop {
+/// Event emitted when a transcript has been requested.
+public struct TranscriptRequested has copy, drop {
     // The Object ID of the transcript wrapper
     wrapper_id: ID,
     // The requester of the transcript
@@ -24,7 +24,7 @@ public struct TranscriptRequestEvent has copy, drop {
 }
 ```
 
-The type representing an event has the abilities `copy` and `drop`. Event objects aren't representing assets, and we are only interested in the data contained within, so they can be duplicated and dropped at the end of scopes.
+Event types have the abilities `copy` and `drop`. They are not assets; we only care about the data, so they can be copied and dropped at the end of scopes.
 
 To emit an event in Sui, you just need to use the [`sui::event::emit` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/sui/event.md#function-emit).
 
@@ -41,17 +41,17 @@ public fun request_transcript(
         transcript,
         intended_address,
     };
-    event::emit(TranscriptRequestEvent {
-        wrapper_id: folder_object.id.to_inner(),
+    event::emit(TranscriptRequested {
+        wrapper_id: object::id(&folder_object),
         requester: ctx.sender(),
         intended_address,
     });
-    // e transfer the wrapped transcript object directly to the intended address
+    // We transfer the wrapped transcript object directly to the intended address
     transfer::transfer(folder_object, intended_address);
 }
 ```
 
-On the Sui explorer, we can see the event emitted displayed as the following, showing the three data fields that we defined in the `TranscriptRequestEvent` event:
+On the Sui explorer, we can see the emitted event with the three data fields defined in `TranscriptRequested`:
 
 ![Custom Event](../images/customevent.png)
 

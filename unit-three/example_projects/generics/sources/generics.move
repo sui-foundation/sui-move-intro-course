@@ -5,12 +5,14 @@
 /// A part of the Sui Move intro course:
 module generics::generics;
 
-public struct Box<T: store> has key, store {
+// === Types ===
+
+public struct Box<T: store> has key {
     id: UID,
     value: T,
 }
 
-public struct SimpleBox has key, store {
+public struct SimpleBox has key {
     id: UID,
     value: u8,
 }
@@ -19,9 +21,11 @@ public struct PhantomBox<phantom T: drop> has key {
     id: UID,
 }
 
+// === Public ===
+
 #[lint_allow(self_transfer)]
 public fun create_box<T: store>(value: T, ctx: &mut TxContext) {
-    transfer::public_transfer(
+    transfer::transfer(
         Box<T> { id: object::new(ctx), value },
         ctx.sender(),
     )
@@ -29,7 +33,7 @@ public fun create_box<T: store>(value: T, ctx: &mut TxContext) {
 
 #[lint_allow(self_transfer)]
 public fun create_simple_box(value: u8, ctx: &mut TxContext) {
-    transfer::public_transfer(
+    transfer::transfer(
         SimpleBox { id: object::new(ctx), value },
         ctx.sender(),
     )

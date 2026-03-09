@@ -1,17 +1,15 @@
 module locked_coin::locked_coin_df;
 
-use std::option;
 use sui::balance::{Self, Balance};
 use sui::clock::{Self, Clock};
-use sui::coin::{Self, TreasuryCap, CoinMetadata};
+use sui::coin::{Self, TreasuryCap};
+use sui::coin_registry;
 use sui::dynamic_field as df;
 use sui::dynamic_object_field as dof;
-use sui::tx_context::sender;
 
 /// Shared object used to attach the lockers
 public struct Registry has key {
     id: UID,
-    metadata: CoinMetadata<LOCKED_COIN>,
 }
 
 public struct LOCKED_COIN has drop {}
@@ -29,7 +27,7 @@ public fun withdraw_vested(
     clock: &Clock,
     ctx: &mut TxContext,
 ) {
-    let locker: &mut Locker = df::borrow_mut(&mut self.id, sender(ctx));
+    let locker: &mut Locker = df::borrow_mut(&mut self.id, ctx.sender());
     let total_duration = locker.final_date - locker.start_date;
     let elapsed_duration = clock.timestamp_ms() - locker.start_date;
     let total_vested_amount = if (elapsed_duration > total_duration) {
@@ -47,20 +45,20 @@ public fun withdraw_vested(
 }
 
 fun init(otw: LOCKED_COIN, ctx: &mut TxContext) {
-    let (treasury_cap, metadata) = coin::create_currency<LOCKED_COIN>(
+    let (builder, treasury_cap) = coin_registry::new_currency_with_otw<LOCKED_COIN>(
         otw,
         8,
-        b"LOCKED COIN",
-        b"LOCK",
-        b"",
-        option::none(),
+        b"LOCK".to_string(),
+        b"LOCKED COIN".to_string(),
+        b"".to_string(),
+        b"".to_string(),
         ctx,
     );
-    // transfer::public_freeze_object(metadata);
+    let metadata_cap = builder.finalize(ctx);
     transfer::public_transfer(treasury_cap, ctx.sender());
+    transfer::public_transfer(metadata_cap, ctx.sender());
     transfer::share_object(Registry {
         id: object::new(ctx),
-        metadata,
     })
 }
 

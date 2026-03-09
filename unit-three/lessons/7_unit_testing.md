@@ -5,7 +5,7 @@ Sui supports the [Move Testing Framework](https://move-book.com/move-basics/test
 ## Testing Environment
 
 Sui Move test code is just like any other Sui Move code, but it has special annotations and functions to distinguish it from the actual production code.
-Test functions or modules start with the `#[test]` or `#[test_only]` annotation.
+Test functions or modules use the `#[test]` or `#[test_only]` annotation. **Do not prefix test function names with `test_`**—the `#[test]` attribute already signals intent. For tests that expect an abort, use a single merged attribute: `#[test, expected_failure(abort_code = ESomeError)]`.
 
 ```move
 #[test_only]
@@ -16,9 +16,9 @@ fun mint_burn() {
 }
 ```
 
-We will put the unit tests for `Managed Coin` into a separate testing module called `managed_tests`.
+We put the unit tests for `Managed Coin` in a separate testing module called `managed_tests`.
 
-Each function inside this module can be seen as one unit test consisting of one or more transactions. We'll write one unit test called `mint_burn`.
+Each function in this module is one unit test (one or more transactions). Prefer **`tx_context::dummy()`** for simple single-sender tests; use **`test_scenario`** only when you need multi-transaction or multi-sender behaviour. Use **`assert_eq!`** for value comparisons (so failures show both expected and actual). Clean up objects created in tests with **`sui::test_utils::destroy`** when appropriate.
 
 ## Test Scenario
 

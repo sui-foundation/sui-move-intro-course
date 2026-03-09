@@ -17,21 +17,23 @@ module collection::bag;
 
 use sui::bag::{Self, Bag};
 
-// Defining a table with generic types for the key and value
-public struct GenericBag {
+// Heterogeneous map-like collection (key and value types can vary)
+public struct GenericBag has key {
+    id: UID,
     items: Bag,
 }
 
 // Create a new, empty GenericBag
 public fun create(ctx: &mut TxContext): GenericBag {
     GenericBag {
+        id: object::new(ctx),
         items: bag::new(ctx),
     }
 }
 
 /// Adds a key-value pair to GenericBag
 public fun add<K: copy + drop + store, V: store>(
-    bag: &mut GenericBag,
+    mut bag: &mut GenericBag,
     k: K,
     v: V,
 ) {
@@ -41,14 +43,13 @@ public fun add<K: copy + drop + store, V: store>(
 /// Removes the key-value pair from the GenericBag with the provided key and
 /// returns the value.
 public fun remove<K: copy + drop + store, V: store>(
-    bag: &mut GenericBag,
+    mut bag: &mut GenericBag,
     k: K,
 ): V {
     bag.items.remove(k)
 }
 
-// Borrows an immutable reference to the value associated with the key in
-// GenericBag
+/// Borrows an immutable reference to the value associated with the key
 public fun borrow<K: copy + drop + store, V: store>(
     bag: &GenericBag,
     k: K,
@@ -56,10 +57,9 @@ public fun borrow<K: copy + drop + store, V: store>(
     bag.items.borrow(k)
 }
 
-/// Borrows a mutable reference to the value associated with the key in
-/// GenericBag
+/// Borrows a mutable reference to the value associated with the key
 public fun borrow_mut<K: copy + drop + store, V: store>(
-    bag: &mut GenericBag,
+    mut bag: &mut GenericBag,
     k: K,
 ): &mut V {
     bag.items.borrow_mut(k)

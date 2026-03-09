@@ -33,7 +33,7 @@ The `delete_transcript` method from the example above illustrates how to delete 
 
 Following these rules, if you want to modify your struct outside its defining module, you will need to provide public methods for these operations.
 
-2. After unpacking the struct and retrieving its ID, the object can be deleted by simply calling the `id.delete()` framework method on its object ID.
+2. After unpacking the struct and retrieving its ID, delete the object by calling `id.delete()` on the ID (use `object::id(&obj)` to get an `ID` from an object when needed).
 
 \_💡Note: the `..` (dot dot) in the above method denotes that we're ignoring the remaining fields in the struct unpacking. This allows us to extract only the fields we need while ignoring the rest.\_
 

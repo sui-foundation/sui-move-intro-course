@@ -6,11 +6,11 @@
 
 - The Sui standard library is published under the `0x2` address, while user-deployed modules are published under a pseudorandom address assigned by the Sui Move VM
 
-- Module starts with the `module` keyword, which is followed by the module name and curly braces - inside them, module contents are placed:
+- In Move 2024, a module uses a single-line declaration: the `module` keyword followed by the package and module name (no curly braces). The rest of the file contains the module contents:
 
   ```move
   module hello_world::hello_world;
-  // module contents
+  // module contents (imports, structs, functions, etc.)
   ```
 
 - Published modules are immutable objects in Sui; an immutable object is an object that can never be mutated, transferred, or deleted. Because of this immutability, the object is not owned by anyone, and hence it can be used by anyone
