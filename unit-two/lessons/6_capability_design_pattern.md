@@ -2,16 +2,16 @@
 
 Now we have the basics of a transcript publishing system, we want to add some access control to our smart contract.
 
-Capability is a commonly used pattern in Move that allows fine-tuned access control using an object-centric model. Let's take a look at how we can define this capability object:
+Capability is a commonly used pattern in Sui Move that allows fine-tuned access control using an object-centric model. Capability types are conventionally suffixed with `Cap`. Define the capability object as follows:
 
 ```move
 // Type that marks the capability to create, update, and delete transcripts
-public struct TeacherCap has key {
-    id: UID
+public struct TeacherCap has key, store {
+    id: UID,
 }
 ```
 
-We define a new struct `TeacherCap` that marks the capability to perform privileged actions on transcripts. If we want the capability to be non-transferable, we simply do not add the `store` ability to the struct.
+We define a new struct `TeacherCap` that marks the capability to perform privileged actions on transcripts. With `key` and `store`, the capability can be transferred (e.g., to add more teachers). If you need a non-transferable capability (e.g., soulbound), omit the `store` ability.
 
 \*💡Note: This is also how the equivalent of soulbound tokens (SBT) can be easily implemented in Move. You simply define a struct that has the `key` ability, but not the `store` ability.
 
@@ -49,12 +49,12 @@ We make similar modifications to all other methods in the contract that perform 
 
 ## Initializer Function
 
-A module's initializer function is called once upon publishing the module. This is useful for initializing the state of the smart contract, and is used often to send out the initial set of capability objects.
+The package initializer is run once when the module is published. Use `fun init` to set up initial state and often to send the initial capability objects.
 
-In our example, we can define the `init` method as the following:
+In our example we define `fun init` as follows:
 
 ```move
-/// Module initializer is called only once on module publish.
+/// Called only once on module publish.
 fun init(ctx: &mut TxContext) {
     transfer::transfer(TeacherCap {
         id: object::new(ctx)

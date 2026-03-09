@@ -21,7 +21,7 @@ public struct Parent has key {
 
 // Dynamic field child struct type containing a counter
 public struct DFChild has store {
-    count: u64
+    count: u64,
 }
 
 // Dynamic object field child struct type containing a counter
@@ -29,28 +29,31 @@ public struct DOFChild has key, store {
     id: UID,
     count: u64,
 }
+
+// Key type for dynamic fields — use a positional struct (Move 2024 style)
+public struct ChildNameKey(vector<u8>) has copy, drop, store;
 ```
 
 Here's the API to use for adding **dynamic fields** or **dynamic object fields** to an object:
 
 ```move
-module collection::dynamic_fields ;
+module collection::dynamic_fields;
 
 use sui::dynamic_field as df;
 use sui::dynamic_object_field as dof;
 
-// Adds a DFChild to the parent object under the provided name
-public fun add_dfchild(parent: &mut Parent, child: DFChild, name: vector<u8>) {
-    df::add(&mut parent.id, name, child);
+// Adds a DFChild to the parent object under the provided key
+public fun add_dfchild(mut parent: &mut Parent, child: DFChild, key: ChildNameKey) {
+    df::add(&mut parent.id, key, child);
 }
 
-// Adds a DOFChild to the parent object under the provided name
+// Adds a DOFChild to the parent object under the provided key
 public fun add_dofchild(
-    parent: &mut Parent,
+    mut parent: &mut Parent,
     child: DOFChild,
-    name: vector<u8>,
+    key: ChildNameKey,
 ) {
-    dof::add(&mut parent.id, name, child);
+    dof::add(&mut parent.id, key, child);
 }
 ```
 
@@ -67,17 +70,17 @@ public fun borrow_dofchild(child: &DOFChild): &DOFChild {
 // Borrows a reference to a DFChild via its parent object
 public fun borrow_dfchild_via_parent(
     parent: &Parent,
-    child_name: vector<u8>,
+    key: ChildNameKey,
 ): &DFChild {
-    df::borrow<vector<u8>, DFChild>(&parent.id, child_name)
+    df::borrow<ChildNameKey, DFChild>(&parent.id, key)
 }
 
 // Borrows a reference to a DOFChild via its parent object
 public fun borrow_dofchild_via_parent(
     parent: &Parent,
-    child_name: vector<u8>,
+    key: ChildNameKey,
 ): &DOFChild {
-    dof::borrow<vector<u8>, DOFChild>(&parent.id, child_name)
+    dof::borrow<ChildNameKey, DOFChild>(&parent.id, key)
 }
 ```
 
@@ -85,24 +88,21 @@ Dynamic fields and dynamic object fields can also be mutated as the following:
 
 ```move
 // Mutate a DOFChild directly
-public fun mutate_dofchild(child: &mut DOFChild) {
+public fun mutate_dofchild(mut child: &mut DOFChild) {
     child.count = child.count + 1;
 }
 
 // Mutate a DFChild directly
-public fun mutate_dfchild(child: &mut DFChild) {
+public fun mutate_dfchild(mut child: &mut DFChild) {
     child.count = child.count + 1;
 }
 
 // Mutate a DFChild's counter via its parent object
 public fun mutate_dfchild_via_parent(
-    parent: &mut Parent,
-    child_name: vector<u8>,
+    mut parent: &mut Parent,
+    key: ChildNameKey,
 ) {
-    let child = df::borrow_mut<vector<u8>, DFChild>(
-        &mut parent.id,
-        child_name,
-    );
+    let child = df::borrow_mut<ChildNameKey, DFChild>(&mut parent.id, key);
     child.count = child.count + 1;
 }
 ```
@@ -114,38 +114,36 @@ _Quiz: Why can `mutate_dofchild` be an entry function but not `mutate_dfchild`?_
 We can remove a dynamic field from its parent object as follows:
 
 ```move
-// Removes a DFChild given its name and parent object's mutable reference, and
-// returns it by value
+// Removes a DFChild given the key and parent's mutable reference; returns it by value
 public fun remove_dfchild(
-    parent: &mut Parent,
-    child_name: vector<u8>,
+    mut parent: &mut Parent,
+    key: ChildNameKey,
 ): DFChild {
-    df::remove<vector<u8>, DFChild>(&mut parent.id, child_name)
+    df::remove<ChildNameKey, DFChild>(&mut parent.id, key)
 }
 
-// Removes a DOFChild given its name and parent object's mutable reference, and
-// returns it by value
+// Removes a DOFChild given the key and parent's mutable reference; returns it by value
 public fun remove_dofchild(
-    parent: &mut Parent,
-    child_name: vector<u8>,
+    mut parent: &mut Parent,
+    key: ChildNameKey,
 ): DOFChild {
-    dof::remove<vector<u8>, DOFChild>(&mut parent.id, child_name)
+    dof::remove<ChildNameKey, DOFChild>(&mut parent.id, key)
 }
 
-// Deletes a DOFChild given its name and parent object's mutable reference
-public fun delete_dofchild(parent: &mut Parent, child_name: vector<u8>) {
-    let DOFChild { id, .. } = remove_dofchild(parent, child_name);
+// Deletes a DOFChild given the key and parent's mutable reference
+public fun delete_dofchild(mut parent: &mut Parent, key: ChildNameKey) {
+    let DOFChild { id, .. } = remove_dofchild(parent, key);
     id.delete();
 }
 
 #[lint_allow(self_transfer)]
-// Removes a DOFChild from the parent object and transfer it to the caller
+// Removes a DOFChild from the parent and transfers it to the caller
 public fun reclaim_dofchild(
-    parent: &mut Parent,
-    child_name: vector<u8>,
+    mut parent: &mut Parent,
+    key: ChildNameKey,
     ctx: &mut TxContext,
 ) {
-    let child = remove_dofchild(parent, child_name);
+    let child = remove_dofchild(parent, key);
     transfer::public_transfer(child, ctx.sender());
 }
 ```

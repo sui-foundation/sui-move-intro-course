@@ -15,8 +15,9 @@ First, without generics, we can define a `Box` that holds a `u64` type as the fo
 ```move
 module generics::storage;
 
-public struct Box {
-    value: u64
+public struct Box has key, store {
+    id: UID,
+    value: u64,
 }
 ```
 
@@ -24,8 +25,10 @@ However, this type will only be able to hold a value of type `u64`. To make our 
 
 ```move
 module generics::storage;
-public struct Box<T> {
-    value: T
+
+public struct Box<T> has key, store {
+    id: UID,
+    value: T,
 }
 ```
 
@@ -35,9 +38,11 @@ We can add conditions to enforce that the type passed into the generic must have
 
 ```move
 module generics::storage;
-// T must be copyable and droppable
+
+// T must have store (required when the container has key, store)
 public struct Box<T: store + drop> has key, store {
-    value: T
+    id: UID,
+    value: T,
 }
 ```
 
@@ -54,16 +59,16 @@ _💡See the [generics project](../example_projects/generics/) under `example_pr
 To write a function that returns an instance of `Box` that can accept a parameter of any type for the `value` field, we also have to use generics in the function definition. The function can be defined as the following:
 
 ```move
-public fun create_box<T>(value: T): Box<T> {
-    Box<T> { value }
+public fun create_box<T: store>(value: T, ctx: &mut TxContext): Box<T> {
+    Box<T> { id: object::new(ctx), value }
 }
 ```
 
 If we want to restrict the function to only accept a specific type for `value`, we simply specify that type in the function signature as follows:
 
 ```move
-public fun create_box(value: u64): Box<u64> {
-    Box<u64>{ value }
+public fun create_box(value: u64, ctx: &mut TxContext): Box<u64> {
+    Box<u64> { id: object::new(ctx), value }
 }
 ```
 
@@ -71,13 +76,14 @@ This will only accept inputs of the type `u64` for the `create_box` method, whil
 
 #### Calling Functions with Generics
 
-To call a function with a signature that contains generics, we must specify the type in angle brackets, as in the following syntax:
+To call a function with a signature that contains generics, we must specify the type in angle brackets. In Sui, object-creation functions also take `ctx: &mut TxContext` for `object::new(ctx)`:
 
 ```move
-// value will be of type storage::Box<bool>
-let bool_box = storage::create_box<bool>(true);
-// value will be of the type storage::Box<u64>
-let u64_box = storage::create_box<u64>(1000000);
+// In a function that has ctx: &mut TxContext in scope:
+// bool_box has type storage::Box<bool>
+let bool_box = storage::create_box<bool>(true, ctx);
+// u64_box has type storage::Box<u64>
+let u64_box = storage::create_box<u64>(1000000, ctx);
 ```
 
 #### Calling Functions with Generics using Sui CLI

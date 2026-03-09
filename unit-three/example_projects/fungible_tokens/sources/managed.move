@@ -2,36 +2,40 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /// Example coin with a trusted manager responsible for minting/burning
-/// (e.g., stablecoin)
-/// By convention, modules defining custom coin types use upper case names, in
-/// contrast to ordinary modules, which use camel case.
+/// (e.g., stablecoin). By convention, modules defining custom coin types use
+/// upper case names, in contrast to ordinary modules, which use camel case.
 module fungible_tokens::managed;
 
-use sui::coin::{Self, Coin, TreasuryCap};
+use sui::coin::{Coin, TreasuryCap};
+use sui::coin_registry;
+
+// === Types ===
 
 /// Name of the coin. By convention, this type has the same name as its parent
-/// module
-/// and has no fields. The full type of the coin defined by this module will be
-/// `COIN<MANAGED>`.
+/// module and has no fields. The full type of the coin will be `COIN<MANAGED>`.
 public struct MANAGED has drop {}
 
-/// Register the managed currency to acquire its `TreasuryCap`. Because
-/// this is a module initializer, it ensures the currency only gets
-/// registered once.
+// === Init ===
+
+/// Register the managed currency to acquire its `TreasuryCap`. Because this is
+/// a module initializer, it ensures the currency only gets registered once.
 fun init(witness: MANAGED, ctx: &mut TxContext) {
     // Get a treasury cap for the coin and give it to the transaction sender
-    let (treasury_cap, metadata) = coin::create_currency<MANAGED>(
+    let (builder, treasury_cap) = coin_registry::new_currency_with_otw<MANAGED>(
         witness,
         2,
-        b"MANAGED",
-        b"MNG",
-        b"",
-        option::none(),
+        b"MNG".to_string(),
+        b"MANAGED".to_string(),
+        b"".to_string(),
+        b"".to_string(),
         ctx,
     );
-    transfer::public_freeze_object(metadata);
-    transfer::public_transfer(treasury_cap, ctx.sender())
+    let metadata_cap = builder.finalize(ctx);
+    transfer::public_transfer(treasury_cap, ctx.sender());
+    transfer::public_transfer(metadata_cap, ctx.sender())
 }
+
+// === Public ===
 
 /// Manager can mint new coins
 public fun mint(
@@ -47,6 +51,8 @@ public fun mint(
 public fun burn(treasury_cap: &mut TreasuryCap<MANAGED>, coin: Coin<MANAGED>) {
     treasury_cap.burn(coin);
 }
+
+// === Test only ===
 
 #[test_only]
 /// Wrapper of module initializer for testing

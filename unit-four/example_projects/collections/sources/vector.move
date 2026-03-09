@@ -34,6 +34,6 @@ public fun remove<T>(vec: &mut GenericVector<T>): T {
 }
 
 // Returns the size of a given GenericVector
-public fun size<T>(vec: &mut GenericVector<T>): u64 {
+public fun size<T>(vec: &GenericVector<T>): u64 {
     vec.values.length()
 }

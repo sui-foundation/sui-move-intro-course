@@ -41,30 +41,34 @@ public struct Listing has key, store {
 }
 ```
 
-This struct holds the information we need related to an item listing. We will attach the actual item to be traded to the `Listing` object as a dynamic object field, eliminating the need to define any item field or collection.
+This struct holds the information we need related to an item listing. We attach the actual item to the `Listing` as a dynamic object field. The key type for that field is a positional struct (Move 2024 style):
 
-Note that `Listing` has the `key` ability, so we are now able to use its object id as the key when we place it inside of a collection.
+```move
+/// Key for the single dynamic object field on a Listing (the listed item).
+public struct ListingItemKey() has copy, drop, store;
+```
+
+Note that `Listing` has the `key` ability, so we can use its object id as the key when placing it in the `Bag` of listings.
 
 ## Listing and Delisting
 
 Next, we write the logic for listing and delisting items. First, listing an item:
 
-```move
 /// List an item at the Marketplace.
 public fun list<T: key + store, COIN>(
-    marketplace: &mut Marketplace<COIN>,
+    mut marketplace: &mut Marketplace<COIN>,
     item: T,
     ask: u64,
     ctx: &mut TxContext,
 ) {
     let item_id = object::id(&item);
     let mut listing = Listing {
-        ask,
         id: object::new(ctx),
+        ask,
         owner: ctx.sender(),
     };
 
-    dof::add(&mut listing.id, true, item);
+    dof::add(&mut listing.id, ListingItemKey(), item);
     marketplace.items.add(item_id, listing)
 }
 ```
@@ -74,28 +78,24 @@ As mentioned earlier, we will simply use the dynamic object field interface to a
 For delisting, we define the following methods:
 
 ```move
-/// Internal function to remove listing and get an item back. Only owner can do
-/// that.
+/// Internal function to remove listing and get an item back. Only owner can do that.
 fun delist<T: key + store, COIN>(
-    marketplace: &mut Marketplace<COIN>,
+    mut marketplace: &mut Marketplace<COIN>,
     item_id: ID,
     ctx: &TxContext,
 ): T {
-    let Listing { mut id, owner, .. } = bag::remove(
-        &mut marketplace.items,
-        item_id,
-    );
+    let Listing { mut id, owner, .. } = bag::remove(&mut marketplace.items, item_id);
 
     assert!(ctx.sender() == owner, ENotOwner);
 
-    let item = dof::remove(&mut id, true);
+    let item = dof::remove(&mut id, ListingItemKey());
     id.delete();
     item
 }
 
 /// Call [`delist`] and transfer item to the sender.
 public fun delist_and_take<T: key + store, COIN>(
-    marketplace: &mut Marketplace<COIN>,
+    mut marketplace: &mut Marketplace<COIN>,
     item_id: ID,
     ctx: &mut TxContext,
 ) {
@@ -111,39 +111,30 @@ Note how the delisted `Listing` object is unpacked and deleted, and the listed i
 Buying an item is similar to delisting but with additional logic for handling payments.
 
 ```move
-/// Internal function to purchase an item using a known Listing. Payment is done
-/// in Coin<C>.
-/// Amount paid must match the requested amount. If conditions are met,
-/// owner of the item gets the payment and buyer receives their item.
+/// Internal function to purchase an item. Payment in Coin<COIN>. Amount must match ask.
 fun buy<T: key + store, COIN>(
-    marketplace: &mut Marketplace<COIN>,
+    mut marketplace: &mut Marketplace<COIN>,
     item_id: ID,
     paid: Coin<COIN>,
 ): T {
-    let Listing {
-        mut id,
-        ask,
-        owner,
-    } = marketplace.items.remove(item_id);
+    let Listing { mut id, ask, owner } = marketplace.items.remove(item_id);
 
     assert!(ask == paid.value(), EAmountIncorrect);
 
-    // Check if there's already a Coin hanging and merge `paid` with it.
-    // Otherwise attach `paid` to the `Marketplace` under owner's `address`.
     if (marketplace.payments.contains(owner)) {
         marketplace.payments.borrow_mut(owner).join(paid)
     } else {
         marketplace.payments.add(owner, paid)
     };
 
-    let item = dof::remove(&mut id, true);
+    let item = dof::remove(&mut id, ListingItemKey());
     id.delete();
     item
 }
 
 /// Call [`buy`] and transfer item to the sender.
 public fun buy_and_take<T: key + store, COIN>(
-    marketplace: &mut Marketplace<COIN>,
+    mut marketplace: &mut Marketplace<COIN>,
     item_id: ID,
     paid: Coin<COIN>,
     ctx: &mut TxContext,
@@ -163,19 +154,18 @@ The entry function `buy_and_take` simply calls `buy` and transfers the purchased
 
 Lastly, we define methods for sellers to retrieve their balance from the marketplace.
 
-```move
-/// Internal function to take profits from selling items on the `Marketplace`.
+/// Internal function to take profits from selling items on the Marketplace.
 fun take_profits<COIN>(
-    marketplace: &mut Marketplace<COIN>,
+    mut marketplace: &mut Marketplace<COIN>,
     ctx: &TxContext,
 ): Coin<COIN> {
     marketplace.payments.remove(ctx.sender())
 }
 
 #[lint_allow(self_transfer)]
-/// Call [`take_profits`] and transfer Coin object to the sender.
+/// Call [`take_profits`] and transfer Coin to the sender.
 public fun take_profits_and_keep<COIN>(
-    marketplace: &mut Marketplace<COIN>,
+    mut marketplace: &mut Marketplace<COIN>,
     ctx: &mut TxContext,
 ) {
     transfer::public_transfer(
