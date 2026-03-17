@@ -13,10 +13,10 @@ public struct Widget has key, store {
 
 #[lint_allow(self_transfer)]
 public fun mint(ctx: &mut TxContext) {
-    let object = Widget {
+    let obj = Widget {
         id: object::new(ctx),
     };
-    transfer::public_transfer(object, ctx.sender());
+    transfer::public_transfer(obj, ctx.sender());
 }
 ```
 

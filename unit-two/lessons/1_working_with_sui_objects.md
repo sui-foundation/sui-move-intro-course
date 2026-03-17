@@ -4,7 +4,7 @@
 
 Sui Move is a fully object-centric language. Transactions on Sui are expressed as operations where the inputs and outputs are both objects. As we briefly touched on this concept in [Unit One, Lesson 4](../../unit-one/lessons/4_custom_types_and_abilities.md#custome-types-and-abilities), Sui objects are the basic unit of storage in Sui. It all starts from the `struct` keyword.
 
-Let's first start with an example that represents a transcript recording a student's grades:
+Let's first start with an example that represents a transcript recording a student's grades. In Move 2024, structs are declared with the `public` keyword:
 
 ```move
 public struct Transcript {
@@ -14,7 +14,7 @@ public struct Transcript {
 }
 ```
 
-The above definition is a regular Move struct, but it is not a Sui object. In order to make a custom Move type instantiate a Sui object in global storage, we need to add the `key` ability, and a globally unique `id: UID` field inside the struct definition.
+The above definition is a regular Move struct, but it is not a Sui object. In Move 2024, structs are declared `public`. To make a custom type a Sui object, add the `key` ability and a globally unique `id: UID` as the first field.
 
 ```move
 public struct TranscriptObject has key {

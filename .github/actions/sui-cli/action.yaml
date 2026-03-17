@@ -1,13 +1,27 @@
-inputs:
-  GIT_CREDENTIALS:
-    description: "Optional credentials to pass to git"
-    required: false
-
+# Install pre-built Sui CLI from official GitHub releases (no source compile).
+# Runner: ubuntu-latest (x86_64). For other OS/arch, use suiup or adjust asset name.
 runs:
   using: composite
   steps:
-    - uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-    - run: cargo install --locked --git https://github.com/MystenLabs/sui.git --branch devnet sui
+    - name: Get latest Sui release tag
+      id: release
+      run: |
+        TAG=$(curl -sL https://api.github.com/repos/MystenLabs/sui/releases/latest | jq -r .tag_name)
+        echo "tag=$TAG" >> $GITHUB_OUTPUT
+        echo "suitgz=sui-${TAG}-ubuntu-x86_64.tgz" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Download and install Sui CLI
+      run: |
+        set -e
+        curl -sSL -o sui.tgz \
+          "https://github.com/MystenLabs/sui/releases/download/${{ steps.release.outputs.tag }}/${{ steps.release.outputs.suitgz }}"
+        mkdir -p "$HOME/.sui-bin"
+        tar -xzf sui.tgz -C "$HOME/.sui-bin"
+        # Asset extracts as sui-<tag>-ubuntu-x86_64/ or similar; find dir that contains 'sui' binary
+        BINDIR=$(find "$HOME/.sui-bin" -name sui -type f | head -1)
+        BINDIR=$(dirname "$BINDIR")
+        echo "$BINDIR" >> $GITHUB_PATH
+        echo "Sui CLI installed at $BINDIR"
+        "$BINDIR/sui" -V
       shell: bash

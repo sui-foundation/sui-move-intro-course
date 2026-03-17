@@ -7,12 +7,14 @@ use sui::table::{Self, Table};
 
 #[allow(unused_field)]
 // Defining a table with specified types for the key and value
-public struct IntegerTable {
+public struct IntegerTable has key {
+    id: UID,
     table_values: Table<u8, u8>,
 }
 
 // Defining a table with generic types for the key and value
-public struct GenericTable<phantom K: copy + drop + store, phantom V: store> {
+public struct GenericTable<phantom K: copy + drop + store, phantom V: store> has key {
+    id: UID,
     table_values: Table<K, V>,
 }
 
@@ -21,6 +23,7 @@ public fun create<K: copy + drop + store, V: store>(
     ctx: &mut TxContext,
 ): GenericTable<K, V> {
     GenericTable<K, V> {
+        id: object::new(ctx),
         table_values: table::new<K, V>(ctx),
     }
 }
@@ -34,8 +37,7 @@ public fun add<K: copy + drop + store, V: store>(
     table.table_values.add(k, v);
 }
 
-/// Removes the key-value pair in the GenericTable `table: &mut Table<K, V>` and
-/// returns the value.
+/// Removes the key-value pair in the GenericTable and returns the value.
 public fun remove<K: copy + drop + store, V: store>(
     table: &mut GenericTable<K, V>,
     k: K,
@@ -43,8 +45,7 @@ public fun remove<K: copy + drop + store, V: store>(
     table.table_values.remove(k)
 }
 
-// Borrows an immutable reference to the value associated with the key in
-// GenericTable
+/// Borrows an immutable reference to the value associated with the key
 public fun borrow<K: copy + drop + store, V: store>(
     table: &GenericTable<K, V>,
     k: K,
@@ -52,8 +53,7 @@ public fun borrow<K: copy + drop + store, V: store>(
     table.table_values.borrow(k)
 }
 
-/// Borrows a mutable reference to the value associated with the key in
-/// GenericTable
+/// Borrows a mutable reference to the value associated with the key
 public fun borrow_mut<K: copy + drop + store, V: store>(
     table: &mut GenericTable<K, V>,
     k: K,

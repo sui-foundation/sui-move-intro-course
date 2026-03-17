@@ -8,11 +8,10 @@ A hot potato is a struct that has no capabilities, therefore you can only pack a
 module flashloan::flashloan;
 
 // === Imports ===
-use sui::sui::SUI;
-use sui::coin::{Self, Coin};
 use sui::balance::{Self, Balance};
-use sui::object::{UID};
-use sui::tx_context::{TxContext};
+use sui::coin::{Self, Coin};
+use sui::object::{Self, UID};
+use sui::sui::SUI;
 
 /// For when the loan amount exceed the pool amount
 const ELoanAmountExceedPool: u64 = 0;
@@ -26,9 +25,9 @@ public struct LoanPool has key {
     amount: Balance<SUI>,
 }
 
-/// A loan position.
-/// This is a hot potato struct, it enforces the users
-/// to repay the loan in the end of the transaction or within the same PTB.
+/// A loan position (hot potato: no abilities).
+/// Enforces users to repay the loan before the transaction or PTB ends.
+/// Do not use a "Potato" suffix — the lack of abilities already signals a hot potato.
 public struct Loan {
     amount: u64,
 }
@@ -96,7 +95,7 @@ public fun mint_nft(payment: Coin<SUI>, ctx: &mut TxContext): NFT {
 
 /// Sell NFT
 public fun sell_nft(nft: NFT, ctx: &mut TxContext): Coin<SUI> {
-    let NFT { id, price } = nft;
+    let NFT { id, price, .. } = nft;
     id.delete();
     price.into_coin(ctx)
 }

@@ -87,7 +87,7 @@ public fun mint_nft(payment: Coin<SUI>, ctx: &mut TxContext): NFT {
 
 /// Sell NFT
 public fun sell_nft(nft: NFT, ctx: &mut TxContext): Coin<SUI> {
-    let NFT { id, price } = nft;
+    let NFT { id, price, .. } = nft;
     id.delete();
     price.into_coin(ctx)
 }

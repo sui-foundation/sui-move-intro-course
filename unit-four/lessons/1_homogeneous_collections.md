@@ -24,7 +24,7 @@ public struct GenericVector<T> {
     values: vector<T>,
 }
 
-// Creates a GenericVector that hold a generic type T
+// Creates a GenericVector that holds a generic type T
 public fun create<T>(): GenericVector<T> {
     GenericVector<T> {
         values: vector::empty<T>(),
@@ -32,17 +32,17 @@ public fun create<T>(): GenericVector<T> {
 }
 
 // Push a value of type T into a GenericVector
-public fun put<T>(vec: &mut GenericVector<T>, value: T) {
+public fun put<T>(mut vec: &mut GenericVector<T>, value: T) {
     vec.values.push_back(value);
 }
 
 // Pops a value of type T from a GenericVector
-public fun remove<T>(vec: &mut GenericVector<T>): T {
+public fun remove<T>(mut vec: &mut GenericVector<T>): T {
     vec.values.pop_back()
 }
 
 // Returns the size of a given GenericVector
-public fun size<T>(vec: &mut GenericVector<T>): u64 {
+public fun size<T>(vec: &GenericVector<T>): u64 {
     vec.values.length()
 }
 ```
@@ -68,12 +68,14 @@ use sui::table::{Self, Table};
 
 #[allow(unused_field)]
 // Defining a table with specified types for the key and value
-public struct IntegerTable {
+public struct IntegerTable has key {
+    id: UID,
     table_values: Table<u8, u8>,
 }
 
 // Defining a table with generic types for the key and value
-public struct GenericTable<phantom K: copy + drop + store, phantom V: store> {
+public struct GenericTable<phantom K: copy + drop + store, phantom V: store> has key {
+    id: UID,
     table_values: Table<K, V>,
 }
 
@@ -82,30 +84,29 @@ public fun create<K: copy + drop + store, V: store>(
     ctx: &mut TxContext,
 ): GenericTable<K, V> {
     GenericTable<K, V> {
+        id: object::new(ctx),
         table_values: table::new<K, V>(ctx),
     }
 }
 
 // Adds a key-value pair to GenericTable
 public fun add<K: copy + drop + store, V: store>(
-    table: &mut GenericTable<K, V>,
+    mut table: &mut GenericTable<K, V>,
     k: K,
     v: V,
 ) {
     table.table_values.add(k, v);
 }
 
-/// Removes the key-value pair in the GenericTable `table: &mut Table<K, V>` and
-/// returns the value.
+/// Removes the key-value pair in the GenericTable and returns the value.
 public fun remove<K: copy + drop + store, V: store>(
-    table: &mut GenericTable<K, V>,
+    mut table: &mut GenericTable<K, V>,
     k: K,
 ): V {
     table.table_values.remove(k)
 }
 
-// Borrows an immutable reference to the value associated with the key in
-// GenericTable
+/// Borrows an immutable reference to the value associated with the key.
 public fun borrow<K: copy + drop + store, V: store>(
     table: &GenericTable<K, V>,
     k: K,
@@ -113,10 +114,9 @@ public fun borrow<K: copy + drop + store, V: store>(
     table.table_values.borrow(k)
 }
 
-/// Borrows a mutable reference to the value associated with the key in
-/// GenericTable
+/// Borrows a mutable reference to the value associated with the key.
 public fun borrow_mut<K: copy + drop + store, V: store>(
-    table: &mut GenericTable<K, V>,
+    mut table: &mut GenericTable<K, V>,
     k: K,
 ): &mut V {
     table.table_values.borrow_mut(k)

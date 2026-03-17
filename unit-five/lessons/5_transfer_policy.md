@@ -9,13 +9,13 @@ In this section, we will learn how to create a `TransferPolicy` and use it to en
 `TransferPolicy` for type `T` must be created for that type `T` to be tradeable in the Kiosk system. `TransferPolicy` is a shared object acting as a central authority enforcing everyone to check their purchase is valid against the defined policy before the purchased item is transferred to the buyers.
 
 ```move
-use sui::transfer_policy::{Self, TransferRequest, TransferPolicy, TransferPolicyCap};
 use sui::package::{Self, Publisher};
+use sui::transfer_policy::{Self, TransferPolicy, TransferPolicyCap};
 
 public struct KIOSK has drop {}
 
 fun init(witness: KIOSK, ctx: &mut TxContext) {
-    let publisher = package::claim(otw, ctx);
+    let publisher = package::claim(witness, ctx);
     transfer::public_transfer(publisher, ctx.sender());
 }
 
@@ -82,7 +82,7 @@ public struct Config has store, drop {
 }
 ```
 
-`Rule` represents a witness type to add to `TransferPolicy`, it helps to identify and distinguish between multiple rules adding to one policy. `Config` is the configuration of the `Rule`, as we implement fixed royaltee fee, the settings should include the percentage we want to deduct out of original payment.
+`Rule` represents a witness type to add to `TransferPolicy`, it helps to identify and distinguish between multiple rules adding to one policy. `Config` is the configuration of the `Rule`, as we implement fixed royalty fee, the settings should include the percentage we want to deduct out of original payment.
 
 #### Add Rule to TransferPolicy
 
@@ -140,9 +140,7 @@ public fun fee_amount<T: key + store>(
     paid: u64,
 ): u64 {
     let config: &Config = transfer_policy::get_rule(Rule {}, policy);
-    let mut amount = (
-        ((paid as u128) * (config.amount_bp as u128) / 10_000) as u64,
-    );
+    let mut amount = ((paid as u128) * (config.amount_bp as u128) / 10_000) as u64;
 
     // If the amount is less than the minimum, use the minimum
     if (amount < config.min_amount) {

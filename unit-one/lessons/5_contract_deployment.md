@@ -33,7 +33,7 @@ export PACKAGE_ID=<package object ID from previous output>
 
 Next, we want to mint a Hello World object by calling the `mint` function in the smart contract we just deployed.
 
-Note that we are able to do this because `mint` is an entry function. 
+We can call `mint` from a transaction because it is declared as an **entry** function (a transaction endpoint). 
 
 The command for this using Sui CLI is:
 

@@ -68,7 +68,7 @@ Method call syntax works when the first parameter of a function matches the type
 
 ## Custom Types
 
-A structure in Sui Move is a custom type that contains key-value pairs, where the key is the name of a property, and the value is what's stored. Defined using the keyword `struct`, a structure can have up to 4 abilities.
+A structure in Sui Move is a custom type that contains key-value pairs, where the key is the name of a property, and the value is what's stored. In Move 2024, structs must be declared with the `public` keyword. A structure can have up to four abilities.
 
 ### Abilities
 
@@ -100,4 +100,4 @@ public struct HelloWorldObject has key, store {
 }
 ```
 
-UID here is a Sui Framework type (sui::object::UID) that defines the globally unique ID of an object. Any custom type with the `key` ability is required to have an ID field.
+UID here is a Sui Framework type (sui::object::UID) that defines the globally unique ID of an object. Any struct with the `key` ability must have `id: UID` as its first field.

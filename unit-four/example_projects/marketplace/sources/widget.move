@@ -5,7 +5,7 @@
 // https://github.com/MystenLabs/sui/blob/main/sui_programmability/examples/nfts/sources/marketplace.move
 module marketplace::widget;
 
-public struct Widget has key, store {
+public struct Widget has key {
     id: UID,
 }
 
@@ -14,5 +14,5 @@ public fun mint(ctx: &mut TxContext) {
     let object = Widget {
         id: object::new(ctx),
     };
-    transfer::public_transfer(object, ctx.sender());
+    transfer::transfer(object, ctx.sender());
 }
